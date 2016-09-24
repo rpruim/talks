@@ -1,0 +1,565 @@
+---
+title: "Introduction to dplyr"
+author: "Randall Pruim"
+date: "Big Data Ignite 2016"
+output:
+  beamer_presentation:
+    colortheme: seagull
+    fig_height: 3
+    fig_width: 8
+    fonttheme: professionalfonts
+    includes:
+      in_header: header.tex
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy=FALSE, size="small",
+                      fig.width=8, fig.height=6)
+```
+
+## Tidy (Rectangular) Data 
+
+ * rows = cases/observational units
+ * columns = variables  
+ * no exceptions
+ 
+### For plotting
+
+ * row for each mark on the plot
+ * columns contain information needed for position, color, size, shape, etc.
+
+
+## Chaining 
+
+The pipe syntax (`%>%`) takes a data frame (or data table) and sends it 
+to the argument of a function.
+
+
+- `x %>% f(y)` is the same as `f(x, y)`
+
+- `y %>% f(x, ., z)` is the same as `f(x,y,z)`
+
+
+## Building Tidy Data 
+
+- object_name <- function_name(arguments) 
+- object_name <- data_table %>% function_name(arguments) 
+- object_name <-   
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;data_table %>%  
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function_name(arguments) %>%  
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; function_name(arguments)
+
+- in chaining, the value (on left) %>% is **first argument** to the function (on right)
+
+
+## 5 Main Data Verbs
+
+Data verbs take data tables as input and give data tables as output
+
+1. select(): subsets *variables* (and rename() )
+2. filter():  subsets unwanted *cases*
+3. mutate(): transforms the variable (and transmute() like mutate, returns only new variables)
+4. arrange(): reorders the cases
+5. summarize(): computes summary statistics
+
+## Other Data Verbs
+- distinct(): returns the unique values in a table
+- sample_n(): take a random row(s)
+- head():  grab the first few rows
+- tail(): grab the last few rows
+- group_by(): SUCCESSIVE functions are applied to groups
+- ungroup():  reverse the grouping action
+- summarise():  
+    + min(), max(), mean(), sum(), sd(), median(), and IQR()
+    + n(): number of observations in the current group
+    + n_distinct(): number of unique values
+    + first_value(), last_value(), and nth_value(x, n): (like x[1], x[length(x)], and x[n] )
+
+## You should know that I did this:
+
+```{r message=FALSE, warning=FALSE, echo=TRUE}
+require(mosaic)
+require(babynames)
+require(NHANES)
+Babynames <- babynames
+names(NHANES) <- tolower(names(NHANES))
+```
+
+## Finally, some Examples! 
+
+```{r}
+Babynames %>% nrow()
+Babynames %>% names()
+```
+
+## Finally, some Examples! 
+
+```{r}
+Babynames %>% glimpse()
+```
+
+## Finally, some Examples!
+
+```{r}
+Babynames %>% head()
+```
+
+## Finally, some Examples! 
+
+```{r}
+Babynames %>% sample_n(size=5)
+```
+
+
+## NHANES Data
+
+```{r}
+names(NHANES)
+```
+
+## 1. select(): subsets *variables*
+
+
+find the sleep variables
+
+```{r}
+NHANESsleep <- 
+  NHANES %>% 
+  select(gender, age, weight, race1, race3, education, sleeptrouble,
+         sleephrsnight, tvhrsday, tvhrsdaychild, physactive)
+
+names(NHANESsleep)
+dim(NHANESsleep)
+```
+
+## 2. filter():  subsets *cases* 
+
+subset for college students
+
+```{r fig.width=5, fig.height=3, fig.center=TRUE}
+NHANESsleep <- NHANESsleep %>% filter(age %in% c(18:22))
+histogram(~age, data=NHANESsleep)
+```
+
+## 3. mutate(): transforms the variable 
+
+mutate or transmute to create a new variable?
+
+```{r }
+NHANESsleep %>% mutate(weightlb = weight*2.2) %>% head(3)
+```
+
+## 3. mutate(): transforms the variable 
+
+mutate or transmute to create a new variable?
+
+```{r }
+NHANESsleep %>% transmute(weightlb = weight*2.2) %>% head(3)
+```
+
+## 5. summarize(): computes summary statistics
+
+```{r}
+# number of people (cases) in NHANES
+NHANES %>% summarise(n())
+```
+
+## 5. summarize(): computes summary statistics
+
+```{r}
+# total weight of all the people in NHANES (silly)
+NHANES %>% 
+  mutate(weightlb = weight*2.2) %>% 
+  summarise(sum(weightlb, na.rm=TRUE))
+```
+
+## 5. summarize(): computes summary statistics
+
+```{r}
+# mean weight of all the people in NHANES
+NHANES %>% 
+  mutate(weightlb = weight*2.2) %>% 
+  summarise(mean(weightlb, na.rm=TRUE))
+```
+
+## 5. summarize() with group_by()
+
+```{r}
+# mean weight of all the people in NHANES, broken down by education
+NHANES %>% 
+  mutate(weightlb = weight*2.2) %>% 
+  group_by(education) %>% 
+  summarise(mean(weightlb, na.rm=TRUE))
+```
+
+## 4. arrange(): reorders the cases
+
+```{r}
+# mean weight, by education, sorted
+NHANES %>% 
+  mutate(weightlb = weight*2.2) %>% 
+  group_by(education) %>% 
+  summarise(avewt = mean(weightlb, na.rm=TRUE)) %>% 
+  arrange(avewt)
+```
+
+## Your Turn 
+
+When starting, it can be helpful to work with a small subset of the data.  When you have your data wrangling statements in working order, shift to the entire data table.
+
+```{r}
+SmallSubset <-
+  Babynames %>%
+  filter(year > 2000) %>%
+  sample_n(size = 200)
+
+names(SmallSubset)
+```
+
+
+## How many babies are represented?
+
+```{r eval=FALSE}
+SmallSubset %>%
+  summarise(total = ????(n)) # a reduction verb
+```
+
+## How many babies are represented?
+
+```{r}
+SmallSubset %>%
+  summarise(total = sum(n))
+```
+
+
+## How many babies are there in each year?
+
+```{r eval=FALSE}
+SmallSubset %>% 
+  group_by(????) %>% 
+  summarise(total = ????(n))
+```
+
+## How many babies are there in each year?
+
+```{r}
+SmallSubset %>% 
+  group_by(year) %>% 
+  summarise(total = sum(n))
+```
+
+## How many distinct names in each year?
+
+```{r eval=FALSE}
+SmallSubset %>%
+  group_by(????) %>%
+  summarise(name_count = n_distinct(????))
+```
+
+## How many distinct names in each year?
+
+```{r}
+SmallSubset %>%
+  group_by(year) %>%
+  summarise(name_count = n_distinct(name))
+```
+
+## How many distinct names of each sex in each year?
+
+```{r eval=FALSE}
+SmallSubset %>%
+  group_by(????, ????) %>%
+  summarise(????)
+```
+
+## How many distinct names of each sex in each year?
+
+```{r}
+temp <- SmallSubset %>%
+  group_by(year, sex) %>%
+  summarise(name_count=n_distinct(name))
+data.frame(temp)
+```
+
+
+## Track the yearly number of Janes and Marys over the years.
+
+```{r eval=FALSE}
+Result <-
+  Babynames %>%
+  ????(name %in% c("Jane", "Mary")) %>% # just the Janes and Marys
+  group_by(????, ????) %>% # for each year for each name
+  summarise(count = ????)
+```
+
+## Track the yearly number of Janes and Marys over the years.
+
+```{r}
+Result <-
+  Babynames %>%
+  filter(name %in% c("Jane", "Mary")) %>% # just the Janes and Marys
+  group_by(name, year) %>% # for each year for each name
+  summarise(count = sum(n))
+```
+
+## Plot out the result
+
+Put `year` on the x-axis and the count of each name on the y-axis.  Note that `ggplot()` commands use `+` rather than `%>%`.
+
+```{r eval=FALSE}
+ggplot(data=Result, aes(x = year, y = count)) +
+  geom_point()
+```
+
+* *Map* the name (Mary or Jane) to the aesthetic of color.  Remember that mapping to aesthetics is always done inside the `aes()` function.
+* Instead of using dots as the glyph, use a line that connects consecutive values: `geom_line()`.
+* Change the y-axis label to "Yearly Births": `+ ylab("Yearly Births")`
+* *Set* the line thickness to `size=2`. Remember that "setting" refers to adjusting the value of an aesthetic to a constant.  Thus, it's *outside* the `aes()` function.
+
+## Plot out the result
+
+```{r fig.width=5, fig.height=3, fig.center=TRUE}
+ggplot(data=Result, aes(x = year, y = count)) +
+  geom_line(aes(color=name), size=2) + 
+  ylab("Yearly Births")
+```
+
+
+## Look at the *proportion* of births rather than the count
+
+Filter first on female, then on Mary and Jane.  Meanwhile, calculate the proportion of names in the dataset which are Mary and Jane (as opposed to the proportion of all babies from the given year which is the *prop* variable).
+
+```{r eval=FALSE}
+Result2 <-
+  Babynames %>%
+  group_by(year) %>%
+  mutate(total = ????(n)) %>%
+  filter(????) %>%
+  mutate(proportion = n / total)
+```
+
+
+## Look at the *proportion* of births rather than the count
+
+Just as you did with count vs year, graph proportion vs year.
+```{r eval=FALSE}
+Result2 %>%
+  Your ggplot statements go here!
+```
+* Add a vertical line to mark a year in which something happened that might relate to the increase or decrease the popularity of the name.  Example: The movie [*Whatever Happened to Baby Jane*](http://en.wikipedia.org/wiki/What_Ever_Happened_to_Baby_Jane%3F_%281962_film%29) came out in 1962.  The glyph is a vertical line: `geom_vline()`.
+
+## Look at the *proportion* of births rather than the count
+
+```{r}
+Result2 <-
+  Babynames %>%
+  filter(sex == "F") %>%
+  filter(sex %in% c("F"))  %>%
+  group_by(year) %>%
+  mutate(total = sum(n)) %>%
+  filter(name %in% c("Mary", "Jane")) %>%
+  mutate(proportion = n / total)
+```
+
+## Look at the *proportion* of births rather than the count
+
+```{r fig.width=5, fig.height=3, fig.center=TRUE}
+ggplot(data=Result2, aes(x=year, y=proportion)) +
+  geom_line(aes(color=name), size=2) +
+  ylab("Yearly Births") +
+  geom_vline(xintercept=1962)
+```
+
+ 
+  
+##  Pick out name(s) of interest to you 
+
+Plot out their popularity over time.
+
+##  Pick out name(s) of interest to you 
+
+```{r fig.width=5, fig.height=3, fig.center=TRUE}
+Frances <- babynames %>%
+  filter(name== "Frances") 
+```
+
+##  Pick out name(s) of interest to you 
+
+```{r fig.width=5, fig.height=3, fig.center=TRUE}
+Frances %>% ggplot(aes(x=year, y=n)) +
+  geom_point(aes(color=sex), size=.5) + 
+  geom_line(aes(color=sex)) + 
+  geom_vline(xintercept=2006) + scale_y_log10() +
+  ylab("Yearly total on log10 scale")
+```
+
+## gather / spread (new verbs)
+
+http://garrettgman.github.io/tidying/
+
+
+-new_sp_m014 - new_rel_f65:  Counts of new TB cases recorded by group.   
+
+-code for method of diagnosis (rel = relapse, sn = negative pulmonary smear, sp = positive pulmonary smear, ep = extrapulmonary)   
+-code for gender (f = female, m = male)   
+-code for age group (014 = 0-14 yrs of age, 1524 = 15-24 years of age, 2534 = 25 to 34 years of age, 3544 = 35 to 44 years of age, 4554 = 45 to 54 years of age, 5564 = 55 to 64 years of age, 65 = 65 years of age or older).  
+
+```{r warning=FALSE, message=FALSE}
+#install.packages(c("tidyr", "devtools"))
+#devtools::install_github("garrettgman/DSR")
+require(tidyr)
+require(DSR)
+data(who)
+head(who)
+```
+
+## gather
+
+```{r}
+whoTidy <- who %>% gather("code", "value", 5:60)
+whoTidy %>% sample_n(10)
+```
+
+## separate
+```{r}
+whoTidy <- whoTidy %>% separate(code, c("new", "var", "sexage"))
+whoTidy %>% sample_n(10)
+```
+
+## separate
+
+```{r}
+whoTidy <- whoTidy %>% separate(sexage, c("sex", "age"), sep = 1)
+whoTidy %>% sample_n(10)
+```
+
+## spread
+```{r}
+whoTidy <- whoTidy %>% spread(var, value)
+whoTidy %>% sample_n(10)
+```
+
+
+## join (flights)
+```{r warning=FALSE, message=FALSE}
+require(nycflights13)
+names(flights)
+Flights <- flights
+Airports <- airports
+Airlines <- airlines
+Weather <- weather
+Planes <- planes
+```
+
+## join (flights)
+
+```{r}
+names(Flights)
+names(Airports)
+names(Airlines)
+names(Weather)
+names(Planes)
+```
+
+## join (flights)
+
+```{r}
+Flights %>% select(carrier, flight, tailnum, origin, dest) %>% head()
+Airports %>% select(faa, name, lat, lon) %>% head()
+
+Flights %>% 
+  inner_join(Airports, by=c("dest" = "faa")) %>%
+  select(carrier, flight, tailnum, origin, dest, name, lat, lon) %>%
+  head()
+```
+
+## join (flights)
+
+```{r}
+# inner_join: return all rows from x where there are matching values in y, and all columns from x and y. 
+Flights %>% inner_join(Airports, by=c("dest" = "faa")) %>% dim()
+
+# left_join: return all rows from x, and all columns from x and y.
+Flights %>% left_join(Airports, by=c("dest" = "faa")) %>% dim()
+
+# right_join: return all rows from y, and all columns from x and y. 
+Flights %>% right_join(Airports, by=c("dest" = "faa")) %>% dim()
+
+# anti_join: return all rows from x where there are not matching values in y, keeping just columns from x.
+Flights %>% anti_join(Airports, by=c("dest" = "faa")) %>% dim()
+
+# full_join: return all rows and all columns from both x and y.
+Flights %>% full_join(Airports, by=c("dest" = "faa")) %>% dim()
+```
+
+
+## lubridate
+
+```{r warning=FALSE, message=FALSE}
+require(lubridate)
+
+rightnow <- now()
+rightnow
+
+day(rightnow)
+week(rightnow)
+month(rightnow, label=FALSE)
+month(rightnow, label=TRUE)
+year(rightnow)
+
+minute(rightnow)
+hour(rightnow)
+
+yday(rightnow)
+mday(rightnow)
+wday(rightnow, label=FALSE)
+wday(rightnow, label=TRUE)
+```
+
+## lubridate
+
+Arithmetic with lubridate
+
+```{r}
+jan31 <- ymd("2013-01-31")
+jan31 + months(0:11)
+
+floor_date(jan31, "month") # round down to the nearest month
+floor_date(jan31, "month") + months(0:11) + days(31)
+jan31 + months(0:11) + days(31)
+
+#Add and subtract months to a date without exceeding the last day of the new month 
+jan31 %m+% months(0:11)
+```
+
+## parse_numeric
+```{r message=FALSE, warning=FALSE}
+require(tidyr)
+require(readr)
+parse_numeric("$1,200.34")
+parse_numeric("-2%")
+
+# The heuristic is not perfect - it won't fail for things that
+# clearly aren't numbers
+parse_numeric("-2-2")
+parse_numeric("12abc34")
+```
+
+## humanparser
+
+```{r}
+require(humanparser)
+
+```
+
+## swirl
+
+For a list of swirl courses, see: https://github.com/swirldev/swirl_courses
+
+```
+install.packages(“swirl”)
+require(swirl) 
+install_from_swirl("Getting and Cleaning Data")
+swirl()
+```
