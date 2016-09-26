@@ -1,0 +1,143 @@
+---
+title: "dplyr and SQL"
+author: "Randall Pruim"
+date: "Big Data Ignite 2016"
+output:
+  beamer_presentation:
+    colortheme: seagull
+    fig_height: 3
+    fig_width: 8
+    fig_caption: false
+    fonttheme: professionalfonts
+    includes:
+      in_header: ../header.tex
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, tidy=FALSE, size="small",
+  cache = TRUE, cache.path = "cache/dplyr-sql-")
+require(mosaic)
+```
+
+
+## dplyr and SQL integration
+
+`dplyr` provides SQL integration
+
+  * backends for several flavors of SQL exist 
+    * Postgres, MySQL, MariaDB, BigQuery
+  
+  * others coming 
+    * MS SQL server
+  
+## airlines data via MySQL (Smith College)
+
+A data base that includes information on US flights since 1987 is available from
+Smith College
+
+```{r, message = FALSE}
+require(dplyr)
+airlinesdb <-
+  src_mysql(
+    "airlines", host = "scidb.smith.edu",
+    user = "mth292", password = "RememberPi")
+airlinesdb
+```
+
+## Connecting to the tables
+
+```{r, warning = FALSE}
+# supressing a couple warnings about type conversion
+Airports <- tbl(airlinesdb, "airports")
+Carriers <- tbl(airlinesdb, "carriers")
+Flights <- tbl(airlinesdb, "flights")
+Planes <- tbl(airlinesdb, "planes")
+Weather <- tbl(airlinesdb, "weather")
+```
+
+## Taking a glimpse
+
+```{r}
+Weather %>% glimpse()
+```
+
+## NY Weather only
+
+Weather data is only for NY airports in 2013.  Complete
+24/7 data would include `r 24 * 365` records.
+
+```{r}
+Weather %>%
+  group_by(origin, year) %>%
+  summarise(num_records = n())
+```
+
+## Airports
+```{r}
+glimpse(Airports)
+```
+
+## GRR Airport
+
+```{r, warning = FALSE}
+Airports %>%
+  filter(faa == "GRR")
+```
+
+## GRR Flights
+
+```{r, eval = FALSE}
+GRR2015 <-
+  Flights %>%
+  filter(year == 2015) %>% 
+  filter(origin == "GRR" | dest=="GRR") %>%
+  collect()
+```
+
+```{r, include = FALSE, eval = FALSE}
+saveRDS(GRR2015, file = "GRR2015.rds")
+```
+
+```{r, include = FALSE}
+GRR2015 <- readRDS("GRR2015.rds")
+```
+
+```{r}
+nrow(GRR2015)
+```
+
+## Where do we go from here?
+
+```{r}
+GRR2015 <-
+  GRR2015 %>%
+  mutate(date = lubridate::mdy(paste(month, day, year))) 
+GRR2015 %>%
+  filter(origin == "GRR") %>%
+  group_by(dest) %>%
+  summarise(n = n()) %>%
+  arrange(-n)
+```
+## Will my flight be on time?
+
+```{r, warning = FALSE}
+GRR2015 %>% 
+  filter((day > 20 & month == 9) | 
+         (day < 10 & month == 10)) %>%
+  ggplot(aes(x = sched_dep_time, y = dep_delay)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth()
+```
+
+## Will my flight be on time?
+
+```{r, warning = FALSE, message = FALSE}
+GRR2015 %>%
+  filter(origin == "GRR") %>%
+  ggplot(aes(x = date, y = dep_delay)) +
+  geom_point(alpha = 0.2) + 
+  geom_smooth() +
+  ylim(0, 180) 
+```

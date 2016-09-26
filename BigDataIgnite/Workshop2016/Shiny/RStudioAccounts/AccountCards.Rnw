@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{multicol}
+\usepackage[margin = 0.5in]{geometry}
+
+\begin{document}
+
+<<include=FALSE>>=
+require(mosaic)
+Accounts <- read.csv("rstudiousers-dos.txt", header=FALSE, stringsAsFactors = FALSE)
+names(Accounts) <- c("userid", "passwd")
+oneCard <- function(data, row) {
+  cat("\n\n\\vspace{5mm}\n\n")
+  cat("\\begin{minipage}{.3\\textwidth}")
+  cat("\n\\centerline{\\textbf{rstudio.calvin.edu}}")
+  cat("\n\\medskip\n")
+  cat("\\begin{tabular}{rl}")
+  cat("\n\nuserid: & ")
+  cat(data[row, "userid"])
+  cat("\\\\\npasswd: & ")
+  cat(data[row, "passwd"])
+  cat("\n\n\\vspace{5mm}\n\n")
+  cat("\\end{tabular}")
+  cat("\\end{minipage}")
+}
+@
+
+<<results="asis", echo=FALSE>>=
+cat("\\begin{multicols}{3}\n")
+for (r in 1:nrow(Accounts)) {
+  oneCard(Accounts, r)
+}
+cat("\n\\end{multicols}\n")
+@
+
+
+
+\end{document}
