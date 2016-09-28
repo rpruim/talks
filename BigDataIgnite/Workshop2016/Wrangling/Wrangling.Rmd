@@ -650,7 +650,7 @@ TBfemale %>%
 The other outlier countries don't have many cases.
 Let's look at Afghanistan.
 
-```{r, fig.height = 1.8}
+```{r, fig.height = 1.5}
 whoLong %>%
   group_by(country, iso3, year, sex) %>%
   summarise(tb = sum(count, na.rm = TRUE)) %>%
