@@ -1,0 +1,49 @@
+---
+title: "Panel Discussion: Leveraging Open Source Technologies in an Enterprise"
+author: "Big Data Ignite 2017"
+date: "9/27/2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Our Panelists
+
+**Tanmay Bakshi** IBM Watson 
+
+**Sagar Kewalramani** Meijer 
+
+**Tuhin Mitra** Big Data Ignite 
+
+**Apurva Singh** Independent Platform Architect
+
+
+## Questions
+
+ 1. What is your current position and what positions have you had recently?
+
+ 2. What open-source tools and technologies do you use?  What's your mix of 
+ open source and closed source?
+ 
+ 3. Why/when do you pick open-source tools instead of proprietary tools?
+
+ 4. Does any vendor help you leverage open-source technologies?
+ 
+ 5. Do you use any hybrids of open-source and proprietary tools?
+ 
+## More Questions
+ 
+ 6. What is the biggest challenge associated with using open-source
+ technologies?  What has been your worst open source experience?
+ 
+ 6. What are the hidden costs of using open source tools?  How do you
+ pay for them?
+ 
+ 7. How do you determine when an open-source technology is mature 
+ enough to use?
+ 
+ 8. Do you or your employees contribute to open-source projects?
+ 
+ 9. What is the best open source alternative to IBM Watson
