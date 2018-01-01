@@ -5,7 +5,7 @@ date: "Big Data Ignite 2016"
 output:
   beamer_presentation:
     colortheme: seagull
-    fig_height: 3
+    fig_height: 2.0
     fig_width: 8
     fonttheme: professionalfonts
     includes:
@@ -23,7 +23,7 @@ opts_chunk$set(
   message = FALSE,
   warning = FALSE,
   size = 'small',
-  cache = TRUE,
+  cache = FALSE,
   cache.path = "cache/gg-",
   tidy = FALSE
   )
@@ -426,7 +426,7 @@ HELPrct %>%
 
 How old are people in the HELP study? -- Other geoms
 ===============================
-```{r, fig.height = 2.3, size = "small"}
+```{r, fig.height = 2.0, size = "small"}
 HELPrct %>% 
   ggplot(aes(x = age)) + 
   geom_ash(binwidth = 2, colour = "navy", size = 1.2) +
@@ -465,14 +465,14 @@ HELPrct %>%
 More combinations
 =====================
 
-```{r, fig.height = 1.7}
+```{r, fig.height = 1.5}
 HELPrct %>% 
   ggplot(aes(x = age)) + 
   geom_point(stat = "bin", binwidth = 3) + 
   geom_line(stat = "bin", binwidth = 3)  
 ```
 
-```{r, fig.height = 1.7}
+```{r, fig.height = 1.5}
 HELPrct %>% 
   ggplot(aes(x = age)) + 
   geom_area(stat = "bin", binwidth = 3)  
@@ -526,7 +526,7 @@ Covariates: Adding in more variables
 
 Using color and linetype:
 
-```{r, fig.height = 1.3}
+```{r, fig.height = 1.1}
 HELPrct %>% 
   ggplot(aes(x = i1, color = substance, linetype = sex)) + 
   geom_line(stat = "density")
@@ -534,7 +534,7 @@ HELPrct %>%
 
 Using color and facets
 
-```{r, fig.height = 1.3}
+```{r, fig.height = 1.1}
 HELPrct %>% 
   ggplot(aes(x = i1, color = substance)) + 
   geom_line(stat = "density") + facet_grid( . ~ sex)
