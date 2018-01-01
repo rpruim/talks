@@ -1,0 +1,853 @@
+---
+title: "Data Wrangling in the Tidyverse"
+author: "Randall Pruim"
+date: "City of Hope Medical Center (January 2018)"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(
+  echo = TRUE, tidy = FALSE, size = "small",
+  fig.width = 6, fig.height = 3)
+
+library(mosaic)
+library(ggformula)
+library(ggplot2movies)  # gets us movies dataset
+library(babynames) 
+library(nycflights13) 
+library(weatherData) 
+library(lubridate)
+
+theme_set(theme_bw())
+
+Movies    <- movies
+Babynames <- babynames
+Flights   <- flights
+Planes    <- planes
+Airports  <- airports
+
+Slim_Movies <- 
+  movies %>% 
+  select(title, budget, length, mpaa)
+
+Movies2 <- 
+  Movies %>% 
+  filter(!is.na(budget), nchar(title) < 24)
+  
+RecentMovies <-
+  movies %>%
+  filter(year > 2000) %>%
+  filter(mpaa != "") 
+```
+
+## About this Tutorial
+
+ * Written using [`learnr`](https://rstudio.github.io/learnr/), 
+ a package for creating tutorials
+ 
+ * Hosted at `rsconnect.calvin.edu/tidyverse-city-of-hope-2018`
+ 
+ * Presented at [City of Hope Medical Center](https://www.cityofhope.org/location/duarte) (Duarte, CA)
+ 
+ 
+### A little help from my friends
+
+This tutorial has evolved from presentations and tutorials made by
+
+ * Randall Pruim
+ * Danny Kaplan
+ * Jo Hardin
+ * Miles Ott
+ * Nicholas Horton
+
+An earlier version of this tutorial was presented at Big Data Ignite 2017.
+
+<div align = "center">
+<img src="images/BDIHorizontalLogo_Gradient.png" width = 40%>
+</div>
+
+## Data used in the tutorial
+
+For simplicity, all the data in this tutorial come from R packages.
+We will rename some data sets so that in this tutorial data sets 
+are capitalized and variables (mostly) are not.
+
+```{r}
+require(mosaic)        # loads part of tidyverse and some data sets
+require(ggplot2movies) # contains a movies dataset
+require(babynames)     # number of kids with each name for over 100 yrs
+require(nycflights13)  # all flights in/out of NYC in 2013
+require(weatherData)   # daily weather in a few cities
+
+# rename so data sets are capitalized and variables (mostly) are not.
+Movies    <- movies
+Babynames <- babynames
+Flights   <- flights
+Planes    <- planes
+Airports  <- airports
+```
+
+## What is the tidyverse?
+
+### A collection of R packages 
+
+ * written by Hadley Wickham (and friends)
+ 
+ * that **play well together** 
+
+ * to **create and manage**  
+ 
+ * **tidy data**.
+
+<div align="center">
+### data I have \ $\stackrel{\mbox{tidyverse}}{\longrightarrow}$  \ data I want
+</div>
+
+## Tidy data
+
+  * Rows are cases (of interest)
+  
+  * Columns are variables
+
+### Tidy vs Clean
+
+As grandma says: tidy and clean are two different things
+
+  * tidy data may not be clean, but
+  * tidy data are easier to clean,
+  * and it is easier to tell whether data are clean when they are tidy 
+ 
+### Glyph Ready Data
+
+Many plotting libraries (including `ggformula` and `ggplot2`) require or work best with
+"glyph ready" data:
+
+  * information for each glyph (a mark on the "page") is in a single row.
+  * attributes of each glyph are determined by values of variables in that row.
+
+`tidyverse` tools are useful for creating glyph ready data.  
+
+## Chaining with %>%
+
+### The following are almost equivalent
+
+```{r eval = FALSE}
+f(x, y, ...)
+```
+
+```{r eval = FALSE}
+x %>% f(y, ...)
+```
+
+(When and where `x` is evaluated is not exactly the same and can matter.)
+
+### Your Turn
+
+Add a second line that is equivalent to the first but uses `%>%`.
+(Note: Unless you use `set.seed()` you will get different results each time
+because of different random choices.)
+
+```{r, pipe01, exercise = TRUE}
+sample_n(Movies, 3)     # 3 random movies
+```
+
+```{r, pipe01-solution}
+sample_n(Movies, 3)     # 3 random movies
+Movies %>% sample_n(3)  # 3 random movies; chaining syntax
+```
+
+## Little Bunny Foo Foo
+
+Here's a silly example that illustrates why `%>%` is helpful.
+
+    Little bunny Foo Foo
+    Went hopping through the forest
+    Scooping up the field mice
+    And bopping them on the head.
+
+### Without chaining
+
+```{r, eval = FALSE}
+bop(scoop(hop(foo_foo, through = forest), up = field_mice), on = head)
+```
+
+### With chaining
+
+```{r, eval = FALSE}
+foo_foo %>%
+  hop(through = forest) %>%
+  scoop(up = field_mice) %>%
+  bop(on = head)
+```
+
+### Advantages of Chaining
+
+  * reduces parenthesis chasing
+  * keeps arguments near functions
+  * mirrors order of operations (making code easier to read)
+  * facilitates code editing (easy to eliminate or insert a step)
+
+## Data Verbs
+
+### Chaining in the tidyverse
+
+Many functions in `tidyverse` 
+
+  * take tidy data as a first argument
+  
+  * return tidy data as a result
+  
+  * do not have side effects
+  
+This sets them up for chaining:
+
+```{r, eval = FALSE}
+new_data <-
+  old_data %>%
+  do_this( ... ) %>%
+  and_that( ... ) %>%
+  and_the_other( ... )
+```
+
+We will refer to these kinds of functions as (transitive) **data verbs** 
+because they do something to (tidy) data *without side effects*.
+
+### Learning tidyverse Tools
+
+There are basically two steps:
+
+|                                                          |              |
+|----------------------------------------------------------|-------------:|
+| 1. Learn how each data verb works in isolation.          | (Low volume) |
+| 2. Break down complex tasks into a sequence steps        | (Creativity) |
+
+
+ 
+## Movies Data
+
+The `Movies` data set contains information about movies.
+
+```{r, inspect, exercise = TRUE}
+Movies %>% glimpse()
+```
+
+### Your Turn
+
+ 1. Change `glimpse()` to `inspect()` in the previous box; `inspect()` provides
+an alternative way to take a quick look at a data set.
+
+ 2. Now change to `head()`.  What does this function do?
+ 
+ 3. Now change to `nrow()`.  What does this function do?
+ 
+ 4. Now change to `names()`.  What does this function do?
+ 
+ 5. Want more information?  Try `?movies`. (Note lower case here.)
+
+### Quiz
+
+```{r, quiz, echo = FALSE}
+quiz(
+  question("Is inspect() a data verb?",
+    answer("Yes."),
+    answer("No, its first argument is not tidy data."),
+    answer("No, it doesn't return tidy data.", correct = TRUE),
+    answer("No, it has side effects.")
+  ),
+  question("Is glimpse() a data verb?",
+    answer("Yes."),
+    answer("No, its first argument is not tidy data."),
+    answer("No, it doesn't return tidy data."),
+    answer("No, it has side effects.", correct = TRUE)
+  ),
+  question("Is head() a data verb?",
+    answer("Yes.", correct = TRUE),
+    answer("No, its first argument is not tidy data."),
+    answer("No, it doesn't return tidy data."),
+    answer("No, it has side effects.")
+  ),
+  question("Is nrow() a data verb?",
+    answer("Yes."),
+    answer("No, its first argument is not tidy data."),
+    answer("No, it doesn't return tidy data.", correct = TRUE),
+    answer("No, it has side effects.")
+  ),
+  question("Is names() a data verb?",
+    answer("Yes."),
+    answer("No, its first argument is not tidy data."),
+    answer("No, it doesn't return tidy data.", correct = TRUE),
+    answer("No, it has side effects.")
+  )
+)
+```
+
+## 6 Main Data Verbs
+
+We'll go through each of these in more detail in just a moment,
+but here are the key data verbs.
+
+### Reduction
+
+1. `summarise()`: compute summary statistics
+
+  * result is a 1-row data frame.  (This is a white lie, but useful for now.)
+
+### Rows 
+
+2. `filter()`:  **keep rows** that match logical condition (discard the others)
+3. `arrange()`: reorder the rows (i.e., sort)
+
+### Columns
+
+4. `select()`: **keep** some **variables** (columns) (discard the others)
+5. `mutate()`: create **new variables** and add them to the data
+
+### Grouping
+
+6. `group_by()`: data unchanged, but groups are noted.
+
+    - `ungroup()`:  clear grouping notes
+
+### But wait, there's more!  
+
+Here are some other data verbs
+
+
+- `transmute()` like `mutate()`, but returns only the new variables
+- `rename()`: rename some of the variables
+- `distinct()`: returns each unique row once
+- `sample_n()`: returns randomly selected row(s)
+- `sample_frac()`: returns randomly selected row(s)
+- `head()`:  returns the first few rows
+- `tail()`: returns the last few rows
+
+## One-row summaries with summarise()
+
+Note: `summarize()` works for non New Zelanders, 
+but it conflicts with a funciton with that same name in another package.
+
+```{r, summarise, exercise = TRUE}
+# number of movies (cases) in movie data
+Movies %>% summarise(n())
+```
+
+`n()` only works in special `tidyverse` functions (like `summarise()`) and computes the 
+same value as `nrow()` but doesn't require us to name the data set inside `summarise()`.
+(This will be more important shortly.)
+
+```{r, summarise-nrow, exercise = TRUE}
+# same information but different data format
+Movies %>% 
+  summarise( n = nrow(Movies))
+```
+
+### Multi-tasking allowed
+
+```{r, summarise02, exercise = TRUE}
+# mean and total number of minutes of all the movies
+Movies %>% 
+  summarise(
+    n = n(),
+    mean_length  = mean(length, na.rm = TRUE), 
+    total_length =  sum(length, na.rm = TRUE)
+    )
+```
+
+### Your turn
+
+Add one more variable to the example above: the total length of all the movies *in years*.
+
+```{r, summarise03, exercise = TRUE}
+# mean and total number of minutes of all the movies
+Movies %>% 
+  summarise(
+    n = n(),
+    mean_length  = mean(length, na.rm = TRUE), 
+    total_length =  sum(length, na.rm = TRUE)
+    )
+```
+
+```{r, summarise03-solution}
+# mean and total number of minutes of all the movies
+Movies %>% 
+  summarise(
+    n = n(),
+    mean_length  = mean(length, na.rm = TRUE), 
+    total_length =  sum(length, na.rm = TRUE),
+    total_length_years =  sum(length, na.rm = TRUE) / (60 * 24 * 365),
+    total_length_years2 =  total_length / (60 * 24 * 365)
+    )
+```
+
+### Useful functions for use with summarise()
+
+- `min()`, `max()`, `mean()`, `sum()`, `sd()`, `median()`, `IQR()`, ...
+- `n()`: number of observations in the current group
+- `n_distinct()`: number of unique values of a variable
+- `first_value()`, `last_value()`, `nth_value(x, n)`
+
+
+## select()
+
+Let's make a data set that has **fewer variables**.
+
+```{r, slim-movies}
+Slim_Movies <- 
+  Movies %>% 
+  select(title, budget, length, mpaa)
+
+Slim_Movies %>% sample_n(4)
+```
+
+- Reminder: `select()` is for *columns*
+- Can use `:` to specify ranges of variables: `title : budget`
+- Can use `-` to deselect variables: `-length`
+
+
+### Your Turn
+
+Select some variables of your own choosing.
+
+```{r, movies-names}
+Movies %>% names()
+```
+
+```{r, slim-movies02, exercise = TRUE}
+Movies %>% 
+  select( ??? )
+```
+
+
+## Creating subsets -- filter() and friends
+
+Often it is useful to work with a subset of the data 
+
+ * inspect a few rows to understand the data
+ * small data sets for prototyping analysis methods
+ * analyses applied only to an "interesting" subset of the data
+ * training and test data sets
+
+### Beginning and End
+
+```{r, head-tail, exercise = TRUE}
+Slim_Movies %>% head(3)       # first few rows
+Slim_Movies %>% tail(3)       # last few rows
+```
+
+### Random sample
+
+```{r, random, exercise = TRUE}
+Slim_Movies %>% sample_n(3)          # 3 random rows
+Slim_Movies %>% sample_frac(.00007)  # random fraction of rows
+```
+
+### filter()
+
+Let's use only use movies (cases) that have budget information and 
+have shorter titles.
+
+```{r, filter-budget, exercise = TRUE}
+Movies2 <- 
+  Movies %>% 
+  filter(!is.na(budget), nchar(title) <= 24)
+
+Movies2 %>% 
+  summarise(n = n(), longest_title = max(nchar(title)))
+```
+
+## Creating new variables -- mutate() and friends
+
+`mutate()` can be used to add new variables (columns) that are calculated 
+from existing variables.
+For example, let's compute the dollars per minute (of runtime) for our films.
+
+```{r, mutate, exercise = TRUE}
+Slim_Movies %>% 
+  filter(!is.na(budget)) %>%
+  mutate(dpm = round(budget / length, 2)) %>%   # $ per minute
+  head(6)
+```
+
+#### Your Turn
+
+Change `mutate()` to `transmute()`.  How do they differ?
+
+
+
+
+## group_by()
+
+`group_by()` is what makes this system really hum.  When tidy data is marked
+with groups, some subsequent data verbs are applied **within groups**.
+
+
+```{r, group-by, exercise = TRUE}
+# mean length of movies in hours for all the movies, broken down by mpaa
+Movies2 %>% 
+  mutate(
+    hours = length / 60,
+    dpm = budget / length) %>% 
+  group_by(mpaa) %>% 
+  summarise(n = n(), mean_length = mean(hours, na.rm = TRUE))
+```
+
+#### Your Turn
+
+ 1. Add some additional summaries of your choosing.
+ 2. Group by length of title instead of by rating.
+
+### Important Note
+
+Groups are in some sense "invisible", and it is easy to forget about them.
+When saving data that have been created with a grouping, you may want to 
+use `ungroup()` to remove the grouping information and let future you
+start fresh -- just saying...
+
+### group() and mutate()
+
+`group()` impacts (some) other operations as well.  What happens when 
+`mutate()` is applied after `group_by()`?
+
+```{r, group-mutate, exercise = TRUE}
+Movies2 %>%
+  group_by(mpaa) %>%
+  mutate(length_rank = rank(-length)) %>%
+  filter(length_rank < 3) %>%
+  select(title, length, length_rank)
+```
+
+### Important Note
+
+Groups are in some sense "invisible", and it is easy to forget about them.
+When saving data that have been created with a grouping, you may want to 
+use `ungroup()` to remove the grouping information and let future you
+start fresh -- just saying...
+
+
+## arrange() reorders the cases
+
+#### Your Turn
+
+
+```{r, arange-issues, exercise = TRUE}
+Movies2 %>%
+  group_by(mpaa) %>%
+  mutate(length_rank = rank(-length)) %>%
+  filter(length_rank <= 3) %>%
+  select(title, length, length_rank)  %>%
+  arrange(mpaa, length_rank)
+```
+
+#### Note about groups
+
+By default, `arrange()` ignores groups.  If you use `.by_group = TRUE`,
+then sorting will be done by grouping variables first, then by additional
+variables specified.
+
+### Group, summarise, arrange
+
+Group-summarise-arrange is a common operation to list groups in
+an order based on some calculation.  
+
+#### Your Turn
+
+Fill in the missing pieces here to list the ratings in order
+of average length of film.  Feel free to include additional
+summary quantities as well if you like.
+
+```{r, arrange, exercise = TRUE}
+Movies2 %>% 
+  group_by( ?? )  %>% 
+  summarise( ?? ) %>%
+  arrange( ?? )
+```
+
+
+## What else is there?
+
+### Lots more.  Here are few examples.
+
+ * `spread()` and `gather()` for converting from "long" to "wide or 
+ from "wide" to "long" shapes
+ 
+ * `separate()` splitting a single variable into multiple variables.
+
+ * `bind_rows()` and `bind_cols()` to (intelligently) glue data frames top-to-bottom or left-to-right.
+ 
+ * `left_join()`, `right_join()`, `inner_join()`, etc. for merging data 
+ from multiple sources.  (Like joins in SQL.)
+ 
+ * `lubridate` has functions for working with dates and times
+ 
+[TB Case Study tutorial](http://rsconnect.calvin.edu/tidy-tb) illustrates
+some of these in a case study using data from the World Health Organization.
+
+### bind_rows()
+
+The easiest way to combine data from multiple sources is when each source represents
+"more of the same thing".  Each data set might represent one site, one date (range),
+one researcher, etc.
+
+`bind_rows()` will stack data sets, using column names to align and filling in with `NA` if 
+some columns are missing in some data sets.
+
+#### Example: Weather data from multiple cities
+
+```{r weather01, exercise = TRUE}
+NewYork2013 %>% head(3)
+Mumbai2013 %>% head(3)
+London2013 %>% head(3)
+SFO2013 %>% head(3)
+```
+
+The following code combines the data from the four cities, but since the data 
+sets didn't include the city as a column, we can't tell which data comes from which city.
+Modify the code below to add a city column to each of the individual data sets.
+
+```{r, weather02, exercise = TRUE}
+MyWeather <- 
+  bind_rows(
+    NewYork2013, 
+    Mumbai2013, 
+    London2013, 
+    SFO2013
+  )
+MyWeather %>% sample_n(5)
+```
+
+```{r, weather02-solution}
+MyWeather <-
+  bind_rows(
+    NewYork2013 %>% mutate(city = "New York"), 
+    Mumbai2013 %>% mutate(city = "Mumbai"), 
+    London2013 %>% mutate(city = "London"), 
+    SFO2013    %>% mutate(city = "San Francisco")
+  )
+MyWeather %>% sample_n(5)
+```
+
+#### Your Turn -- Bonus
+
+Use the combined weather data to create a plot like this showing daily 
+high and low temperatures in each city.
+
+```{r, weather03, fig.height = 4, echo = FALSE}
+bind_rows(
+    NewYork2013 %>% mutate(city = "New York"), 
+    Mumbai2013 %>% mutate(city = "Mumbai"), 
+    London2013 %>% mutate(city = "London"), 
+    SFO2013 %>% mutate(city = "San Francisco")
+  ) %>%
+  mutate(date = lubridate::date(Time)) %>%
+  group_by (city, date) %>%
+  summarise(
+    lo = min(Temperature, na.rm = TRUE),
+    hi = max(Temperature, na.rm = TRUE),
+    mean = mean(Temperature, na.rm = TRUE),
+  )  %>% 
+  ungroup() %>%
+  gf_linerange(lo + hi ~ date | city ~ ., color = ~mean) %>%
+  gf_refine(scale_color_gradientn(colors = rev(rainbow(10))))
+```
+
+**Notes** 
+
+ 1. Dates
+ 
+    * `lubridate::date()` will convert the times into dates.  You can use `mutate()`
+    to add a `date` variable to the data.
+ 
+ 2. Colors
+ 
+    * First do this using the default colors. 
+    * In `ggformula` or `ggplot2`, the color scale can be modified using 
+ `scale_color_gradientn()`.  A vector of ten rainbow colors can be produced 
+ using `rainbow(10)`.  (You will likely want to use `rev(rainbow(10))` to get
+ the warm colors with the higher temperatures.)
+    * Feel free to use other custom color choices if you like.
+
+```{r, weather04, fig.height = 4, exercise = TRUE}
+MyWeather <- 
+  bind_rows(
+    NewYork2013, 
+    Mumbai2013, 
+    London2013, 
+    SFO2013
+  )
+```
+
+```{r, weather04-solution, fig.height = 4, echo = FALSE}
+bind_rows(
+    NewYork2013 %>% mutate(city = "New York"), 
+    Mumbai2013 %>% mutate(city = "Mumbai"), 
+    London2013 %>% mutate(city = "London"), 
+    SFO2013 %>% mutate(city = "San Francisco")
+  ) %>%
+  mutate(date = lubridate::date(Time)) %>%
+  group_by (city, date) %>%
+  summarise(
+    lo = min(Temperature, na.rm = TRUE),
+    hi = max(Temperature, na.rm = TRUE),
+    mean = mean(Temperature, na.rm = TRUE),
+  )  %>% 
+  ungroup() %>%
+  gf_linerange(lo + hi ~ date | city ~ ., color = ~mean) %>%
+  gf_refine(scale_color_gradientn(colors = rev(rainbow(10))))
+```
+### Database connections
+
+These same commands can be used to [manage data in an SQL data base](https://db.rstudio.com/dplyr/).
+ 
+* converts data verbs into SQL query
+* allows you to inspect the query
+* only fetches a few rows unless you ask for more (to save time while
+  you are debugging)
+
+```{r, eval = FALSE}
+# establish connection -- details vary by type of database
+con <- DBI::dbConnect(RMySQL::MySQL(), 
+  host = "database.rstudio.com",
+  user = "hadley",
+  password = rstudioapi::askForPassword("Database password")
+)
+
+# extract a table
+flights_db <- tbl(con, "flights")
+
+# treat it just like in-memory data (mostly)
+flights_db %>%
+  group_by(...) %>%
+  mutate(...) %>%
+  summarise(...) %>%
+  collect()          # get me all of the data
+```
+
+**Notes** 
+
+ * Some R commands can't be translated into SQL and so don't work inside `mutate()`, `summarise()`, etc. 
+ 
+ * Recent R Studio releases include expanded support for working with databases.
+ 
+
+## Your Turn -- More Movies
+
+### A Smaller Data Set
+
+When starting, it can be helpful to work with a small subset of the data.  When
+you have your data wrangling statements in working order, shift to the entire
+data table.
+
+```{r, small-subset, exercise = TRUE}
+RecentMovies <-
+  Movies %>%
+  filter(year > 2000) %>%
+  filter(mpaa != "") 
+```
+
+You can use the smaller data set as you are figuring out the solutions to these
+exercises.  Once have it sussed, you can switch to the full `Movies` data.
+
+### Your Turn
+
+#### What is the average IMDB user rating?
+
+```{r, rating, exercise = TRUE}
+RecentMovies %>%
+  summarise(avg = ????(rating)) 
+```
+
+
+#### What is the average IMDB user rating of movies for each mpaa category?
+
+```{r, rating-by-cat, exercise = TRUE}
+RecentMovies %>% 
+  group_by(????) %>% 
+  summarise(avg = ????(rating))
+```
+
+#### How many Action Movies in each year?
+
+```{r, action-movies, exercise = TRUE}
+RecentMovies %>%
+  group_by(????) %>%
+  summarise(Actioncount = sum(????))
+```
+
+#### How many Comedies of each mpaa rating in each year?
+
+```{r, comedies, exercise = TRUE}
+RecentMovies %>%
+  group_by(????, ????) %>%
+  summarise(????)
+```
+
+
+#### Track the average IMDB ratings for movies with mpaa "R" over the years.
+
+```{r r-movies, exercise = TRUE}
+Movies %>%
+  filter(mpaa == "R") %>%     # just the rated R movies
+  group_by(year) %>%          # for each year for each movie title
+  summarise(mean_user_rating = ????) %>%
+  gf_point(mean_user_rating ~ year)  # plot results
+```
+
+
+#### Track the number of IMDB ratings given to R movies over the years
+
+You could use total number or average number.  Your choice.
+
+(Hint: Use `votes` to see how many votes were cast for each movie.)
+
+```{r r-movies-2, exercise = TRUE}
+Movies %>%
+  filter(mpaa == "R") %>%     # just the rated R movies
+  group_by(year) %>%          # for each year for each movie title
+  summarise(????) %>%
+  gf_line(??? ~ year)  # plot results
+```
+
+#### Challenge
+
+Calculate the average per rating rather than the average per movie.  
+
+
+## You are on your way 
+
+
+### Keep learning
+
+ * [TB Case Study](http://rsconnect.calvin.edu/tidy-tb) demonstrates 
+a data tidying project based on WHO data on TB cases.
+
+ * [RStudio webinar](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
+
+ * [RStudio Cheatsheets](https://www.rstudio.com/resources/cheatsheets/) 
+ 
+### Keep practicing 
+
+Use `Babynames` or `Flights` to hone your skills.
+
+```{r, more-practice-baby, exercise = TRUE}
+Babynames %>% head()
+Babynames %>% nrow()
+```
+
+```{r, more-practice-flights, exercise = TRUE}
+Flights %>% head()
+Flights %>% nrow()
+Flights %>% 
+  filter(origin == "GRR" | dest == "GRR") %>% 
+  nrow()
+```
+
+### Keep a stiff upper lip
+
+<div align="center">
+![ImpostR Syndrome](images/impostR.jpg)
+</div>
+
+
