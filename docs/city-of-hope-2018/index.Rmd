@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
 ## Tutorials
 
  * Plotting with `ggformula` (these are also located in the `ggformula` package)
@@ -21,10 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
  
  * Data Wrangling: [rsconnect.calvin.edu//tidyverse/city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse/city-of-hope-2018/)
 
-## Cheat Sheets
 
-R Studio is assembling a number of useful cheat sheets at [www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
- 
 ## R Studio Server
 
 You are welcome to use an account on Calvin's RStudio server using the username and password 
@@ -33,7 +29,11 @@ provided.  Here's the link to get there.
   * [rstudio.calvin.edu](http://rstudio.calvin.edu)
   
 These accounts will likely be recycled in May or June, 2018.
-  
+
+## Cheat Sheets
+
+R Studio is assembling a number of useful cheat sheets at [www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
+   
 ## Running R Locally
 
 You are welcome to work in your own local copy of R and RStudio if you prefer.  This will work best if you have a recent versions 
@@ -47,6 +47,5 @@ You are welcome to work in your own local copy of R and RStudio if you prefer.  
 Packages can be installed or updated using the Packages tab in RStudio.
 
 
-  
   
   
