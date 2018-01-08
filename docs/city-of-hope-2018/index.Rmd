@@ -1,0 +1,32 @@
+---
+title: "City of Hope"
+author: "Randall Pruim (Calvin College)"
+date: "1/9/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+## Tutorials
+
+ * Plotting with `ggformula` (these are also located in the `ggformula` package)
+ 
+      * Intro: [rsconnect.calvin.edu/ggformula_intro/](http://rstudio.calvin.edu:3939/ggformula_intro/)
+      * Refining: [rsconnect.calvin.edu/ggformula_refining/](http://rstudio.calvin.edu:3939/ggformula_refining/)
+   
+ 
+ * Data Wrangling: [rsconnect.calvin.edu//tidyverse-city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse-city-of-hope-2018/)
+ 
+ 
+## R Studio Server
+
+You are welcome to use an account on Calvin's RStudio server using the username and password 
+provided.  Here's the link to get there.
+
+  * [rstudio.calvin.edu](http://rstudio.calvin.edu)
+  
+  
