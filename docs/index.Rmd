@@ -1,7 +1,7 @@
 # Talks by R Pruim
 
-Page in progress.
-
+  * [City of Hope, January 2018](city-of-hope-2018)
+  
   * Big Data Ignite 2016
  
     * [slides from workshop on Shiny](bigdataignite2016/shiny/04-Shiny.pdf)
