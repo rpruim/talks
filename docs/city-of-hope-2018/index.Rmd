@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
       * Refining: [rsconnect.calvin.edu/ggformula/refining/](http://rstudio.calvin.edu:3939/ggformula/refining/)
    
  
- * Data Wrangling: [rsconnect.calvin.edu//tidyverse/city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse/city-of-hope-2018/)
+ * Data Wrangling: [rsconnect.calvin.edu/tidyverse/city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse/city-of-hope-2018/)
 
 
 ## R Studio Server
