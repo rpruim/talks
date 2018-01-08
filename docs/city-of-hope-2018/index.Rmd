@@ -15,11 +15,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
  * Plotting with `ggformula` (these are also located in the `ggformula` package)
  
-      * Intro: [rsconnect.calvin.edu/ggformula_intro/](http://rstudio.calvin.edu:3939/ggformula_intro/)
-      * Refining: [rsconnect.calvin.edu/ggformula_refining/](http://rstudio.calvin.edu:3939/ggformula_refining/)
+      * Intro: [rsconnect.calvin.edu/ggformula/intro/](http://rstudio.calvin.edu:3939/ggformula/intro/)
+      * Refining: [rsconnect.calvin.edu/ggformula/refining/](http://rstudio.calvin.edu:3939/ggformula/refining/)
    
  
- * Data Wrangling: [rsconnect.calvin.edu//tidyverse-city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse-city-of-hope-2018/)
+ * Data Wrangling: [rsconnect.calvin.edu//tidyverse/city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse/city-of-hope-2018/)
 
 ## Cheat Sheets
 
