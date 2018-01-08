@@ -1,0 +1,69 @@
+---
+title: "Domino Arithmetic"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  comment = NA)
+require(mosaic)
+require(printr)
+```
+
+## Tiling 2 x n (Fibonacci)
+
+```{r}
+t <- function(n) {
+  alpha <- (1 + sqrt(5))/2
+  beta  <- (1 - sqrt(5))/2
+  A <-   alpha / sqrt(5)
+  B <- - beta  / sqrt(5)
+  
+  data_frame(
+    n = 0:20,
+    t = A * alpha^n + B * beta^n,
+    A_part = format(A * alpha^n, scientific = FALSE),
+    B_part = format(B * beta^n, scientific = FALSE) 
+  )
+}
+
+t(0:10)
+```
+
+
+## Tiling 3 x n 
+
+```{r}
+u <- function(n) {
+  alpha <- 2 + sqrt(3)
+  beta  <- 2 - sqrt(3)
+  A <-   1/2 + sqrt(3) / 6
+  B <-   1/2 - sqrt(3) / 6
+  
+  A * alpha^n + B * beta^n
+}
+
+data_frame(
+  n = 0:20,
+  t = t(n),
+  u = u(n)
+)
+```
+
+```{r}
+u <- function(n) {
+  alpha <- 2 + sqrt(3)
+  beta  <- 2 - sqrt(3)
+  A <-   1/2 + sqrt(3) / 6
+  B <-   1/2 - sqrt(3) / 6
+  data_frame(
+    n = 0:20,
+    t = A * alpha^n + B * beta^n,
+    A_part = format(A * alpha^n, scientific = FALSE),
+    B_part = format(B * beta^n, scientific = FALSE) 
+  )
+}
+u(0:20)
+```
+
