@@ -232,5 +232,15 @@ If you are new to R, you will learn faster and be happier if you can learn a
 few flexible tools very well than if you run with the first thing you google that 
 gets today's job done.
 
+## Outline of the day
+
+  * Introduction to `ggformula` (plotting with formulas)
+  
+  * Data Wrangling in the `tidyverse`
+  
+  * R Markdown (if time/interest)
+  
+Be sure to interrupt with questions along the way.
+
 
 
