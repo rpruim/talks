@@ -30,6 +30,11 @@ provided.  Here's the link to get there.
   
 These accounts will likely be recycled in May or June, 2018.
 
+## R Markdown
+
+ * [Prezi by Nick Horton](https://prezi.com/vq6l5yqpnqma/intro-to-r-markdown-cvc-2015/)
+ * [R Markdown Cheet Sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+
 ## Cheat Sheets
 
 R Studio is assembling a number of useful cheat sheets at [www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
