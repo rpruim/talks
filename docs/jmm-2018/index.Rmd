@@ -1,0 +1,55 @@
+---
+title: "Joint Mathematics Meetings"
+author: "Randall Pruim (Calvin College)"
+date: "January 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Less Volume, More Creativity
+
+ 
+  * Intro Tutorial: [rsconnect.calvin.edu/less-volume-plotting/jmm2018/](http://rstudio.calvin.edu:3939/less-volume-plotting/jmm2018/)
+  * Refining `ggformula` plots: [rsconnect.calvin.edu/ggformula/refining/](http://rstudio.calvin.edu:3939/ggformula/refining/)
+   
+ 
+ * Data Wrangling: [rsconnect.calvin.edu/tidyverse/city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse/city-of-hope-2018/)
+    
+    * has many uses, including preparing data for plotting
+
+
+## R Studio Server
+
+You are welcome to use an account on Calvin's RStudio server using the username and password 
+provided.  Here's the link to get there.
+
+  * [rstudio.calvin.edu](http://rstudio.calvin.edu)
+  
+These accounts will likely be recycled in May or June, 2018.
+
+## R Markdown
+
+ * [Prezi by Nick Horton](https://prezi.com/vq6l5yqpnqma/intro-to-r-markdown-cvc-2015/)
+ * [R Markdown Cheet Sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+
+## Cheat Sheets
+
+R Studio is assembling a number of useful cheat sheets at [www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
+   
+## Running R Locally
+
+You are welcome to work in your own local copy of R and RStudio if you prefer.  This will work best if you have a recent versions 
+
+  * [R](http://cran.r-project.org)
+  * [RStudio](http://rstudio.com)
+  * the [`mosaic`](https://github.com/ProjectMOSAIC/mosaic) package and its dependencies
+  * the [`ggformula`](https://github.com/ProjectMOSAIC/mosaic) package and its dependencies
+  * the [`tidyverse`](https://github.com/tidyverse/tidyverse) package and its dependencies
+  
+Packages can be installed or updated using the Packages tab in RStudio.
+  
+  

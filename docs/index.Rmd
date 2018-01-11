@@ -1,6 +1,12 @@
-# Talks by R Pruim
+# Recent Presentations by R Pruim
 
+  * [JMM, January 2018](jmm-2018)
+  
   * [City of Hope, January 2018](city-of-hope-2018)
+ 
+  * Big Data Ignite 2017
+  
+  * [CVC 2013--2017](http://cvc.mosaic-web.org/)
   
   * Big Data Ignite 2016
  
