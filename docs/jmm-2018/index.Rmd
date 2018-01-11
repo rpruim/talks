@@ -16,6 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ###  This document is located at http://rpruim.github.io/talks/jmm-2018/
 
+## Wifi
+
+  * network: JMM18mini
+  * password: minicourse
+  
 ## Feedback 
 
  * I've created a [**Google doc**](https://docs.google.com/document/d/1d_gm6hRLSfAJBVr-P9M7cTdf3PCNaAY_qFjuEiNEVuA/edit?usp=sharing) where you can leave feedback, ask questions, etc.
