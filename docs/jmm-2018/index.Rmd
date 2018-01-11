@@ -10,8 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Less Volume, More Creativity
+## The Less Volume, More Creativity approach
 
+  * Opening Slides: [[HTML]](../Less-Volume/less-volume-jmm-2018.html) [[Rmd]](../Less-Volume/less-volume-jmm-2018.Rmd)
+  
+
+## Some Tutorials
  
   * Intro Tutorial: [rsconnect.calvin.edu/less-volume-plotting/jmm2018/](http://rstudio.calvin.edu:3939/less-volume-plotting/jmm2018/)
   * Refining `ggformula` plots: [rsconnect.calvin.edu/ggformula/refining/](http://rstudio.calvin.edu:3939/ggformula/refining/)
