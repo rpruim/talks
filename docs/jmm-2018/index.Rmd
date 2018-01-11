@@ -34,7 +34,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Some Tutorials
  
-  * Intro Tutorial: [rsconnect.calvin.edu/less-volume-plotting/jmm2018/](http://rstudio.calvin.edu:3939/less-volume-plots/jmm2018/)
+  * Intro Tutorial: [rsconnect.calvin.edu/less-volume-plots/jmm2018/](http://rstudio.calvin.edu:3939/less-volume-plots/jmm2018/)
   
   
   * Refining `ggformula` plots: [rsconnect.calvin.edu/ggformula/refining/](http://rstudio.calvin.edu:3939/ggformula/refining/)
