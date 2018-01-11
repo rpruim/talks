@@ -1,5 +1,5 @@
 ---
-title: "Joint Mathematics Meetings"
+title: "JMM Minicourse: <BR>Teaching Statistics Using R and RStudio"
 author: "Randall Pruim (Calvin College)"
 date: "January 2018"
 output: html_document
@@ -9,6 +9,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+<br>
+<br>
+<br>
+
+###  This document is located at http://rpruim.github.io/talks/jmm-2018/
+
+## Feedback 
+
+ * I've created a [**Google doc**](https://docs.google.com/document/d/1d_gm6hRLSfAJBVr-P9M7cTdf3PCNaAY_qFjuEiNEVuA/edit?usp=sharing) where you can leave feedback, ask questions, etc.
+
+ * MAA has a [survey they would like you fill out](https://www.surveymonkey.com/r/RCTTT5D).
 
 ## The Less Volume, More Creativity approach
 
