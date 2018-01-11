@@ -30,7 +30,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Some Tutorials
  
   * Intro Tutorial: [rsconnect.calvin.edu/less-volume-plotting/jmm2018/](http://rstudio.calvin.edu:3939/less-volume-plotting/jmm2018/)
+  
+  
   * Refining `ggformula` plots: [rsconnect.calvin.edu/ggformula/refining/](http://rstudio.calvin.edu:3939/ggformula/refining/)
+  
+    * In case you want to learn more about how to produce plots  
+   
    
  
  * Data Wrangling: [rsconnect.calvin.edu/tidyverse/city-of-hope-2018/](http://rsconnect.calvin.edu/tidyverse/city-of-hope-2018/)
