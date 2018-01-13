@@ -1,0 +1,907 @@
+---
+title: "Less Volume, More Creativity <br>Plots and More"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+
+
+
+```{r setup, include=FALSE}
+library(learnr)
+# library(checkr)
+library(tibble)
+library(ggformula)
+library(mosaic)
+library(mosaicData)
+library(NHANES)
+theme_set(theme_bw())
+# data(Births78, package = "mosaicData")
+# Births78 <- Births78 %>% mutate(date = as.Date(date))
+data(Births, package = "mosaicData")
+data(NHANES, package = "NHANES")
+for (y in unique(Births$year)) {
+  assign(paste0("Births",y),  Births %>% filter(year == y))
+}
+Births1978 <- Births %>% filter(year == 1978)
+data(Galton, package = "mosaicData")
+# knitr::opts_chunk$set(exercise.checker = checkr::checkr_tutor)
+knitr::opts_chunk$set(
+  echo = FALSE,
+  fig.align = "center",
+  fig.width = 6, fig.height = 2.5)
+```
+
+
+<style type="text/css">
+span.boxed {
+  border:5px solid gray;
+  border-radius:10px;
+  padding: 5px;
+}
+span.invboxed {
+  border:5px solid gray;
+  padding: 5px;
+  border-radius:10px;
+  color: white;
+}
+
+table, td, th { border:0px; }
+
+/* cellpadding */
+th, td { padding: 5px; }
+
+</style>
+
+
+
+## US Births in 1978
+
+Here is an interesting plot showing the number of live births in the United
+States each day of 1978.  
+
+```{r, echo = FALSE}
+gf_point(births ~ date, data = Births1978)
+```
+
+ 1. What patterns do you notice in this data?
+ 
+ 2. What possible explanations could there be for these patterns?
+ 
+ 3. What explanations might students give that indicate they are misunderstanding the plot?
+
+## How do we make this plot?
+
+```{r, echo = FALSE}
+gf_point(births ~ date, data = Births1978)
+```
+
+We are going to use this plot
+
+  * to learn how to create plots using the `ggformula` package 
+  
+  * to begin thinking about designing, describing, and interpreting plots more generally
+
+## Two important questions
+
+To get R (or any software) to create this plot (or do anything else, really),
+there are two important questions you must be able to answer. 
+<!-- Before continuing, see if you can figure out **what two questions we have in mind**. -->
+
+### The Questions
+
+#### 1. What do you want the computer to do?
+  
+#### 2. What must the computer know in order to do that?
+
+### Answering the two questions
+
+```{r, echo = FALSE}
+gf_point(births ~ date, data = Births1978)
+```
+
+To make this plot, the answers to our questions are 
+
+#### 1. What do you want the computer to do?
+
+ * Make a scatter plot 
+ 
+    * better answer: a **plot** consisting of **points**
+  
+#### 2. What must the computer know in order to do that?
+
+ * The data used for the plot:
+
+    * The variable to be plotted along the y-axis.
+    * The variable to be plotted along the x-axis.
+    * The data set that contains the variables.
+      
+#### We just need to learn how to tell R these answers.     
+
+
+## Plotting with Formulas
+
+### The Formula Template
+
+We will provide answers to our two questions by filling in
+the boxes of this important template:
+
+<center>
+<h2><strong><span class="invboxed">goal</span> ( <span class="invboxed">yyy</span> ~ <span class="invboxed">xxx</span> , data = <span class="invboxed">mydata</span> )</strong> 
+</h2></center>
+
+&nbsp;
+
+We just need to identify which portions of our answers go into which boxes.
+
+### The Name of the Game
+
+It is useful to provide names for the boxes:
+
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ...)</strong> 
+</h2></center>
+&nbsp;
+
+These names can help us remember which things go where.
+(The `...` indicates that there are some additional arguments we will add
+eventually.)
+
+<!-- #### Other versions -->
+
+<!-- Sometimes we will add or subtract a bit from our formula. -->
+<!-- Here are some other forms we will eventually see. -->
+
+<!-- ```{r eval=FALSE, echo = TRUE} -->
+<!-- # simpler version -->
+<!-- goal( ~ x, data = mydata )           -->
+<!-- # fancier version -->
+<!-- goal( y ~ x | z , data = mydata )    -->
+<!-- # unified version -->
+<!-- goal( formula , data = mydata )      -->
+<!-- ``` -->
+
+### 2 Questions and the Formula Template
+
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ... )</strong> 
+</h2></center>
+ 
+&nbsp;
+
+
+#### Q. What do you want R to do?  A. goal
+
+ * This determines the function to use.
+ 
+ * For a plot, the function will describe what sorts of marks to draw (points, in our example).
+ 
+    * other possibilities include lines, boxplots, etc, etc.
+
+#### Q. What must R know to do that?  A. arguments 
+
+ * This determines the inputs to the function.
+ * For a plot, we must identify the variables and the data frame that contains them.
+ 
+### Assembling the pieces
+
+#### Template
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> )</strong> 
+</h2></center>
+ 
+&nbsp;
+
+#### Pieces
+
+<table align = "center" >
+<tr>
+  <th> box </th>
+  <th> fill in with </th>
+  <th> purpose </th>
+</tr>
+<tr>
+  <td> `goal` </td>
+  <td> `gf_point` </td>
+  <td> plot some points </td>
+</tr>
+<tr>
+  <td> `y` </td>
+  <td> `births` </td>
+  <td> y-axis variable</td>
+</tr>
+<tr>
+  <td> `x` </td>
+  <td> `date` </td>
+  <td> x-axis variable </td>
+</tr>
+<tr>
+  <td> `mydata` </td>
+  <td> `Births1978`</td>
+  <td> name of data set </td>
+</tr>
+</table>
+
+#### Exercise
+
+Put each piece in its place in the template below and then run the code
+to create the plot. 
+
+```{r, gf_point, echo = TRUE, exercise = TRUE}
+goal(y ~ x, data = mydata)
+```
+
+<div id="gf_point-hint">
+If you get an "object not found" or "could not find function" error message,
+that indicates that you have not correctly filled in one of the four boxes from
+the template.  
+
+Note: R is case sensitive, so watch your capitalization.
+</div>
+  
+For the record, here are the first few rows of `Births1978`.
+  
+```{r}
+Births1978 %>% head(3) %>% select(births, date, day_of_year, wday)
+```
+
+### Formulas in R
+
+The most distinctive feature of `ggformula` plots is the use of formulas to 
+describe the positional information of a plot.
+Formulas in R always involve the tilde character, which is easy to overlook.
+It looks like this:  
+
+```{r echo = FALSE, fig.align = "center"}
+knitr::include_graphics("../images/tilde.png")
+```
+
+The position of ![](../images/tilde-small.png) on the keyboard varies from brand to brand. On Apple keyboards, it's here.
+
+```{r echo = FALSE, fig.align = "center", out.width = "40%"}
+knitr::include_graphics("../images/keyboard-tilde.png")
+```
+
+<!-- #### Exercise -->
+
+<!-- Find the ![](../images/tilde-small.png) on your keyboard and type `births ~ date` in  -->
+<!-- the code block.  That's the formula we need for our plot. -->
+
+<!-- ```{r type-tilde, exercise=TRUE, exercise.lines = 2} -->
+
+<!-- ``` -->
+
+<!-- ```{r type-tilde-check, echo = FALSE} -->
+<!-- set_success_message("Good. That's all this exercise was about: typing a formula.") -->
+<!-- t1 <- find_call("whatever ~ whatever", message = "do you have a tilde (~)?  Does your formula have two sides?") -->
+<!-- t2 <- find_call("births ~ date", message = "you need to have the y-axis variable on the left and the x-axis variable on the right") -->
+
+<!-- USER_CODE %>% t1 %>% t2  -->
+<!-- ``` -->
+
+### Using formulas to describe plots
+
+Most `gf_` functions take a formula that describes the positional
+attributes of the plot.  Using one of these functions with no arguments
+will show you the "shape" of the formula it requires.
+
+#### Exercise
+Run this code to see the formula shape for `gf_point()`.
+
+```{r, gf-shape, exercise = TRUE}
+gf_point()
+```
+
+You should see that `gf_point()`'s formula has the shape `y ~ x`, 
+so the $y$-variable name goes before the tilde and the x-variable name goes
+after.  (Think:  "y depends on x".  Also note that the y-axis label appears
+farther left than the x-axis label.)
+
+
+#### Exercise
+
+Change `date` to `day_of_year` and see how the plot changes.
+(If you do this on a separate line, you will see both plots at once.)
+
+```{r, gf_point-day_of_year, echo = TRUE, exercise = TRUE}
+gf_point(births ~ date, data = Births1978)
+```
+
+#### Bonus Exercise (Optional)
+
+Reverse the roles of the variables -- changing `births ~ date` to 
+`date ~ birth` -- to see how the plot changes.
+
+
+## Changing things up: different types of plots
+
+Our plots have points because we have used `gf_point()`.  But there are 
+many other `gf_` functions that create different types of plots.
+
+#### Exercise
+
+Experiment with some other plot types by changing `gf_point()` to 
+one of the following:
+
+  * `gf_line()`: connect the dots
+  * `gf_lm()`: a regression line (lm = linear model)
+  * `gf_smooth()`: smoothed version of `gf_line()` (LOESS or lm)
+  * `gf_spline()`: another type of smoother (using splines)
+
+Which type of plot reveals **exceptional cases** the best?  What are those exceptional
+cases?
+
+```{r, gf_point-layer, echo = TRUE, exercise = TRUE}
+gf_point(births ~ date, data = Births1978)
+```
+
+
+## Plots with one positional variable
+
+Some `gf_` functions only require the user to supply one variable. The y-positions
+for these plots can calculated from the x-variable.
+
+Here are two examples.  Run the code below to see the formula shapes used by
+these plots.
+
+```{r, one-var-plot-help, exercise = TRUE}
+gf_histogram()
+gf_density()
+```
+
+Notice that when there is only one variable it is always on the **right** side.
+
+
+Other examples of functions that take just one variable include 
+
+ * `gf_dhistogram()` -- density histogram (the right way to do a histogram)
+ * `gf_dens()` 
+ * `gf_freqpoly()` 
+ * `gf_dotplot()` 
+ * `gf_ash()`
+ * `gf_bar()` 
+ * `gf_cols()` 
+ * `gf_qq()`
+
+#### Exercise
+
+Create some "one-variable" plots using the functions listed above 
+and the template below.  Which variable should you use?
+
+```{r, gf_histogram-etc, echo = TRUE, exercise = TRUE}
+gf____( ~ _____, data = Births1978)
+```
+
+
+## Changing things up: options
+
+If you created the spline plot, you probably found it "too wiggly".  If you created 
+the smoothed plot, you might prefer that the gray bands not be displayed.  For any
+of these plots you might have preferred different colors or sizes of things.
+Such global characteristics of a plot can be adjusted with additional arguments to
+the `gf_` function. These go in the `...` part of the template.
+
+&nbsp;
+<center>
+<h3><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ...)</strong> 
+</h3></center>
+&nbsp;
+
+The general form for these is `option = value`.
+
+For example, 
+
+  * `spar = 0.5` (or any number between 0 and 1) controls the amount of smoothing in `gf_spline()`.
+  * `se = FALSE` (note capitalization) turns off the "error band" in `gf_smooth()`.
+  * `color = "red"` or `fill = "navy"` (note quotes) can be used to change the colors of things.  (`fill` is typically used for regions that are "filled in" and `color` for dots and lines.)
+  * `alpha = 0.5` (or any number between 0 and 1) will set the opacity (0 is completely
+  transparant and 1 is completely opaque).
+
+
+#### Exercises
+
+Here are some examples.  Adjust some of the options to see how things change.
+We've inserted some line breaks to make the options easier to locate in the code.
+
+```{r, gf-options-1, exercise = TRUE}
+gf_spline(births ~ date, data = Births1978, 
+          spar = 0.5, 
+          color = "navy")
+```
+
+
+```{r, gf-options-2, exercise = TRUE}
+gf_smooth(births ~ date, data = Births1978, 
+          se = FALSE, 
+          color = "red")
+```
+
+```{r, gf-options-3, exercise = TRUE}
+gf_point(births ~ date, data = Births1978, 
+         size = 3, shape = 18,
+         alpha = 0.5, color = "purple")
+```
+
+ 
+#### What attributes are available?
+
+You can learn about the attributes available for a given layer using the 
+"quick help" for a layer function.  You can find out more by reading the help file
+produced with `?`.
+
+```{r, quick-help, exercise = TRUE}
+# "quick help" for gf_point()
+gf_point()
+```
+
+#### What are the color names?  
+  
+Curious to know all the available color names? Run this code.
+
+```{r, colors, exercise = TRUE}
+colors()
+```
+
+
+## Multiple layers with %>%
+
+We said that `gf_point()` creates a plot with points. 
+This isn't quite true. Technically, it creates a **layer** with points.
+A plot may have multiple layers.  To create a multi-layered plot, simply
+append `%>%` at the end of the code for one layer and follow that with
+another layer.
+
+#### Exercise
+
+ 1. If you run the following code as is, you will get three separate plots.
+ 2. Combine these three layers into a single plot by appending `%>%` at
+the end of the first two lines.
+ 3. That's pretty ugly.  Now change the x-axis variable to `day_of_year` so 
+ that all three years are aligned.
+ 4. If you like, change the plot type to `gf_smooth()` or `gf_spline()`.
+
+```{r multi-layers, exercise = TRUE}
+gf_point(births ~ date, data = Births1978, color = "navy") 
+gf_point(births ~ date, data = Births1969, color = "red")
+gf_point(births ~ date, data = Births1988, color = "skyblue")
+```
+
+## Mapping attributes
+
+The births data in 1978 contains two clear "waves" of dots.  One conjecture
+is that these are weekdays and weekends.  We can test this conjecture
+by putting different days in different colors.
+
+In the lingo of `ggformula`, we need to **map** color to the variable `wday`.
+**Mapping** and **setting** attributes are different in an important way.
+
+ * `color = "navy"` **sets** the color to "navy".  All the dots will be navy.
+ 
+ *  `color = ~ wday` **maps** color to `wday`. This means that the color will 
+ depend on the values of `wday`. A legend (aka, a guide) will be 
+ automatically included to show us which days are which.
+ 
+#### Exercise
+
+  1. Change the color argument so that it maps to `wday`.
+  Don't forget the tilde (`~`).
+  
+  2. Try some other plot types: `gf_line()`, `gf_smooth()`, etc.  Which do you
+  like best? Why?
+  
+  
+```{r, color-mapping, exercise = TRUE}
+gf_point(births ~ date, data = Births1978, color = "navy")
+```
+
+```{r color-mapping-quiz}
+quiz(
+  question(
+    "Does it appear that the conjecture about weekends is generally correct?",
+    answer("yes", correct = TRUE),
+    answer("no")
+  ),
+  question(
+    "What happens if you omit the `~` before `~wday`?",
+    answer("It works just the same.  The tilde isn't required."),
+    answer("All the dots are the same color."),
+    answer("There is an error message: 'wday' not found.", correct = TRUE)
+  )
+)
+```
+
+## Facets
+
+### Facets are coordinated subplots
+
+If we want to look at all 20 years of birth data, overlaying the data
+is likely to put too much information in too little space and make it hard to tell which
+data is from which year.  (Deciphering 20 colors or 20 shapes can be hard, too.)
+Instead, let's put each year in separate **facet** or sub-plot.  Facets are better
+than 20 separate plots because the coordinate systems are shared across the facets
+which saves space and makes comparisons across facets easier.
+
+There are two ways to create facets.  The simplest way is to add a vertical bar `|` to
+our formula.
+
+
+```{r, births-facets, exercise = TRUE, fig.height = 6}
+gf_point(births ~ day_of_year | year, data = Births, size = 0.5)
+```
+
+The second way is to add on a facet command using `%>%`:
+
+```{r, births-facets-wrap, exercise = TRUE, fig.height = 6}
+gf_point(births ~ day_of_year, data = Births, size = 0.5) %>%
+  gf_facet_wrap( ~ year)
+```
+
+#### Exercise
+
+Edit one of the plots above to do the following:
+
+  1. map color to `wday`
+  2. change from points to lines or one of the smoothers
+  
+```{r, births-facets-ex1, exercise = TRUE, fig.height = 6}
+```
+
+#### Exercise
+
+Now edit one the plots above to
+
+  1. remove the facets, and 
+  2. use `date` instead of `day_of_year`
+  
+What advantage do we get from using facets in this case?
+
+```{r, births-facets-ex2, exercise = TRUE}
+```
+
+### Facet Grids and Facet Wraps
+
+The faceting we did on the previous page is called facet wrapping.  If the facets
+don't fit nicely in one row, the facets continue onto additional rows.
+
+A facet grid uses rows, or columns, or both in a fixed way.
+
+```{r, facet-grid, exercise = TRUE, fig.height = 9}
+gf_point(births ~ day_of_year | year ~ wday, data = Births, size = 0.5)
+```
+
+#### Exercise
+
+Recreate the plot above using `gf_facet_grid()`.  This works much like `gf_facet_wrap()`
+and accepts a formula with one of three shapes
+
+  * `y ~ x` (facets along both axes)
+  * ` ~ x`  (facets only along x-axis)
+  * `y ~ .` (facets only along y-axis; notice the important dot in this one)  
+
+(These three formula shapes can also be used on the right side of `|`.)
+
+  
+```{r, facet-grid2, exercise = TRUE, fig.height = 9}
+```
+
+## More Practice 
+
+Time to explore on your own.  Here are some data sets you can use.
+
+  * `Births1969` through `Births1988` contain birth data for individual years.
+  * `HELPrct` has data from a study of people addicted to alcohol, cocaine, or heroine
+  * `KidsFeet` has information about some kids' feet.
+  * `NHANES` has lots of physiologic and other measurements from 10,000
+  subjects in the National Health and Nutrition Evaluation Survey.
+  
+To find out more about the data sets use `?HELPrct`, `?KidsFeet`, or  `?NHANES`.
+To see the first few rows of the `KidsFeet` data, you can use `head(KidsFeet)`.
+
+To get a list of functions available in `ggformula`, run this code chunk.
+
+```{r, apropos, exercise = TRUE}
+# list all functions starting gf_
+apropos("gf_")
+```
+
+#### Exercise.
+
+Make some plots to explore one or more of these data sets.
+
+ * Experiment with different types of plots.
+ * Use mapping and/or facets to reveal groups.
+ * You can put more than one plot in a code chunk, but we've provided two chunks
+ in case you want to separate your work that way.  Use one chunk for experimenting
+ and copy and paste your favorites to the other chunk if you like.
+
+```{r, explore, exercise = TRUE}
+head(KidsFeet)
+gf_bar( ~ sex, data = KidsFeet)
+gf_violin(length ~ sex, data = KidsFeet) %>%
+  gf_jitter(length ~ sex, height = 0, width = 0.15)
+?KidsFeet
+```
+
+```{r, explore-more, exercise = TRUE}
+
+```
+
+## Where do we go from here?
+
+### Bells & Whistles
+
+If you are fussy about your plots, you may be wondering how to have more control over 
+things like:
+
+ * custom labeling, including titles and axis labels
+ * fonts, colors, and sizes of text
+ * color of plot elements like background, gridlines, facet labels, etc.
+ * custom scales (user chosen colors, sizes, etc.)
+ * etc, etc.
+  
+As you can imagine, all of these things can be adjusted pretty much however you like.
+But we'll save that for a separate tutorial on customizing your plots.
+
+### Bells & Whistles with students
+ 
+My approach: 
+
+ * Let the students ask or 
+ * Let the data analysis drive 
+
+### Bells & Whistles -- an ugly example
+
+This is ugly, but hints at some of the things that can be modified
+with bells and whistles.
+
+```{r, echo = FALSE}
+gf_line(births ~ date,  color = ~ wday, data = Births78, size = 1.2) %>%
+  gf_point(births ~ date,  color = ~ wday, data = Births78, size = 2) %>%
+  gf_refine(
+    scale_color_manual(
+      values = c("orange", "pink", "brown", "navy", "green", "red", "gray50")),
+    guides(color = guide_legend("day of week")),
+    theme(text = element_text(color = "green", size = 15, face = "italic"))
+    ) %>%
+  gf_labs(title = "Births in the US (1978)", 
+          x = "date in 1978", 
+          y = "Numbr of live births")
+```  
+
+## Numerical Summaries
+
+One of the powerful features of the formula template is that it can be used for other 
+things in addition to plotting.  
+For example, numerical summaries can be created using
+the same formula template.
+
+### Augmented statistical summary functions.
+
+R includes a number of statistical summary functions, but out of the box, they don't know about formulas.
+The `mosaic` package augments these to make them "formula-aware".  This works for functions like
+`mean()`, `median()`, `sd()`, `iqr()`, `max()`, `min()`, etc.
+
+**Big idea:** Replace plot name with summary name
+
+ * Nothing else changes
+
+```{r, mean-et-al, exercise = TRUE}
+gf_boxplot(births ~ wday, data = Births1978)
+      mean(births ~ wday, data = Births1978)
+```
+
+#### Exercise
+
+Change `mean()` to one of the other summary functions in the example above.
+
+### df_stats -- a general tool
+
+`df_stats()` returns a data frame instead of a plot and can be used to create a wide variety of numerical 
+summaries using the same formula structure that we use for plotting.
+
+```{r, numerical, exercise = TRUE}
+df_stats(births ~ wday, data = Births1978, mean)
+```
+
+#### Exercise
+
+ 1. Change mean to one or more of the following: `median`, `sd`, `max`, `min`.
+
+ 2. What happens if you omit `mean` and don't replace it with anything?
+
+
+## Modeling with formulas
+
+This is really the starting point for this Less Volume, More Creativity appraoch.  Since R uses formulas for modeling,
+it reduces cognitive load to use formulas for graphical and numerical summaries as well.  There are lots of resources
+about fitting various sorts of models in R.  Here we will just illustrate how similar numerical summaries, graphical
+summaries and models look syntactically.
+
+### A two sample t-test
+
+Notice how similar these command are, then run them.
+
+```{r, t-test, exercise = TRUE}
+      mean(length ~ sex, data = KidsFeet)
+gf_boxplot(length ~ sex, data = KidsFeet)
+    t.test(length ~ sex, data = KidsFeet)
+```
+
+### Linear models
+
+```{r, lm, exercise = TRUE}
+gf_point(length ~ width, data = KidsFeet) %>%
+   gf_lm(length ~ width, data = KidsFeet)
+     cor(length ~ width, data = KidsFeet)
+      lm(length ~ width, data = KidsFeet)
+```
+
+### Linear model with a covariate
+
+```{r, broom, exercise = TRUE}
+gf_point(length ~ width, color = ~ sex, data = KidsFeet) %>%
+   gf_lm(length ~ width, color = ~ sex, data = KidsFeet)
+      lm(length ~ width + sex, data = KidsFeet)
+```
+
+#### Exercise
+
+Delete all of the arguments to `gf_lm()` in the example above.  Notice that things still work!  `gf_lm()` inherits the 
+formula, data and color from the earlier layer.
+
+
+Other packages you may be interested in for working with models: `broom`, `mosaicModel`.
+
+## One template to rule a lot
+
+Our one template gets us a lot: graphical summaries, numerical summaries, and modeling.
+
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ...)</strong> 
+</h2></center>
+&nbsp;
+
+Here is justa sample of things we can do with this template.
+
+```{r, one-var, exercise = TRUE}
+gf_histogram( ~ age, data = HELPrct)
+ gf_freqpoly( ~ age, data = HELPrct)
+     gf_dens( ~ age, data = HELPrct)
+  gf_density( ~ age, data = HELPrct)
+      gf_ash( ~ age, data = HELPrct)
+        mean( ~ age, data = HELPrct)
+          sd( ~ age, data = HELPrct)
+    df_stats( ~ age, data = HELPrct)
+    df_stats( ~ age, data = HELPrct, mean, sd)
+      t.test(~ age, data = HELPrct)  
+      t.test(~ age, data = HELPrct) %>% confint()
+      t.test(~ age, data = HELPrct) %>% pval()  # silly
+        
+      gf_bar( ~ substance, data = HELPrct)
+       tally( ~ substance, data = HELPrct)
+    df_stats( ~ substance, data = HELPrct, counts)
+    df_stats( ~ substance, data = HELPrct, props)
+```
+
+```{r, two-var, exercise = TRUE}
+  gf_point(length ~ width, data = KidsFeet) %>%
+     gf_lm(length ~ width, data = KidsFeet, color = "red") %>%
+ gf_smooth(length ~ width, data = KidsFeet, se = FALSE) 
+        lm(length ~ width, data = KidsFeet)
+       cor(length ~ width, data = KidsFeet)
+        
+gf_boxplot(length ~ sex, data = KidsFeet)
+ gf_violin(length ~ sex, data = KidsFeet, fill = "skyblue", alpha = 0.3) %>%
+ gf_jitter(length ~ sex, data = KidsFeet, width = 0.2, height = 0)
+      mean(length ~ sex, data = KidsFeet)
+  df_stats(length ~ sex, data = KidsFeet)
+  df_stats(length ~ sex, data = KidsFeet, mean, sd)
+    t.test(length ~ sex, data = KidsFeet)
+        lm(length ~ sex, data = KidsFeet)
+    t.test(length ~ sex, data = KidsFeet)
+```
+
+## But Wait, There's More!
+
+The `mosaic` and `ggformula` packages include a few other things that you might like to use for your classes.
+
+### Plotting distributions 
+
+`gf_dist()` is a bit different since it doesn't use a formula.  In fact, it doesn't use data at all.  It just plots the 
+density function for a specified distribution.
+
+```{r, gf-dist, exercise = TRUE}
+gf_dist("chisq", df = 3)
+```
+
+### Probabilities from distributions (with plots)
+
+```{r, xpnorm, exercise = TRUE}
+xpnorm(600, mean = 500, sd = 100)
+xqt(.90, df = 12)
+xqchisq(c(0.8, 0.9, 0.95), df = 4)
+```
+
+### Plotting fitted distributions
+
+It is also possible to fit distributions to data and display the best fitting member of a family of distributions.  (Fitting is done via maximum likelihood and limited to a dozen or so of the most commonly used distributions.)
+
+```{r, gf-fitdistr, exercise = TRUE}
+gf_dhistogram( ~ age | substance, data = HELPrct, alpha = 0.6) %>%
+  gf_fitdistr() %>%   # normal fit by default
+  gf_fitdistr(dist = "dgamma", color = "red")  # fit gamma distributions instead.
+```
+
+### The Extractor Template
+
+There is one more template that I use frequently in R.  
+
+```{r eval = FALSE, echo = TRUE}
+extractor(object)
+object %>% extractor()    # alternative syntax
+```
+
+Many packages provide useful extractors that create and display information about some object.
+This is especially useful for working with model objects.
+
+```{r, extractor, exercise = TRUE}
+# ANOVA model
+model <- lm(age ~ substance, data = HELPrct)
+model
+msummary(model)         # a terser version of summary(model)
+confint(model)          # confidence intervals for coefficients
+anova(model)            # a more typical anova table
+TukeyHSD(model)         # Tukey's Honest Significant Differences
+mplot(TukeyHSD(model))  # Tukey's Honest Significant Differences
+f <- makeFun(model)     # convert fit into a function
+f("alcohol")
+f("cocaine")
+```
+
+#### Alternative Syntax with %>%
+
+```{r extrator-pipe, exercise = TRUE}
+# ANOVA model
+model <- lm(age ~ substance, data = HELPrct)
+model
+model %>% msummary()              # a terser version of model %>% summary()
+model %>% confint()               # confidence intervals for coefficients
+model %>% anova()                 # a more typical anova table
+model %>% TukeyHSD()              # Tukey's Honest Significant Differences
+model %>% TukeyHSD() %>% mplot()  # plot Tukey's Honest Significant Differences
+model %>% TukeyHSD() %>% mplot(system = "gg")  
+f <- model %>% makeFun()          # convert fit into a function
+f("alcohol")
+f("cocaine")
+```
+
+
+### do()ing randomization and bootstrap
+
+#### Lady Tasting Tea
+
+```{r, rflip, exercise = TRUE}
+rflip(20)
+do(3) * rflip(20)
+TeaLadies <- do(1000) * rflip(20)
+gf_dhistogram( ~ heads, data = TeaLadies, binwidth = 1, alpha = 0.5) %>%
+  gf_dist("binom", params = list(size = 20, prob = 0.5), color = "red")
+```
+
+#### Comparing Means
+
+```{r, do-diffmean, exercise = TRUE}
+diffmean(age ~ sex, data = HELPrct)
+do(3) * diffmean(age ~ shuffle(sex), data = HELPrct)
+Randomization <- do(1000) * diffmean(age ~ shuffle(sex), data = HELPrct)
+gf_dhistogram( ~ diffmean, data = Randomization, alpha = 0.4) %>%
+  gf_vline(xintercept = -0.784, color = "red")
+df_stats(~(diffmean < -0.784), data = Randomization, props)
+```

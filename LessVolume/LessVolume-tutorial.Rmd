@@ -1,0 +1,1011 @@
+---
+title: Less Volume, More Creativity<br>R for Busy Humans
+author: Randall Pruim
+date: "JMM Minicourse: January 2018"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+---
+
+
+<style type="text/css">
+span.boxed {
+  border:5px solid gray;
+  border-radius:10px;
+  padding: 5px;
+}
+span.invboxed {
+  border:5px solid gray;
+  padding: 5px;
+  border-radius:10px;
+  color: white;
+}
+table, td, th
+{
+border:0px;
+}
+</style>
+
+
+## Less Volume, More Creativity
+
+```{r setup,  echo = FALSE, warning = FALSE, message = FALSE}
+require(magrittr)
+require(lubridate)
+require(dplyr)
+require(mosaic)
+require(ggformula)
+trellis.par.set(theme = col.mosaic())
+theme_set(theme_bw())
+require(knitr)
+opts_chunk$set(
+  cache = TRUE,
+  size = 'small', 
+  fig.width = 8, 
+  fig.height = 3,
+  out.width = 800,
+  out.height = 300,
+  tidy = FALSE)
+
+options(width = 90)
+options(digits = 3)
+```
+
+
+### Mike McCarthy
+
+<table><tr align="top" padding=5><td width="20%" align="top">
+<img src="images/MikeMcCarthy.jpg" align="top" width="150"></td>
+<td align="top"> 
+Head coach, Green Bay Packers (NFL Football)
+
+ * Packers subscribe to "draft and develop"
+ * Among the youngest teams in the league every year
+ * Coaching staff constantly teaching young players
+</td>
+</tr>
+</table>
+
+### Mike McCarthy
+
+<table><tr align="top" cellpadding=5><td width="20%" align="top">
+<img src="images/MikeMcCarthy.jpg" align="top" width="150"></td>
+<td align="top"> 
+Head coach, Green Bay Packers (NFL Football)
+
+ * Packers subscribe to "draft and develop"
+ * Among the youngest teams in the league every year
+ * Coaching staff constantly teaching young players
+</td>
+</tr>
+</table>
+
+**Joe from Fitchburg, WI:**
+
+> Do you have a favorite Mike McCarthy quote? 
+
+### Mike McCarthy
+
+<table><tr align="top" padding=5><td width="20%" align="top">
+<img src="images/MikeMcCarthy.jpg" align="top" width="150"></td>
+<td align="top"> 
+Head coach, Green Bay Packers (NFL Football)
+
+ * Packers subscribe to "draft and develop"
+ * Among the youngest teams in the league every year
+ * Coaching staff constantly teaching young players
+</td>
+</tr>
+</table>
+
+
+**Joe from Fitchburg, WI:**
+
+> Do you have a favorite Mike McCarthy quote? 
+> Mine is "statistics are for losers".
+
+### Mike McCarthy
+
+<table><tr align="top" padding=5><td width="20%" align="top">
+<img src="images/MikeMcCarthy.jpg" align="top" width="150"></td>
+<td align="top"> 
+Head coach, Green Bay Packers (NFL Football)
+
+ * Packers subscribe to "draft and develop"
+ * Among the youngest teams in the league every year
+ * Coaching staff constantly teaching young players
+</td>
+</tr>
+</table>
+
+
+**Joe from Fitchburg, WI:**
+
+> Do you have a favorite Mike McCarthy quote? 
+> Mine is "statistics are for losers".
+
+
+**Vic Ketchman (packers.com):**
+
+> "Less volume, more creativity."
+
+Source: [Ask Vic @ packers.com](http://www.packers.com/news-and-events/article-ask-vic/article-1/Half-line-drills-best-thing-about-training-camp/a6cca4ae-7e15-4fb5-a32f-4a066340eb18#ixzz3dqBGgs7b)
+
+
+### More Mike McCarthy Quotes
+
+You’ve got to watch that you **don’t do too much**. We have a philosophy on our coaching staff about **less volume, more creativity**. 
+<br><br>
+
+A lot of times you end up putting in a lot more volume, because you are teaching fundamentals  and you are teaching concepts that you need to put in, but you may not necessarily use because they are building blocks for other concepts and variations that will come off of that ... **In the offseason you have a chance to take a step back and tailor it more specifically towards your  team and towards your players.**" 
+
+### More Mike McCarthy Quotes
+
+**Q.** (for McCarthy) How many offensive and defensive plays might you have coming into a game on average?
+
+**A.** That's an excellent question because years ago when I first got into the NFL we had 150 passes in our game plan. I've put a sign on all of the coordinators' doors - **less volume, more creativity**. We function with more concepts with less volume. We're more around 50 (passes) into a game plan.
+           
+           
+Source: [http://www.jsonline.com/packerinsider/106968233.html](http://www.jsonline.com/packerinsider/106968233.html) (Nov 10, 2010)
+
+
+
+### The Minimal R Exercise
+
+**List** every R command used throughout a course
+
+**Organize** by syntactic similarity and by purpose
+
+**Scratch** everything you could have done without
+
+**Replace** dissimilar tools with more similar tools
+
+**Aim** for a set of commands that is
+
+ * **small**: fewer is better
+ * **coherent**:  commands should be as similar as possible
+ * **powerful**: can do what needs doing 
+
+**Result:** [Minimal R for Intro Stats ](https://github.com/ProjectMOSAIC/mosaic/blob/master/vignettes/MinimalR.pdf)
+
+### Less Volume, More Creativity 
+ 
+It is not enough to use R, 
+it must be used efficiently and elegantly.
+
+The `mosaic` package attempts to be part of one solution.
+
+
+<table>
+<tr>
+<td>
+Perfection is achieved, not when there is nothing more to add, but when there is nothing left to take away. 
+<br><br>
+--- Antoine de Saint-Exupery (writer, poet, pioneering aviator)
+</td>
+<td width="20%"> 
+<img src="images/SaintExupery.jpg">
+</tr>
+</table>
+
+## Introductory Tutorial
+
+We're going to see an example of using a Less Volume, More Creativity Approach in a 
+[Tutorial on US Births](http://dtkaplan.shinyapps.io/USBirths)
+
+You can come back later and 
+
+ * look at slides that go through essentially the same information
+ * jump ahead to [what comes after the US Births example](#48)
+
+### The Most Important Template
+
+&nbsp;
+
+<center>
+<h2><strong><span class="invboxed">goal</span> ( <span class="invboxed">yyy</span> ~ <span class="invboxed">xxx</span> , data = <span class="invboxed">mydata</span> )</strong> 
+</h2></center>
+
+&nbsp;
+
+### The Most Important Template
+
+&nbsp;
+
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> )</strong> 
+</h2></center>
+ 
+### The Most Important Template
+
+&nbsp;
+
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ...)</strong> 
+</h2></center>
+&nbsp;
+
+#### Other versions:
+```{r eval=FALSE}
+# simpler version
+goal( ~ x, data = mydata )          
+# fancier version
+goal( y ~ x | z , data = mydata )   
+# unified version
+goal( formula , data = mydata )     
+```
+
+### 2 Questions
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> )</strong> 
+</h2></center>
+ 
+&nbsp;
+
+####  What do you want R to do?  (goal)
+
+&nbsp;
+ 
+####  What must R know to do that?  
+
+
+### 2 Questions
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> )</strong> 
+</h2></center>
+ 
+&nbsp;
+
+
+####  What do you want R to do?  (goal)
+ * This determines the function to use 
+
+
+####  What must R know to do that?  
+ * This determines the inputs to the function
+ * Must identify the variables and data frame
+
+### How do we make this plot?
+
+```{r first-plot01, fig.width = 8, fig.height = 3, out.height = 400, fig.align = "center", echo = FALSE}
+gf_point(births ~ dayofyear, data = Births78) 
+```
+
+### How do we make this plot?
+
+```{r first-plot02, fig.width = 8, fig.height = 3.0, out.height = 400, fig.align = "center", echo = FALSE, out.width = "60%", out.height = "35%"}
+gf_point( births ~ dayofyear, data = Births78) 
+```
+
+#### What is the Goal?
+
+ * 
+
+#### What does R need to know?
+
+ * 
+ * 
+
+### How do we make this plot?
+
+```{r first-plot03, fig.width = 8, fig.height = 3.0, out.height = 400, fig.align = "center", echo = FALSE, out.width = "60%", out.height = "35%"}
+gf_point( births ~ dayofyear, data = Births78) 
+```
+
+#### What is the Goal?
+
+* a plot with points
+
+#### What does R need to know?
+
+ * which variable goes where 
+ * which data set 
+
+### How do we tell R to make this plot?
+
+```{r first-plot04, fig.width = 8, fig.height = 3.0, out.height = 400, fig.align = "center", echo = FALSE, out.width = "60%", out.height = "35%"}
+gf_point( births ~ dayofyear, data = Births78) 
+```
+
+#### What is the Goal?
+
+* a plot with points (`gf_point()`)
+
+#### What does R need to know?
+
+ * which variable goes where (`births ~ dayofyear`)
+ * which data set (`data = Births78`)
+    * use `?Births78` for documentation
+
+### How do we make this plot?
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> )</strong> 
+</h2>
+</center>
+
+&nbsp;
+
+```{r first-plot05, fig.width = 8, fig.height = 2.5, fig.align = "center", echo = TRUE}
+gf_point( births ~ dayofyear, data = Births78) 
+```
+
+### Your turn: How do you make this plot?
+
+
+```{r echo = FALSE, fig.height = 2.5}
+gf_boxplot( age ~ substance, data = HELPrct)
+```
+
+#### Two Questions?
+
+### Your turn: How do you make this plot?
+
+
+```{r echo = FALSE, fig.height = 2.5}
+gf_boxplot(age ~ substance, data = HELPrct) 
+```
+
+1. Command: <code>gf_boxplot()</code>
+
+2. The data: <code>HELPrct</code>
+ * Variables: <code>age</code>, <code>substance</code>
+ * use `?HELPrct` for info about data
+
+### Your turn: How do you make this plot?
+
+```{r echo = TRUE, fig.height = 2.5}
+gf_boxplot(age ~ substance, data = HELPrct)
+```
+
+### Graphical Summaries: One Variable
+
+```{r fig.width = 8, fig.height = 3, out.height = 400, fig.align = "center"}
+gf_histogram( ~ age, data = HELPrct) 
+```
+
+Note: When there is **one variable** it is on 
+the **right side** of the formula.
+
+### Graphical Summaries: One Variable
+
+```{r fig.width = 8, fig.height = 3, out.height = 400, fig.align = "center"}
+gf_histogram( ~ age, data = HELPrct, binwidth = 5) 
+```
+
+Note: When there is **one variable** it is on 
+the **right side** of the formula.
+
+### Graphical Summaries: Overview
+
+
+#### One Variable
+```{r eval = FALSE, tidy = FALSE}
+gf_histogram( ~ age, data = HELPrct ) 
+  gf_density( ~ age, data = HELPrct ) 
+     gf_dens( ~ age, data = HELPrct ) 
+ gf_freqpoly( ~ age, data = HELPrct ) 
+       gf_qq( ~ age, data = HELPrct ) 
+  gf_boxplot( ~ age, data = HELPrct ) 
+      gf_bar( ~ sex, data = HELPrct )
+```
+
+#### Two Variables
+
+```{r eval = FALSE, tidy = FALSE}
+  gf_point(  i1 ~ age,       data = HELPrct ) 
+gf_boxplot( age ~ substance, data = HELPrct ) 
+```
+
+ *  **i1** average number of drinks (standard units) consumed per day in the past 30 days (measured at baseline)
+
+
+### The Graphics Template
+
+
+#### One variable
+<center>
+<h3><strong><span class="boxed">plotname</span> ( ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ...)</strong> 
+</h3></center>
+
+ * `gf_histogram()`,  `gf_qq()`,  `gf_dens()`, `gf_freqpoly()`, `gf_bar()` 
+
+&nbsp;
+
+
+#### Two Variables
+<center>
+<h3><strong><span class="boxed">plotname</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> , ...)</strong> 
+</h3></center>
+
+
+ * `gf_point()`, `gf_line()`, `gf_boxplot()` 
+
+
+### Your turn
+
+Create a plot of your own choosing with one of these data sets
+```{r eval = FALSE}
+names(KidsFeet)    # 4th graders' feet
+?KidsFeet
+```
+
+```{r eval = FALSE}
+names(Utilities)   # utility bill data
+?Utilities
+```
+
+```{r eval = FALSE}
+names(Births)      # like Births78, but more years
+?Births
+```
+
+```{r eval = FALSE}
+require(NHANES)
+names(NHANES)      # body shape, etc.
+?NHANES
+```
+
+
+### Facets
+
+
+ * Use `y ~ x | z` to create multipanel plots.
+
+```{r fig.width = 8, fig.height = 2.2, out.height = 300, fig.align = "center", tidy = FALSE}
+gf_freqpoly( ~ age | sex, data = HELPrct, binwidth = 5)
+```
+
+### Facets
+
+ * Use `y ~ x | z` to create multipanel plots.
+
+```{r fig.width = 8, fig.height = 2.2, out.height = 300, fig.align = "center", tidy = FALSE}
+gf_line( births ~ date | wday, data = Births78)
+```
+
+### Facets in 2d
+
+ * Use `y ~ x | z1 ~ z2` to create a grid of multipanel plots.
+
+```{r fig.width = 8, fig.height = 2.2, out.height = 300, fig.align = "center", tidy = FALSE}
+gf_freqpoly( ~ age | sex ~ substance, data = HELPrct, binwidth = 5)
+```
+
+### Other attributes
+
+So far we have focused on position, but we can also change attributes like
+color, size, and shape. Two ways to **map** attributes to variables/exressions:
+
+ * `, attribute = ~ expr` 
+ 
+ * `+ attribute:variable` (or `attribute::(expression)`) as part of formula
+
+```{r fig.width = 8, fig.height = 2.2, fig.align = "center", tidy = FALSE, fig.keep = "last"}
+gf_line( births ~ date,  color = ~ wday, data = Births78)  
+```
+
+
+
+### Mix and Match
+
+We can combine attributes and facets.
+
+```{r fig.width = 8, fig.height = 1.8, out.height = 300, fig.align = "center", tidy = FALSE}
+gf_freqpoly( ~ age | sex, data = HELPrct, color = ~ substance, binwidth = 5)
+```
+
+
+### Bells & Whistles
+
+ * titles
+ * axis labels
+ * fonts and colors for labels
+ * custom scales (user chosen colors, sizes, etc.)
+ * etc, etc.
+ 
+My approach: 
+
+ * Let the students ask or 
+ * Let the data analysis drive 
+
+### Bells & Whistles
+
+This is ugly, but hints at some of the things that can be modified
+with bells and whistles.
+
+```{r, echo = FALSE}
+gf_line(births ~ date,  color = ~ wday, data = Births78, size = 1.2) %>%
+  gf_point(births ~ date,  color = ~ wday, data = Births78, size = 2) %>%
+  gf_refine(
+    scale_color_manual(
+      values = c("orange", "pink", "brown", "navy", "green", "red", "gray50")),
+    guides(color = guide_legend("day of week")),
+    theme(text = element_text(color = "green", size = 15, face = "italic"))
+    ) %>%
+  gf_labs(title = "Births in the US (1978)", 
+          x = "date in 1978", 
+          y = "Numbr of live births")
+```  
+
+**Note:**
+The `ggplot2` system, on which `gformula` is built, is based on a 
+notation of layers.  It is easy to add multiple layers onto a single plot.
+In this example, we have layered points and lines (using both `gf_point()`
+and `gf_line()`).  More on this later...
+
+### Numerical Summaries: One Variable
+
+
+Big idea: Replace plot name with summary name
+
+ * Nothing else changes
+ 
+```{r fig.keep = 'none', fig.show = 'hold', out.height = 200, message = FALSE, warning = FALSE}
+gf_histogram( ~ age, data = HELPrct)
+        mean( ~ age, data = HELPrct )
+```
+
+```{r echo = FALSE, fig.show = 'hold', out.height = 200, message = FALSE, warning = FALSE}
+gf_histogram( ~ age, data = HELPrct, binwidth = 5)
+```
+
+### Other Summaries
+
+The mosaic package includes formula aware versions of
+`mean()`,
+`sd()`,
+`var()`,
+`min()`,
+`max()`,
+`sum()`,
+`IQR()`, ...
+
+Also provides `favstats()` to compute our favorites.
+```{r}
+favstats( ~ age, data = HELPrct )
+```
+
+### Tallying 
+
+
+```{r}
+tally( ~ sex, data = HELPrct)
+tally( ~ substance, data = HELPrct)
+```
+
+### Numerical Summaries: Two Variables
+
+Three ways to think about this.  All do the same thing.
+```{r,eval = FALSE}
+sd(   age ~ substance, data = HELPrct )
+sd( ~ age | substance, data = HELPrct )
+sd( ~ age, groups = substance, data = HELPrct )
+```
+```{r, echo = FALSE}
+sd( ~ age, groups = substance, data = HELPrct )
+```
+
+### Numerical Summaries: Tables
+
+```{r}
+tally( sex ~ substance, data = HELPrct )
+tally( ~ sex + substance, data = HELPrct )
+```
+
+### Numerical Summaries
+
+```{r echo = FALSE}
+HELPrct <- mutate(HELPrct, sex = factor(sex, labels = c('F','M')),
+                  substance = factor(substance, labels = c('A', 'C', 'H')))
+```
+```{r size = 'small'}
+mean( age ~ substance | sex, data = HELPrct )
+mean( age ~ substance | sex, data = HELPrct, .format = "table" )
+```
+```{r echo = FALSE}
+rm(HELPrct)
+data(HELPrct)
+```
+ * I've abbreviated the names to make things fit on slide
+ * Also works for `median()`, `min()`, `max()`, `sd()`, `var()`, `favstats()`, etc.
+
+### One Template to Rule a Lot
+
+
+ * single and multiple variable graphical summaries
+ * single and multiple variable numerical summaries
+ * linear models
+```{r eval = FALSE}
+      mean( age ~ sex, data = HELPrct )
+gf_boxplot( age ~ sex, data = HELPrct ) 
+        lm( age ~ sex, data = HELPrct )
+```
+
+```{r echo = FALSE}
+   mean( age ~ sex, data = HELPrct )
+coef(lm( age ~ sex, data = HELPrct ))
+```
+
+### Exercises
+
+Answer each question with both a numerical summary and a graphical summary.
+
+ 1. Are boys feet larger than girls feet? (`KidsFeet`)
+ 
+ 2. Do boys and girls differently shaped feet? (`KidsFeet`)
+ 
+## Getting Oriented to RStudio
+
+### Access to RStudio Sever
+
+  * [rstudio.calvin.edu](http://rstudio.calvin.edu:8787)
+    * You were sent an email with userid (e.g., rstudio199) and password.
+    * [Change passwords here](https://freeipa1.cs.calvin.edu/)
+
+<center>
+<img src="images/rstudio-calvin.png" width=40%>
+</center>
+
+### Menu
+
+  * Files, Edit, Code, View, etc.
+  * Tools > Options for customization
+
+### Panes and Tabs
+
+  * 4 **panes** (but some may be minimized).
+  * Each pane can have multiple **tabs**.
+  * Options let you decide which tabs go in which panes.
+
+
+<img src="images/RStudio-4panes.png" width=70% align = "center">
+ 
+### The Console -- ephemeral, interactive commands 
+
+  
+<!--
+  * **Up/Down** arrows allow access to previous commands
+  * **Tab** completion helps shorten typing an remind you of commands
+    an arguments
+  * **CaPitaLiZatioN** matters
+  * **ESCAPE** key to get out of messes -- returns to empty command prompt
+
+### A few little details
+-->
+
+#### R is case sensitive
+
+ * many students are *not* case sensitive
+
+#### Arrows and Tab
+
+ * up/down arrows scroll through history
+ * TAB completion can simplify typing
+
+#### If all else fails, try ESC
+
+ * If you see a + prompt, it means R is waiting for more input
+ * If this is unintentional, you probably have a typo
+ * ESC will get you pack to the command prompt
+
+### Caclulation and Assignment { .smaller }
+
+  * Basic calculation is similar to a calculator
+  * Results can be stored in named variables with `<-` (or `->`)
+  * Good place to get started with R (but we will learn other 
+  options shortly)
+  
+
+```{r}
+product <- 5 * 3 * 27
+product
+```
+```{r}
+sqrt(100)
+log10(product)
+```
+
+### Environment Tab
+
+  * Shows the objects in the working environment
+  * Broom icon clears the working environment
+  
+![RStudio Environment Tab](images/RStudio-environment.png)
+
+### History Tab
+
+  * Searchable list of previous commands
+  * Commands can be copied to console or to files
+
+![RStudio History Tab](images/RStudio-history.png)
+
+### Packages Tab
+
+  * List all installed packages
+  * Install new packages
+  * Load/unload packages by clicking check boxes
+  * Click on name of package to find documentation, vignettes, and other info
+  
+![RStudio Packages Tab](images/RStudio-packages.png)
+
+### Help!
+
+RStudio provides several ways to get help
+
+ * Help tab documents functions and data sets in packages
+ * `?` followed by name of function or data set
+ * Package vignettes
+ * TAB completion provides useful hints
+ 
+![RStudio History Tab](images/RStudio-help.png)
+
+## Some Other Things in mosaic
+
+### Some other things
+
+The `mosaic` package includes some other things, too
+
+ * Data sets (you've already seen some of them)
+ * xtras: `xchisq.test()`, `xpnorm()`, `xqqmath()`
+ * `mplot()` 
+   * `mplot(HELPrct)` interactive plot creation
+   * replacements for `plot()` in some situations
+ * simplified `histogram()` controls (e.g., `width`)
+ * simplified ways to add onto lattice plots
+
+### xpnorm()
+
+```{r}
+xpnorm( 700, mean = 500, sd = 100)
+```
+
+### xpnorm()
+
+```{r}
+xpnorm( c(300, 700), mean = 500, sd = 100)
+```
+
+### xchisq.test()
+
+
+```{r, echo = FALSE}
+phs <- cbind(c(104,189),c(10933,10845))
+colnames(phs) <- c("heart attack","no heart attack")
+rownames(phs) <- c("aspirin","placebo")
+```
+
+```{r}
+xchisq.test(phs)
+```
+
+### Modeling 
+
+Modeling is really the starting point for the `mosaic` 
+design.
+
+ * linear models (`lm()` and `glm()`) defined the template
+ * `lattice` and `ggformula` graphics use the template (so we chose one of these
+ for plotting)
+ * we added functionality so numerical summaries 
+ can be done with the same template
+ * additional things added to make modeling easier for beginners.
+
+### Models as Functions
+
+```{r}
+model <- lm(width ~ length * sex, data = KidsFeet)
+Width <- makeFun(model)
+Width( length = 25, sex = "B")
+Width( length = 25, sex = "G")
+```
+
+### Models as Functions -- Plotting
+
+```{r, include = FALSE}
+trellis.par.set(
+  superpose.symbol = list(col = c('navy','red'), pch = 16), 
+  superpose.line = list(lty = 1, col = c('navy','red'))
+)
+```
+                                                       
+```{r, fig.keep = 'last', message = FALSE}
+gf_point( width ~ length, color = ~ sex, data = KidsFeet) %>%
+  gf_fun(Width(length, sex = "B") ~ length, color = "navy") %>%
+  gf_fun(Width(length, sex = "G") ~ length, color = "red") %>%
+  gf_refine(scale_color_manual(values = c("navy", "red")))
+```
+
+```{r, include = FALSE}
+trellis.par.set(theme = col.mosaic())
+```
+
+### Resampling -- You can do() it!
+
+
+### Lady Tasting Tea
+
+ * Often used on first day of class
+ 
+ * Story
+ 
+   * woman claims she can tell whether milk
+   has been poured into tea or vice versa.
+   
+   * Question: How do we test this claim?
+   
+```{r echo = FALSE }
+require(mosaic)
+trellis.par.set(theme = col.mosaic())
+require(knitr)
+opts_chunk$set(size = 'small', cache = TRUE)
+options(width = 90)
+set.seed(12345)
+```
+
+```{r echo = FALSE}
+require(knitr)
+opts_chunk$set( 
+  fig.width = 8, 
+  fig.height = 3,
+  out.width = 800,
+  out.height = 300,
+  fig.align = "center"
+  )
+```
+
+### Computer Simulation
+
+Use `rflip()` to simulate flipping coins
+```{r}
+rflip()
+```
+
+### Computer Simulation
+
+Faster if we flip multiple coins at once:
+```{r} 
+rflip(10)
+```
+ * easier to consider `heads` = correct; `tails` = incorrect than to compare with a given pattern
+   * this switch bothers me more than it bothers my students
+
+### Let's do that a lot of times
+
+`rflip(10)` simulates 1 lady tasting 10 cups 1 time.
+
+We can do that many times to see how guessing ladies do:
+```{r}
+do(2) * rflip(10)
+```
+
+ * `do()` is clever about what it remembers
+ * 2 isn't many -- we'll do many next.
+
+### The distribution of guessing ladies
+
+
+```{r fig.width = 8, fig.height = 3, out.width = 800, out.height = 300}
+Ladies <- do(5000) * rflip(10)
+head(Ladies, 1)
+gf_histogram( ~ heads, data = Ladies, binwidth = 1 )
+```
+
+### How often does guessing score 9 or 10?
+
+
+```{r}
+tally( ~ (heads >= 9) , data = Ladies)
+```
+
+### How often does guessing score 9 or 10?
+
+
+```{r}
+tally( ~ (heads >= 9) , data = Ladies, format = "prop")
+```
+
+### How often does guessing score 9 or 10?
+
+
+```{r}
+tally( ~ (heads >= 9) , data = Ladies, format = "prop")
+ prop( ~ (heads >= 9), data = Ladies)
+```
+
+### A general approach to randomization
+
+
+ 1. Do it for your data
+ 2. Do it for "random" data
+ 3. Do it lots of times for "random" data
+ 
+ * definition of "random" is important, but can
+ often be handled by `shuffle()` or `resample()`
+
+### Example: Do mean ages differ by sex?
+
+```{r}
+diffmean(age ~ sex, data = HELPrct)
+do(1) * 
+  diffmean(age ~ shuffle(sex), data = HELPrct)
+Null <- do(5000) * 
+  diffmean(age ~ shuffle(sex), data = HELPrct)
+```
+
+### Example: Do mean ages differ by sex?
+
+
+```{r fig.width = 8, fig.height = 3, out.width = 800, out.height = 300}
+prop( ~ (abs(diffmean) > 0.7841), data = Null )
+gf_histogram( ~ diffmean, data = Null, bins = 50) %>%
+  gf_vline(xintercept = -.7841) 
+```
+
+### Example:  Bootstrap for difference in means
+
+
+```{r fig.width = 8, fig.height = 3, out.width = 800, out.height = 300}
+Bootstrap <- do(5000) * 
+  diffmean(age ~ sex, data= resample(HELPrct))
+
+gf_histogram( ~ diffmean, data = Bootstrap, bins = 50) %>%
+  gf_vline(xintercept = -.7841, color = "red")
+```
+
+### Example:  CI for difference in mean ages
+
+```{r}
+cdata( ~ diffmean, data = Bootstrap, p = .95)
+confint(Bootstrap, method = "quantile")
+```
+
+### Example:  CI for difference in mean ages
+
+```{r}
+confint(Bootstrap)  # default uses st. err
+```
+
+### Randomization and linear models
+
+
+```{r}
+do(1) * lm(width ~ length, data = KidsFeet)
+do(3) * lm( width ~ shuffle(length), data = KidsFeet)
+```
+
+### Randomization and linear models
+
+
+```{r}
+do(1) * 
+  lm(width ~ length + sex, data = KidsFeet)
+do(3) * 
+  lm( width ~ length + shuffle(sex), data = KidsFeet)
+```
+
+
+### Randomization and linear models
+
+```{r fig.width = 8, fig.height = 3, out.width = 800, out.height = 300}
+Null <- do(5000) * 
+  lm( width ~ length + shuffle(sex), data = KidsFeet)
+gf_histogram( ~ sexG, data = Null) %>%
+  gf_vline(xintercept = -0.2325, color = "red")
+```
+
+### Randomization and linear models {.smaller}
+
+```{r fig.width = 8, fig.height = 2, out.width = 800, out.height = 300}
+gf_histogram( ~ sexG, data = Null) %>%
+  gf_vline(xintercept = -0.2325, color = "red")
+prop(~ (sexG <= -0.2325), data = Null)
+```
+
