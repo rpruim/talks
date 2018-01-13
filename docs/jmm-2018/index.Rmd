@@ -77,5 +77,14 @@ You are welcome to work in your own local copy of R and RStudio if you prefer.  
   * the [`tidyverse`](https://github.com/tidyverse/tidyverse) package and its dependencies
   
 Packages can be installed or updated using the Packages tab in RStudio.
-  
-  
+
+## Setting up your own RStudio Server  
+
+ * If you ask, RStudio will provide you with the professional server for free for qualifying academic purposes.  Contact them for details to see if you qualify.
+ 
+ * RStudio has lots of documentation about how to install and configure. For example, here is the [RStudio Server Pro admin guide](http://docs.rstudio.com/ide/server-pro/)
+ 
+ * Here's a [blog post](https://www.r-bloggers.com/how-to-get-your-very-own-rstudio-server-and-shiny-server-with-digitalocean/) discussing how to do this with Digital Ocean.
+
+ * Here's a [blog post](http://amunategui.github.io/EC2-RStudioServer/) about doing this with AWS.
+ 
