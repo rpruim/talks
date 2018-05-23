@@ -1117,3 +1117,20 @@ gf_dhistogram( ~ age | substance, data = HELPrct, alpha = 0.6) %>%
   gf_fitdistr(dist = "dgamma", color = "red")  # fit gamma distributions instead.
 ```
 
+## Thanks
+
+* **Danny Kaplan** -- co-conspirator on `ggformula`
+
+* **My students** -- for motivation and debugging
+
+* **CAUSE** -- for eCOTS
+
+## ggformula home
+
+* GitHub: [https://github.com/ProjectMOSAIC/ggformula]
+    * report issues here
+
+* CRAN: [https://cran.r-project.org/package=ggformula]
+    * access vignettes without installing package
+    
+
