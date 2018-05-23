@@ -6,6 +6,9 @@ output:
   learnr::tutorial:
     progressive: true
     allow_skip: true
+  ioslides_presentation:
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 ---
 
@@ -583,7 +586,6 @@ Other examples of functions that take just one variable include
  * `gf_dotplot()` 
  * `gf_ash()`
  * `gf_bar()` 
- * `gf_cols()` 
  * `gf_qq()`
 
 #### Exercise
