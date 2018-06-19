@@ -18,7 +18,7 @@ library(ggformula)
 library(ggplot2movies)  # gets us movies dataset
 library(babynames) 
 library(nycflights13) 
-library(weatherData) 
+# library(weatherData) 
 library(lubridate)
 
 theme_set(theme_bw())
@@ -80,7 +80,7 @@ require(mosaic)        # loads part of tidyverse and some data sets
 require(ggplot2movies) # contains a movies dataset
 require(babynames)     # number of kids with each name for over 100 yrs
 require(nycflights13)  # all flights in/out of NYC in 2013
-require(weatherData)   # daily weather in a few cities
+
 
 # rename so data sets are capitalized and variables (mostly) are not.
 Movies    <- movies
@@ -594,109 +594,7 @@ one researcher, etc.
 `bind_rows()` will stack data sets, using column names to align and filling in with `NA` if 
 some columns are missing in some data sets.
 
-#### Example: Weather data from multiple cities
 
-```{r weather01, exercise = TRUE}
-NewYork2013 %>% head(3)
-Mumbai2013 %>% head(3)
-London2013 %>% head(3)
-SFO2013 %>% head(3)
-```
-
-The following code combines the data from the four cities, but since the data 
-sets didn't include the city as a column, we can't tell which data comes from which city.
-Modify the code below to add a city column to each of the individual data sets.
-
-```{r, weather02, exercise = TRUE}
-MyWeather <- 
-  bind_rows(
-    NewYork2013, 
-    Mumbai2013, 
-    London2013, 
-    SFO2013
-  )
-MyWeather %>% sample_n(5)
-```
-
-```{r, weather02-solution}
-MyWeather <-
-  bind_rows(
-    NewYork2013 %>% mutate(city = "New York"), 
-    Mumbai2013 %>% mutate(city = "Mumbai"), 
-    London2013 %>% mutate(city = "London"), 
-    SFO2013    %>% mutate(city = "San Francisco")
-  )
-MyWeather %>% sample_n(5)
-```
-
-#### Your Turn -- Bonus
-
-Use the combined weather data to create a plot like this showing daily 
-high and low temperatures in each city.
-
-```{r, weather03, fig.height = 4, echo = FALSE}
-bind_rows(
-    NewYork2013 %>% mutate(city = "New York"), 
-    Mumbai2013 %>% mutate(city = "Mumbai"), 
-    London2013 %>% mutate(city = "London"), 
-    SFO2013 %>% mutate(city = "San Francisco")
-  ) %>%
-  mutate(date = lubridate::date(Time)) %>%
-  group_by (city, date) %>%
-  summarise(
-    lo = min(Temperature, na.rm = TRUE),
-    hi = max(Temperature, na.rm = TRUE),
-    mean = mean(Temperature, na.rm = TRUE),
-  )  %>% 
-  ungroup() %>%
-  gf_linerange(lo + hi ~ date | city ~ ., color = ~mean) %>%
-  gf_refine(scale_color_gradientn(colors = rev(rainbow(10))))
-```
-
-**Notes** 
-
- 1. Dates
- 
-    * `lubridate::date()` will convert the times into dates.  You can use `mutate()`
-    to add a `date` variable to the data.
- 
- 2. Colors
- 
-    * First do this using the default colors. 
-    * In `ggformula` or `ggplot2`, the color scale can be modified using 
- `scale_color_gradientn()`.  A vector of ten rainbow colors can be produced 
- using `rainbow(10)`.  (You will likely want to use `rev(rainbow(10))` to get
- the warm colors with the higher temperatures.)
-    * Feel free to use other custom color choices if you like.
-
-```{r, weather04, fig.height = 4, exercise = TRUE}
-MyWeather <- 
-  bind_rows(
-    NewYork2013, 
-    Mumbai2013, 
-    London2013, 
-    SFO2013
-  )
-```
-
-```{r, weather04-solution, fig.height = 4, echo = FALSE}
-bind_rows(
-    NewYork2013 %>% mutate(city = "New York"), 
-    Mumbai2013 %>% mutate(city = "Mumbai"), 
-    London2013 %>% mutate(city = "London"), 
-    SFO2013 %>% mutate(city = "San Francisco")
-  ) %>%
-  mutate(date = lubridate::date(Time)) %>%
-  group_by (city, date) %>%
-  summarise(
-    lo = min(Temperature, na.rm = TRUE),
-    hi = max(Temperature, na.rm = TRUE),
-    mean = mean(Temperature, na.rm = TRUE),
-  )  %>% 
-  ungroup() %>%
-  gf_linerange(lo + hi ~ date | city ~ ., color = ~mean) %>%
-  gf_refine(scale_color_gradientn(colors = rev(rainbow(10))))
-```
 ### Database connections
 
 These same commands can be used to [manage data in an SQL data base](https://db.rstudio.com/dplyr/).
