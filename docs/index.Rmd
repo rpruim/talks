@@ -1,5 +1,7 @@
 # Recent Presentations by R Pruim
 
+  * [Creating Packages with RStudio and Github](R-Packages/R-packages-slides.html)
+  
   * [JMM, January 2018](jmm-2018)
   
   * [City of Hope, January 2018](city-of-hope-2018)
