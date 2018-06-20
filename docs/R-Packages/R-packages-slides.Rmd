@@ -11,10 +11,6 @@ output:
 knitr::opts_chunk$set(
   size = "small",
   echo = TRUE)
-  # learnr::tutorial:
-  #   progressive: true
-  #   allow_skip: true
-# runtime: shiny_prerendered
 ```
 
 ## Getting Your Project Started
@@ -45,7 +41,6 @@ use_testthat()        # Prepare for unit testing
 
 ## Commit your package stub
 
-
 Commit the files in the stub of your package.  
 
 * You don't have to commit `hello.R` and `hello.Rd`, 
@@ -70,9 +65,7 @@ git push -u origin master  # link local master branch to Github
 
 4. In R: `use_github_links()`
 
-5. Knit `README.Rmd`, commit, and push `README.Rmd` and `README.md`
-
-6. Go to Github and confirm that it worked.
+5. Go to Github and confirm that it worked.
 
 ## Linking to Github -- use_github()
 
@@ -93,7 +86,7 @@ More details at [https://help.github.com/articles/adding-an-existing-project-to-
 
 ## Edit README.Rmd
 
- * `use_readme_rmd()` creates a stub for you to edit.
+ * Create a stub using `use_readme_rmd()`.
  * Installation instructions will be included in the stub if you use `use_github_links()`.
  * Describe your package, provide some examples.
 
@@ -109,6 +102,9 @@ If you refer to issues in your commit messages, comments will be added to Github
 1. Put code for your function in the `R/` folder.
 
 2. Document with `roxygen2` (details in a moment)
+
+    * Add `Roxygen: list(markdown = TRUE)` to your DESCRIPTION file so you can
+    use Markdown short cuts when creating documentation.
 
 3. If you use other packages:
 
@@ -186,7 +182,6 @@ test_that("Description of a sub-category of tests.", {
   expect_error(log(-2))
   expect_warning(1:3 + 1:2)
 })
-
 ```
 
 
@@ -234,3 +229,6 @@ receive an email with links to the results of building and checking the package 
 * `devtools::release()` will walk you through the process of getting your package onto CRAN, 
 reminding you to take care of all sorts of things along the way.
 
+## For More Details
+
+See Hadley Wickham's online book: *R Packages* at [http://r-pkgs.had.co.nz/](http://r-pkgs.had.co.nz/)

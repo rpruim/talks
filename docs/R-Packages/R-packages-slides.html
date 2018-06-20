@@ -149,7 +149,6 @@ git push -u origin master  # link local master branch to Github</pre>
 
 <ol>
 <li><p>In R: <code>use_github_links()</code></p></li>
-<li><p>Knit <code>README.Rmd</code>, commit, and push <code>README.Rmd</code> and <code>README.md</code></p></li>
 <li><p>Go to Github and confirm that it worked.</p></li>
 </ol>
 
@@ -171,7 +170,7 @@ git push -u origin master  # link local master branch to Github</pre>
 </article></slide><slide class=""><hgroup><h2>Edit README.Rmd</h2></hgroup><article  id="edit-readme.rmd">
 
 <ul>
-<li><code>use_readme_rmd()</code> creates a stub for you to edit.</li>
+<li>Create a stub using <code>use_readme_rmd()</code>.</li>
 <li>Installation instructions will be included in the stub if you use <code>use_github_links()</code>.</li>
 <li>Describe your package, provide some examples.</li>
 </ul>
@@ -186,7 +185,11 @@ git push -u origin master  # link local master branch to Github</pre>
 
 <ol>
 <li><p>Put code for your function in the <code>R/</code> folder.</p></li>
-<li><p>Document with <code>roxygen2</code> (details in a moment)</p></li>
+<li><p>Document with <code>roxygen2</code> (details in a moment)</p>
+
+<ul>
+<li>Add <code>Roxygen: list(markdown = TRUE)</code> to your DESCRIPTION file so you can use Markdown short cuts when creating documentation.</li>
+</ul></li>
 <li><p>If you use other packages:</p>
 
 <ol>
@@ -302,7 +305,11 @@ test_that(&quot;Description of a sub-category of tests.&quot;, {
 <ul>
 <li><p><code>devtools::build_win()</code> will send your package to Win Builder, where it will be built. You will receive an email with links to the results of building and checking the package there.</p></li>
 <li><p><code>devtools::release()</code> will walk you through the process of getting your package onto CRAN, reminding you to take care of all sorts of things along the way.</p></li>
-</ul></article></slide>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>For More Details</h2></hgroup><article  id="for-more-details">
+
+<p>See Hadley Wickham&#39;s online book: <em>R Packages</em> at <a href='http://r-pkgs.had.co.nz/' title=''>http://r-pkgs.had.co.nz/</a></p></article></slide>
 
 
   <slide class="backdrop"></slide>
