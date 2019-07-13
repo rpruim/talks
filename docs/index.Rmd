@@ -1,5 +1,7 @@
 # Recent Presentations by R Pruim
 
+  * [Domino Arithmetic](domino-arithmetic/domino-arithmetic-slides.html) (GVSU Math Path 2019)
+  
   * [Creating Packages with RStudio and Github](R-Packages/R-packages-slides.html)
   
   * [JMM, January 2018](jmm-2018)
