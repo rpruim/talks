@@ -18,22 +18,22 @@ div.domalgebra td{
   padding: 10px;
 }
 
-</style>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { 
-      fonts: ["Neo-Euler", "Asana-Math", "Gyre-Pagella", "Gyre-Termes", "STIX-Web", "TeX"],
-    }
-  });
-  
-</script>
+<!-- </style> -->
+<!-- <script type="text/x-mathjax-config"> -->
+<!--   MathJax.Hub.Config({ -->
+<!--     extensions: ["tex2jax.js"], -->
+<!--     jax: ["input/TeX", "output/HTML-CSS"], -->
+<!--     tex2jax: { -->
+<!--       inlineMath: [ ['$','$'], ["\\(","\\)"] ], -->
+<!--       displayMath: [ ['$$','$$'], ["\\[","\\]"] ], -->
+<!--       processEscapes: true -->
+<!--     }, -->
+<!--     "HTML-CSS": {  -->
+<!--       fonts: ["Neo-Euler", "Asana-Math", "Gyre-Pagella", "Gyre-Termes", "STIX-Web", "TeX"], -->
+<!--     } -->
+<!--   }); -->
+
+<!-- </script> -->
 
 
 ```{r setup, include=FALSE}
@@ -583,35 +583,115 @@ Can you come up with definitions of addition and multiplication so that
 Examples:
 
 <div class = "domalgebra">
-(<svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg> 
-+
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect> 
-</svg>)
-(<svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg> 
-+
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect> 
-</svg>)
-
+( <img src = "images/dom1v.svg" /> + 
+  <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /> )
+( <img src = "images/dom2h.svg" /> + 
+  <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" />) = ??
 </div>
 
+<div class = "domalgebra">
+( <img src = "images/dom1v.svg" /> + 
+  <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /> )
+( <img src = "images/dom2h.svg" /> + 
+  <img src = "images/dom1v.svg" /><img src = "images/dom2h.svg" />) = ??
+</div>
 
 ## Domino Algebra
 
-### The Fundamental Equation
+
+Can you come up with definitions of addition and multiplication so that
+
+### (A+B) (C+D) = AC + AD + BC + BD
+
+Examples:
+
+<div class = "domalgebra">
+<table>
+<tr>
+<td>
+( <img src = "images/dom1v.svg" /> + 
+  <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /> )
+( <img src = "images/dom2h-dark.svg" /> + 
+  <img src = "images/dom1v-dark.svg" /><img src = "images/dom1v-dark.svg" />)
+</td>
+<td> = </td>
+<td>
+  <img src = "images/dom1v.svg" /><img src = "images/dom2h-dark.svg" />
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v-dark.svg" /><img src = "images/dom1v-dark.svg" />
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom2h-dark.svg" />
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom1v-dark.svg" /><img src = "images/dom1v-dark.svg" />  
+</td>
+</tr>
+<tr>
+<td>
+(<img src = "images/dom1v.svg" /> + 
+  <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /> )
+(<img src = "images/dom2h-dark.svg" /> + 
+  <img src = "images/dom1v-dark.svg" /><img src = "images/dom2h-dark.svg" />)
+</td>
+<td>=</td>
+<td>
+  <img src = "images/dom1v.svg" /><img src = "images/dom2h-dark.svg" /> 
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v-dark.svg" /><img src = "images/dom2h-dark.svg" />
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom2h-dark.svg" />
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom1v-dark.svg" /><img src = "images/dom2h-dark.svg" />
+</td>
+</tr>
+<tr>
+<td></td>
+<td>=</td>
+<td>
+  <img src = "images/dom1v.svg" /><img src = "images/dom2h.svg" /> 
++ 2 <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom2h.svg" />
++ <img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom1v.svg" /><img src = "images/dom2h.svg" />
+</td>
+</tr>
+</table>
+</div>
+
+
+Note:
+
+* multiplication does not commute!
+* additional does commute if we are not interested in the order of our list.
+
+## Equations for T(n)
+
+```{d3 T1, ref.label = "dominos3by-d3", data = TT[[1]] %>% tile_data(), options = list(size = 30, space = 40, plus = "+"), height = 3 * 30, width = 1 * 1 * 30, echo = FALSE, container = "svg"}
+```
+
+```{d3 T2, ref.label = "dominos3by-d3", data = TT[[2]] %>% tile_data(), options = list(size = 30, space = 80, plus = "+"), height = 2 * 2 * 30 + 10, width = 2 * 2 * 30 + 20, echo = FALSE, container = "svg"}
+```
+
+```{d3 T3, ref.label = "dominos3by-d3", data = TT[[3]] %>% tile_data(), options = list(size = 30, space = 110, plus = "+"), height = 3 * 30, width = 3 * 3 * 30 + 2 * 20, echo = FALSE, container = "svg"}
+```
+
+```{d3 T4, ref.label = "dominos3by-d3", data = TT[[4]] %>% tile_data(), options = list(size = 30, space = 4 * 30 + 20, plus = "+"), height = 3 * 30, width = 5 * 4 * 30 + 4 * 20, echo = FALSE, container = "svg"}
+```
+
+T(n) = <img src="images/dom1v.svg"> T(n-1)
+     + <img src="images/dom2h.svg"> T(n-2) 
+     
+So t(n) = t(n-1) + t(n-2)  [Fibonacci]
+
+
+## T Time
+
+Let T be the list of **all** tilings of rectangles with 2 rows (and any
+number of columns).
+
+<center>
+T = T(0) + T(1) + T(2) + $\cdots$
+</center>
+
+<br>
+
+Wait, what is T(0)? Tilings of a 2 $\times$ 0 rectangle?
+
+* How many are there? (What is t(0)?)
+* How should we denote this?
+
+## The Fundamental Equation for T
 
 <div class = "domalgebra">
 T = 1 + <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
@@ -627,7 +707,7 @@ T = 1 + <svg width="15" height="30" style="background: rgb(255, 255, 255); fill:
 </svg> T
 </div>
 
-### Can you Solve for T
+### Can you Solve for T?
 
 ## Fundamental Equation
 
@@ -689,6 +769,9 @@ T = 1 / (1 - <svg width="15" height="30" style="background: rgb(255, 255, 255); 
 </svg>)
 </div>
 
+Technically, we need a left multiplicative inverse, but let's stick
+with this notation.
+
 ## Do you Recognize This?
 
 <div class = "domalgebra">
@@ -704,17 +787,7 @@ T =
 <td align = "center"> 1 </td>
 </tr>
 <tr>
-<td>1 - <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg> 
--
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect> 
-</svg>
+<td>1 - <img src = "images/dom1v.svg"/> - <img src = "images/dom2h.svg"/>
 </td>
 </tr>
 </table>
@@ -727,17 +800,9 @@ T =
 <td align = "center"> 1 </td>
 </tr>
 <tr>
-<td>1 - (<svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg> 
--
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect> 
-</svg>)
+<td>1 - (<img src = "images/dom1v.svg"/>
++
+<img src = "images/dom2h.svg"/>)
 </td>
 </tr>
 </table>
@@ -745,33 +810,115 @@ T =
 </tr>
 </table>
 </div>
+
+## Geometric Series!
+
+<div class = "domalgebra">
+
+<table>
+<tr>
+<td>
+T = 
+</td>
+<td>
+<table>
+<tr style="border-bottom: 3px solid #666666">
+<td align = "center"> 1 </td>
+</tr>
+<tr>
+<td>1 - (<img src="images/dom1v.png"/> + <img src="images/dom2h.png"/>)
+</td>
+</tr>
+</table>
+</td>
+<td> = 
+1 + 
+(<img src="images/dom1v.png"/> + <img src="images/dom2h.png"/>)
++
+(<img src="images/dom1v.png"/> + <img src="images/dom2h.png"/>)<sup>2</sup>
++
+(<img src="images/dom1v.png"/> + <img src="images/dom2h.png"/>)<sup>3</sup>
++ $\cdots$
+</td>
+</tr>
+</table>
+</div>
+
+<div class = "domalgebra">
+&nbsp;
+&nbsp;
+= 1 + 
+<img src="images/dom1v.png"/> + <img src="images/dom2h.png"/>
++ <img src="images/dom1v.png"/><img src="images/dom1v.png"/>
++ <img src="images/dom1v.png"/><img src="images/dom2h.png"/>
++ <img src="images/dom2h.png"/><img src="images/dom1v.png"/>
++ <img src="images/dom2h.png"/><img src="images/dom2h.png"/>
++ <img src="images/dom1v.png"/><img src="images/dom1v.png"/><img src="images/dom1v.png"/>
++ <img src="images/dom1v.png"/><img src="images/dom1v.png"/><img src="images/dom2h.png"/>
++ $\cdots$
+</div>
+
 
 
 ## Using letters
 
-If we let 
 
 <div class = "domalgebra">
-x = <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg>
-and y = 
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect> T
-</svg>
+If we let 
+x = <img src = "images/dom1v.svg"/>
+and y<sup>2</sup> = <img src = "images/dom2h.svg"/> (and let
+$x$ and $y$ commute), then
 </div>
 
-Then we get
 
 $$
 \begin{align}
-T &= 1 + xT + y T
+T &= \frac{1}{1 - (x + y^2)} = \sum_{k=0}^\infty (x + y^2)^k
+\\
+& = 
+\sum_{k,j \ge 0} \binom{k}{j} x^j y^{2(k-j)}
+\\
+& = 
+\sum_{m,j \ge 0} \binom{m+j}{j} x^j y^{2m}  \tag{$m = k-j$}
 \end{align}
 $$
+
+So the number of tilings with $j$ <img src="images/dom1v.svg"> and 
+$m$ <img src="images/dom2h.svg"> is $\binom{m+j}{j}$.
+
+## This gives us another way to compute t(n)
+
+Example: 
+
+$$
+\small
+\begin{align*}
+t(8) &= \binom{0+4}{0} 
++ \binom{2 + 3}{2}
++ \binom{4 + 2}{4}
++ \binom{6 + 1}{6}
++ \binom{8 + 0}{8}
+\\
+&=
+`r choose(4,0)` +
+`r choose(5,2)` +
+`r choose(6,4)` +
+`r choose(7,6)` +
+`r choose(8,8)` 
+\\
+&= 
+`r choose(4,0) + choose(5,2) + choose(6,4) + choose(7,6) + choose(8,8)` 
+\end{align*}
+$$
+
+```{r echo = FALSE, out.width = "30%", fig.align = "center"}
+knitr::include_graphics("images/Pascal-Fibonacci.png")
+```
+
+## One more slight of hand
+
+Now let $x = y = z$ 
+(a domino is a domino is a domino -- ignore orientation).
 
 $$
 \begin{align}
@@ -931,6 +1078,59 @@ T(0:10) %>% knitr::kable()
 
 # Tiling 3 x n 
 
+## Fundamental Equation for U
+
+```{d3, ref.label = "dominos3by-d3", data = U4 %>% tile_data(), options = list(size = 15, space = 80, plus = "+"), height = 3 * 15, width = 11 * 80, echo = FALSE, container = "svg"}
+```
+
+<br>
+
+<div class = "domalgebra">
+U = ??
+</div>
+
+## Fundamental Equation for U
+
+```{d3, ref.label = "dominos3by-d3", data = U4 %>% tile_data(), options = list(size = 15, space = 80, plus = "+"), height = 3 * 15, width = 11 * 80, echo = FALSE, container = "svg"}
+```
+
+<br>
+
+<div class = "domalgebra">
+U = 1 
++ <img src="images/dom3h.svg">U
++ <img src="images/dom2L.svg">V
++ <img src="images/dom2Gamma.svg">&Lambda;
+</div>
+
+
+## Fundamental Equations for U
+
+```{d3, ref.label = "dominos3by-d3", data = U4 %>% tile_data(), options = list(size = 15, space = 80, plus = "+"), height = 3 * 15, width = 11 * 80, echo = FALSE, container = "svg"}
+```
+
+<br>
+
+<div class = "domalgebra">
+U = 1 
++ <img src="images/dom3h.svg">U
++ <img src="images/dom2L.svg">V
++ <img src="images/dom2Gamma.svg">&Lambda;
+</div>
+
+<br>
+
+<div class = "domalgebra">
+V =  + <img src="images/dom1up.svg">U + <img src="images/dom3V.svg">V 
+</div>
+
+<br>
+
+<div class = "domalgebra">
+&Lambda; = + <img src="images/dom1down.svg">U + <img src="images/dom3Lambda.svg">&Lambda;
+</div>
+
+
 ## Algebra
 
 We start with 3 equations and 3 unknowns, $U$, $V$, and $\Lambda$.
@@ -1058,8 +1258,12 @@ U(0:10) %>% knitr::kable()
 ## Want to Know More?
 
 
-## Some Images
+```{r echo = FALSE, fig.align = "center", out.height = "50%"}
+knitr::include_graphics("images/generatingfunctionology.jpg")
+```
 
+
+## Some Images
 
 <div class = "domalgebra">
 1 + <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
@@ -1098,4 +1302,18 @@ T = 1 / (1 - <svg width="15" height="30" style="background: rgb(255, 255, 255); 
 <br>
 
 ```{d3, ref.label = "dominos3by-d3", data = TT[[2]] %>% tile_data(), options = list(size = 15, space = 50, plus = "+"), height = 2 * 15, width = 80, echo = FALSE, container = "svg"}
+```
+
+<br>
+
+```{d3, ref.label = "dominos3by-d3", data = U4[11] %>% tile_data(), options = list(size = 15, space = 50, plus = "+"), height = 3 * 15, width = 80, echo = FALSE, container = "svg"}
+```
+
+<br>
+
+```{d3, ref.label = "dominos3by-d3", data = U4[10] %>% tile_data(), options = list(size = 10, space = 50, plus = "+"), height = 3 * 10, width = 80, echo = FALSE, container = "svg"}
+```
+<br>
+
+```{d3, ref.label = "dominos3by-d3", data = U4[5] %>% tile_data(), options = list(size = 10, space = 50, plus = "+"), height = 3 * 10, width = 80, echo = FALSE, container = "svg"}
 ```
