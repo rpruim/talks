@@ -339,7 +339,7 @@ V<>V
 #### **Notation** 
 
  * u(n) = number of ways to tile a 3 $\times$ n rectangle
- * U(n) = listing (set) of all tilings of a 3 $\times$ n rectangle
+ * U(n) = listing of all tilings of a 3 $\times$ n rectangle
  * u(n) = |U(n)|
 
 ### **Example:** What is u(2)?  What is U(2)?
@@ -454,7 +454,7 @@ To solve this problem, we need
 ### **Notation** 
 
  * t(n) = number of ways to tile a 2 $\times$ n rectangle
- * T(n) = listing (set) of all tilings of a 2 $\times$ n rectangle
+ * T(n) = listing of all tilings of a 2 $\times$ n rectangle
  * t(n) = |T(n)|
 
 ### **Example:** What is t(2)?  What is T(2)?
