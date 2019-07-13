@@ -1263,57 +1263,57 @@ knitr::include_graphics("images/generatingfunctionology.jpg")
 ```
 
 
-## Some Images
+<!-- ## Some Images -->
 
-<div class = "domalgebra">
-1 + <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg> T
-+
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect> T
-</svg>
-</div>
-
-
-<div class = "domalgebra">
-T = 1 / (1 - <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-</svg> 
--
-<svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);">
-<rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>
-<rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black">
-</rect>)
-</svg>
-</div>
+<!-- <div class = "domalgebra"> -->
+<!-- 1 + <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);"> -->
+<!-- <rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black"> -->
+<!-- </rect> -->
+<!-- </svg> T -->
+<!-- + -->
+<!-- <svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);"> -->
+<!-- <rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black"> -->
+<!-- </rect> -->
+<!-- <rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black"> -->
+<!-- </rect> T -->
+<!-- </svg> -->
+<!-- </div> -->
 
 
+<!-- <div class = "domalgebra"> -->
+<!-- T = 1 / (1 - <svg width="15" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);"> -->
+<!-- <rect rx="2" ry="2" x="1" y="1" width="13" height="28" fill="skyblue" fill-opacity="0.5" stroke="black"> -->
+<!-- </rect> -->
+<!-- </svg>  -->
+<!-- - -->
+<!-- <svg width="30" height="30" style="background: rgb(255, 255, 255); fill: rgb(0, 0, 0); color: rgb(0, 0, 0);"> -->
+<!-- <rect rx="2" ry="2" x="1" y="1" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black"> -->
+<!-- </rect> -->
+<!-- <rect rx="2" ry="2" x="1" y="16" width="28" height="13" fill="skyblue" fill-opacity="0.5" stroke="black"> -->
+<!-- </rect>) -->
+<!-- </svg> -->
+<!-- </div> -->
 
-```{d3, ref.label = "dominos3by-d3", data = TT[[1]] %>% tile_data(), options = list(size = 15, space = 20, plus = "+"), height = 2 * 15, width = 80, echo = FALSE, container = "svg"}
-```
 
-<br>
 
-```{d3, ref.label = "dominos3by-d3", data = TT[[2]] %>% tile_data(), options = list(size = 15, space = 50, plus = "+"), height = 2 * 15, width = 80, echo = FALSE, container = "svg"}
-```
+<!-- ```{d3, ref.label = "dominos3by-d3", data = TT[[1]] %>% tile_data(), options = list(size = 15, space = 20, plus = "+"), height = 2 * 15, width = 80, echo = FALSE, container = "svg"} -->
+<!-- ``` -->
 
-<br>
+<!-- <br> -->
 
-```{d3, ref.label = "dominos3by-d3", data = U4[11] %>% tile_data(), options = list(size = 15, space = 50, plus = "+"), height = 3 * 15, width = 80, echo = FALSE, container = "svg"}
-```
+<!-- ```{d3, ref.label = "dominos3by-d3", data = TT[[2]] %>% tile_data(), options = list(size = 15, space = 50, plus = "+"), height = 2 * 15, width = 80, echo = FALSE, container = "svg"} -->
+<!-- ``` -->
 
-<br>
+<!-- <br> -->
 
-```{d3, ref.label = "dominos3by-d3", data = U4[10] %>% tile_data(), options = list(size = 10, space = 50, plus = "+"), height = 3 * 10, width = 80, echo = FALSE, container = "svg"}
-```
-<br>
+<!-- ```{d3, ref.label = "dominos3by-d3", data = U4[11] %>% tile_data(), options = list(size = 15, space = 50, plus = "+"), height = 3 * 15, width = 80, echo = FALSE, container = "svg"} -->
+<!-- ``` -->
 
-```{d3, ref.label = "dominos3by-d3", data = U4[5] %>% tile_data(), options = list(size = 10, space = 50, plus = "+"), height = 3 * 10, width = 80, echo = FALSE, container = "svg"}
-```
+<!-- <br> -->
+
+<!-- ```{d3, ref.label = "dominos3by-d3", data = U4[10] %>% tile_data(), options = list(size = 10, space = 50, plus = "+"), height = 3 * 10, width = 80, echo = FALSE, container = "svg"} -->
+<!-- ``` -->
+<!-- <br> -->
+
+<!-- ```{d3, ref.label = "dominos3by-d3", data = U4[5] %>% tile_data(), options = list(size = 10, space = 50, plus = "+"), height = 3 * 10, width = 80, echo = FALSE, container = "svg"} -->
+<!-- ``` -->
