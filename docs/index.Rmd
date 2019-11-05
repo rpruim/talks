@@ -1,5 +1,7 @@
 # Recent Presentations by R Pruim
 
+  * [Mixing D3 and R](D3/BDI2019/bdi2019-slides.html) (Big Data Ignite 2019)
+
   * [Domino Arithmetic](domino-arithmetic/domino-arithmetic-slides.html) (GVSU Math Path 2019)
   
   * [Creating Packages with RStudio and Github](R-Packages/R-packages-slides.html)

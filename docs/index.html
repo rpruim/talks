@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -268,7 +269,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -342,18 +342,6 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -380,6 +368,7 @@ $(document).ready(function () {
 <div id="recent-presentations-by-r-pruim" class="section level1">
 <h1>Recent Presentations by R Pruim</h1>
 <ul>
+<li><p><a href="D3/BDI2019/bdi2019-slides.html">Mixing D3 and R</a> (Big Data Ignite 2019)</p></li>
 <li><p><a href="domino-arithmetic/domino-arithmetic-slides.html">Domino Arithmetic</a> (GVSU Math Path 2019)</p></li>
 <li><p><a href="R-Packages/R-packages-slides.html">Creating Packages with RStudio and Github</a></p></li>
 <li><p><a href="jmm-2018">JMM, January 2018</a></p></li>
@@ -411,6 +400,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
