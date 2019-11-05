@@ -35,8 +35,26 @@ library(sp)
 theme_set(theme_bw())
 ```
 
+<style>
+.foo {
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg);
+}
+
+.inverse {
+  background-image: url(images/BDIorange-teal.jpg);
+  background-size: cover;
+}
+
+.title-slide {
+  background-image: url(images/BDIorange-teal.jpg);
+  background-size: cover;
+}
+</style>
+
 
 # Outline
+
+0. Some Teasers
 
 1. Some Quick and Easy Things (No D3 knowledge required)
     * maps
@@ -47,6 +65,29 @@ theme_set(theme_bw())
 2. If you know some D3, then ...
     * ... D3 chunks in R markdown are an easy way to mix R and D3.
     * you might like to write your own htmlwidget
+
+---
+
+class: center
+
+## 15 Data Visualizations That Will Blow Your Mind
+
+<https://blog.udacity.com/2015/01/15-data-visualizations-will-blow-mind.html>
+
+<iframe width = 900 height = 470 src = "https://blog.udacity.com/2015/01/15-data-visualizations-will-blow-mind.html"/>
+
+
+---
+
+class: center
+
+## Visualizing US Gun Deaths
+
+<br>
+
+<https://guns.periscopic.com/?year=2013>
+
+<!-- <iframe width = 900 height = 470 src = "https://guns.periscopic.com/?year=2013"> -->
 
 ---
 
@@ -320,7 +361,7 @@ ggplotly(tooltip = c("text", "colour"))     #<<
     * but often good enough for quick interactivity for personal use
 
 ---
-class inverse middle center
+class: inverse middle center
 
 # Quick and Easy #3: plotly without ggplot2
 
@@ -768,13 +809,31 @@ class: inverse
 
 ---
 
+class: center
+
 ## Creating htmlwidgets
 
-<iframe width = "950px" height = "500px" src = "https://www.htmlwidgets.org/develop_intro.html">
+<https://www.htmlwidgets.org/develop_intro.html>
+
+<iframe width = "950px" height = "470px" src = "https://www.htmlwidgets.org/develop_intro.html">
+
+---
+
+class: center
+
+## Example: leaflethex
+
+<https://rpruim.github.io/leaflethex>
+
+<iframe width = "950px" height = "470px" src = "https://rpruim.github.io/leaflethex/">
+
+class: center 
 
 ---
 
 class: center 
+
+background-image: images/BDIorange-teal.jpg
 
 # Thanks
 
@@ -788,3 +847,5 @@ qrcode::qrcode_gen("https://calvin.co1.qualtrics.com/jfe/form/SV_6VeKg1TmW3yuo8R
 ```
 
 <https://calvin.co1.qualtrics.com/jfe/form/SV_6VeKg1TmW3yuo8R>
+
+
