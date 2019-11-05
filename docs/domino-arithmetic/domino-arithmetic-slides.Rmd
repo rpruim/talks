@@ -142,7 +142,6 @@ svg.selectAll('text')
 
 ```{d3 dominos3by-d3, include = FALSE}
 
-
 svg.selectAll('rect')
   .data(data)
   .enter().append('rect')
