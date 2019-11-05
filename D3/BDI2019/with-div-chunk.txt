@@ -1,0 +1,72 @@
+```{d3 data = G2007, container="div", d3_version = "5", options = list(margin = list(top = 25, right = 25, bottom = 80, left = 50)), echo = FALSE}
+
+let xvar = "gdpPercap";
+let yvar = "lifeExp";
+let color_var = "continent";
+let size_var = "pop";
+let inner_width = width - options.margin.left - options.margin.right;
+let inner_height = height - options.margin.top - options.margin.bottom;
+
+div
+  .append("p").attr("id", "some-text")
+  .text("A plot of " + yvar + " vs. " + xvar + ".")
+  .style("color", "salmon")
+  .style("font-family", "Helvetica,Arial,sans-serif")
+
+var graphic =
+  div
+   .append("svg")
+     .attr("width", width)
+     .attr("height", height)
+   .append("g")
+     .attr("transform", "translate(" + options.margin.left + "," + options.margin.top + ")");
+
+graphic
+  .append("rect")
+    .attr("width", inner_width)
+    .attr("height", inner_height)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("fill", "blue")
+    .attr("opacity", 0.05);
+
+var x_scale = d3.scaleLog()
+  .domain(d3.extent(data.map(d => d[xvar])))
+  .range([0, inner_width]);
+
+var x_axis = d3.axisBottom().scale(x_scale);
+
+var y_scale = d3.scaleLinear()
+  .domain(d3.extent(data.map(d => d[yvar])))
+  .range([inner_height, 0]);
+
+var y_axis = d3.axisLeft().scale(y_scale);
+
+var color_scale = d3.scaleOrdinal(d3.schemeAccent)
+  .domain(d3.extent(data.map( d => d[color_var])));
+
+var size_scale = d3.scaleSqrt()
+  .domain(d3.extent(data.map(d => d[size_var])))
+  .range([7, 30]);
+
+graphic.selectAll("circle")
+  .data(data)
+  .enter()
+  .append("circle")
+  .attr("cx", d => x_scale(d[xvar]))
+  .attr("cy", d => y_scale(d[yvar]))
+  .attr("r",  d => size_scale(d[size_var]))
+  .attr("fill", d => color_scale(d[color_var]))
+  .attr("fill-opacity", 0.6)
+  .attr("stroke", "black")
+  .attr("stroke-opacity", 0.4);
+
+graphic.append("g")
+  .attr("transform", "translate(0," + inner_height + ")")
+  .attr("id", "x-axis")
+  .call(x_axis);
+
+graphic.append("g")
+  .attr("id", "y-axis")
+  .call(y_axis);
+```
