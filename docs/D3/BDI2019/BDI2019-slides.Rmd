@@ -398,6 +398,7 @@ plot_ly(data = G2007, type = "scatter", alpha = 0.4,
   layout(xaxis = list(type = "log"))
 ```
 
+
 ---
 
 ## Animating multiple years
