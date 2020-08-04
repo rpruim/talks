@@ -1,0 +1,329 @@
+---
+title: "GAISE for Majors"
+author: "Randall Pruim -- Calvin University"
+date: "JSM 2020"
+output: 
+  ioslides_presentation:
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.width = 8,
+  fig.height = 4,
+  out.width = "70%"
+  )
+library(mosaic)
+theme_set(theme_bw())
+library(maxLik)
+library(fastR2)
+```
+
+<style>
+h1, h2, h3 {
+  color: forestgreen;
+}
+strong {
+  color: forestgreen;
+}
+</style>
+
+## Some Background
+
+* Calvin University: 
+
+    * Liberal arts university with ~3500 undergraduate students
+    * Large core curriculum, small majors (Statistics = ~ 36 + 10 hours)
+    
+* Prob/Stats sequence
+
+    * Prob/Stats taken by students from many programs
+    * Some of these students have not had statistics before
+    
+* The first time I taught our prob/stat sequence (in 2005)
+
+    * Just under half of students took the second course
+    * Most were more interested in statistics than in probability
+    * But the course I inherited was basically all probability in the first semester
+    * GAISE was brand new and change was afoot (Cobb's *Ptolameic Curriculum*, etc.)
+
+## What is GAISE?
+
+Guidelines for Assessment and Instruction in Statistics Education
+
+* PreK-12 Report
+    * 2005/2007 
+
+* College Report
+    * focused on Intro Stats courses
+    * original in 2005
+    * revised 2016
+
+* available from ASA at <https://www.amstat.org/asa/education/Guidelines-for-Assessment-and-Instruction-in-Statistics-Education-Reports.aspx>
+
+
+## GAISE College -- 6 Recommendations
+
+1. Teach statistical thinking.
+    * Teach statistics as an investigative process of problem-solving and decision making.
+    * Give students experience with multivariable thinking.
+2. Focus on conceptual understanding.
+3. Integrate real data with a context and purpose.
+4. Foster active learning.
+5. Use technology to explore concepts and analyze data.
+6. Use assessments to improve and evaluate student learning. 
+
+## GAISE College -- 6 Recommendations
+
+1. Teach **statistical thinking**.
+    * Teach statistics as an **investigative process** of problem-solving and decision making.
+    * Give students experience with **multivariable** thinking.
+2. Focus on **conceptual understanding**.
+3. Integrate **real data** with a **context** and **purpose**.
+4. Foster **active learning**.
+5. Use **technology** to explore concepts and analyze data.
+6. Use **assessments** to improve and evaluate student learning. 
+
+## GAISE College -- 6 Recommendations
+
+1. Teach statistical thinking (investigative, multivariable)
+    
+2. Focus on **conceptual understanding**.
+
+    * **Michael Lavine** (10:45): "Likelihood ... is the main *statistical concept* we should teach"
+
+3. Integrate real data with a context and purpose.
+
+4. Foster **active learning**.
+    * **Erin E Blankenship** (11:25): *Active Learning, Not Just for Intro Stats*
+    
+5. Use technology to explore concepts and analyze data.
+
+6. Use **assessments** to improve and evaluate student learning. 
+    * **Jennifer Green** (11:05): *Learning Through Assessment*
+
+
+## GAISE College -- 9 Goals
+
+1. Students should become **critical consumers** of statistically-based results reported in
+popular media, recognizing whether reported results reasonably follow from the study
+and analysis conducted.
+
+2. Students should be able to **recognize** questions for which the investigative process in
+**statistics would be useful** and should be able to answer questions using the investigative
+process.
+
+3. Students should be able to produce **graphical displays and numerical summaries** and
+interpret what graphs do and do not reveal.
+
+4. Students should recognize and be able to explain the **central role of variability** in the field
+of statistics.
+
+## GAISE College -- 9 Goals
+
+<ol start=5>
+<li>
+Students should recognize and be able to explain the **central role of randomness** in
+designing studies and drawing conclusions.
+<ul>
+<li>
+<strong>Dennis Sun</strong> (10:25): "interleave probability and statistical inference topics"
+</li>
+</ul>
+</li>
+
+<li>Students should gain experience with how **statistical models**, including multivariable
+models, are used.
+<ul>
+<li>
+<strong>Michael Lavine</strong> (10:45): "Likelihood is the primary way to quantify the quality of a probability model."
+</li>
+</ul>
+</li>
+
+<li>Students should demonstrate an understanding of, and ability to use, basic ideas of
+**statistical inference**, both hypothesis tests and interval estimation, in a variety of settings.</li>
+
+<li>Students should be able to interpret and draw conclusions from 
+**standard output from statistical software packages**.</li>
+
+<li>Students should demonstrate an awareness of **ethical issues** associated with sound
+statistical practice. </li>
+</ol>
+
+## Outline of Panel
+
+```{r echo = FALSE, out.width = "95%", fig.align="center"}
+knitr::include_graphics("../JSM-panel-outline.png")
+```
+
+Post questions/comments in the session chat as we go along.
+
+<!-- 10:05 AM	GAISE for Majors -->
+<!-- Randall Pruim, Calvin University -->
+<!-- 10:25 AM	Dual Immersion in Probability and Statistics -->
+<!-- Dennis Sun, Cal Poly and Google; Kevin Ross, California Polytechnic State University -->
+<!-- 10:45 AM	Teach Likelihood -->
+<!-- Michael Lavine, Army Research Office -->
+<!-- 11:05 AM	Learning Through Assessment: Challenging Mathematical Statistics Students in Novel Ways -->
+<!-- Jennifer Green, Montana State University; Erin E Blankenship, University of Nebraska-Lincoln -->
+<!-- 11:25 AM	Active Learning: Not Just for Intro Stats -->
+<!-- Erin E Blankenship, University of Nebraska-Lincoln; Jennifer Green, Montana State University -->
+<!-- 11:45 AM	Floor Discussion -->
+
+## First Adjustment: Statistics Early
+
+* See basics of inference in first semester (tests, intervals, power, simulation-based methods)
+
+* Lead with Lady Tasting Tea (or similar) on Day 1.
+
+
+```{r fig.height = 3}
+Sims <- do(5000) * rflip(20) 
+Sims %>% gf_histogram(~ heads, binwidth = 1)
+```
+
+## Probability For Statistics
+
+~~Probability then Statistics~~ $\rightarrow$ **Probability FOR Statistics**
+
+* Use statistical ideas to motivate learning probability.
+
+* Lady Tasting Tea $\rightarrow$ Binomial distributions $\rightarrow$ Binomial Test $\rightarrow$ Normal approximation to Binomial Test
+
+* Golfballs in the Yard $\to$ Test Stats & Null Distributions
+
+* How many replicates do I need to estimate a p-value empirically?
+
+* Robustness: Is the coverage rate in my simulation consistent with nominal value?
+
+More about this in the next talk (*Dual Immersion in Probability and Statistics*, Dennis Sun)
+
+## Technology
+
+These days the use of technology in a statistics class is not so controversial.  
+
+* Allows us to use larger, more interesting data sets
+* Allows us to focus attention on the right parts of the task
+* Allows us to teach reproducible analysis methods (eg, RMarkdown, scripting)
+
+R/RStudio is a popular choice
+
+* Free
+* Toolkit get better rapidly (RStudio, tidyverse, publishing tools, etc.)
+
+## Technology: You Gotta Have Style
+
+But just using a statistical package like R/RStudio is not enough -- it needs to
+be used well.
+
+* Teach R as a language, but not a "programming" language
+
+    * Much can be done with simple declarative commands, perhps chained with `%>%`.
+    * Focus on communicating to R what you want to happen (what do you want R to do?
+    what must it know to do that?)
+    * Learning to write simple functions is a big power boost (and not that hard).
+    
+* Be professional about how you use technology
+
+    * Adopt a set of complementary tools and a consistent style
+    * Equivalent to using correct terminology and good notation
+    * Instructors should know more than they teach 
+
+
+## Stat 344: First Exam Problem
+
+**Problem 1** `<Details omitted>`
+
+<ol type = 'a'>
+<li> What is the maximum likelihood estimate for $\theta$?
+<li> If we test the null hypothesis that $\theta = 2.5$, what is the p-value?
+<li> What is the 95\% likelihood confidence interval for $\theta$?
+</ol>
+
+
+## Stat 344: First Exam Problem -- Preamble
+
+Below is a graph of a log likelihood function $l(\theta)$ for a data set with
+$n = 23$.
+
+```{r fig.width = 7, fig.height = 3, out.width = "40%", echo = FALSE, fig.align = "center", results = "hide", warning = FALSE, message = FALSE}
+library(mosaic)
+k <- qchisq(.95, 1) / 2
+m <- -17.14
+controls <-
+  data.frame(
+    x = c(2, 4.5, 5),
+    y = c(-19, m, m - k))
+l <-
+  mosaic::fitSpline(y ~ x, data = controls, df = 2)
+gf_function(l, xlim = c(0.95, 5.68)) %>%
+#  gf_point(y ~ x, data = controls) %>%
+  gf_labs(y = "log likelihood", x = expression(theta)) %>%
+  gf_lims(y = c(-21.9, -17.5)) %>%
+  gf_refine(
+    scale_x_continuous(breaks = seq(0, 9, by = 1), minor_breaks = seq(0,9, by = 0.25)),
+    scale_y_continuous(breaks = seq(-24, -14, by = 1), minor_breaks = seq(-24, -14, by = 0.25))
+    )
+maxLik(l, start = c(theta = 4)) %>% summary()
+```
+
+Using the information provided, answer the following questions as accurately as you can.
+
+<!-- Your work should make it clear how you are getting your answers and that you know how to get more precise values -->
+<!-- if you had access to the log-likelihood function and not just the graph of it. -->
+
+<ol type = 'a'>
+<li> What is the maximum likelihood estimate for $\theta$?
+<li> If we test the null hypothesis that $\theta = 2.5$, what is the p-value?
+<li> What is the 95\% likelihood confidence interval for $\theta$?
+</ol>
+
+
+## Visualizing Likelihood
+
+`maxLik` + `fastR2` make it easy to visualize likelihood (for one parameter).
+
+```{r income-1, include = FALSE}
+income <- read.csv('~/public_html/data/s344/s18income.csv')$income
+income
+n <- length(income)
+theta.hat <- n / sum( log(income) ) ; theta.hat
+```
+
+```{r income-percentile, include = FALSE}
+F = function(x,theta) { 1 - x^(-theta) }
+f = function(x,theta) { theta * x^(-theta-1) }
+p80 <- uniroot( function(x) {F(x, theta.hat) -.8}, c(1,10^5) )$root; p80    # 80th percentile
+p90 <- uniroot( function(x) {F(x, theta.hat) -.9}, c(1,10^5) )$root; p90    # 90th percentile
+p90/p80  # ratio of 90th percentile to 80th percentile
+```
+
+```{r income-ci, results = 'hide', fig.width = 7, fig.height = 3, out.width = "60%", echo = FALSE, fig.align = "center", warning = FALSE, message = FALSE}
+loglik.income <-
+  function(theta, x) {
+    sapply(theta, function(t) sum(log(t) - (t + 1) * log(x)))
+  }
+
+ml.income <- maxLik2(loglik.income, start = c(theta = 2), x = income)
+ml.income %>% summary()
+theta.hat <- coef(ml.income); theta.hat
+tstat_critical <- function(theta0) {
+   2 * (loglik.income(theta.hat, income) - loglik.income(theta0, income)) - qchisq(.95, df = 1)
+}
+ci <- c(
+  uniroot(tstat_critical, c(0.1, theta.hat)) %>% value(),
+  uniroot(tstat_critical, c(20,  theta.hat)) %>% value()
+)
+ci
+plot(ml.income, ci = c("lik", "wald"))
+loglik.income(theta.hat, income)
+sapply(ci, loglik.income, x = income)
+```
+
+## Poisson and Exponential
+
+Take advantage of the connection between the two distributions to help students shake 
+a common misunderstanding of the Poisson rate parameter $\lambda$.
+
