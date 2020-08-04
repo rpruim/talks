@@ -86,6 +86,8 @@ class: middle, center, inverse
 
 ## GAISE for Majors
 
+slides at <https://bit.ly/JSM2020-G4M>
+
 ---
 
 ## Some Background

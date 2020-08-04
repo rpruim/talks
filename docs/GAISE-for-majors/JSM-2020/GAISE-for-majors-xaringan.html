@@ -67,6 +67,8 @@ class: middle, center, inverse
 
 ## GAISE for Majors
 
+slides at &lt;https://bit.ly/JSM2020-G4M&gt;
+
 ---
 
 ## Some Background
@@ -477,6 +479,13 @@ Using the information provided, answer the following questions as accurately as 
 ```r
 ml &lt;- maxLik2(loglikelihood, start = c(theta = 2), x = data)
 plot(ml, ci = c("lik", "wald"))
+```
+
+```
+## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.
 ```
 
 &lt;img src="GAISE-for-majors-xaringan_files/figure-html/unnamed-chunk-8-1.png" width="70%" /&gt;
