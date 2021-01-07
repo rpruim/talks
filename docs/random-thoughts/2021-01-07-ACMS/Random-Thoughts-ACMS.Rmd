@@ -8,6 +8,7 @@ output:
     lib_dir: libs
     css: ['default', 'default-fonts', 'rpruim-talks.css']
     nature:
+      ratio: '16:10'
       beforeInit: "macros.js"
       highlightStyle: github
       highlightLines: true
@@ -102,7 +103,7 @@ Image credit: [credit](https://danielmiessler.com/images/ordered_chaos.png)
 
   * A coin toss
 
-2. **Unknowability** [Ontological Randomness]
+2. **Unknowability** [Epistemological Randomness]
 
   * A different coin toss
 
@@ -244,11 +245,11 @@ knitr::include_graphics("images/sorry-game-over-shoulder.jpg")
 ---
 class: inverse, center, middle
 
-* Beyond Games
+# Beyond Games
 
 ---
 
-# Random Life Events
+# Joe
 
 <p class = "center middle">
 ![:scale 40%](images/joe-wergin-hof.jpg)
@@ -356,7 +357,7 @@ At each step:
 ---
 class: inverse, center, middle
 
-* Some Big Questions
+# Some Big Questions
 
 ---
 
@@ -379,25 +380,31 @@ Does it matter how God relates to (apparent) randomness?
 
 --
 
-1. If things are not random, why do they behave that way?
+**1.** If things are not random, why do they behave that way?
 
-    * Mediation of Christ: to make the world more liveable for humans?
-    * Why doesn't God make different choices?
+* To make the world more liveable for humans? (cf. D Laverell)
+* Why doesn't God make different choices?
     
 --
 
-2. Life events
 
-    * Lots
-    * Coincidenes
-    * Insurance
+**2.** How do we interpret life events?
+
+* Lots, Coincidenes, Insurance
 
 --
 
-3. How much are we shaped by "random" things that happen in our lives?
+**3.** How much are we shaped by "random" things that happen in our lives?
 
-    * The three movies answer this question in different ways.
+--
 
+* The three movies answer this question in different ways.
+    
+--
+
+<p class = "center">
+![:scale 30%](images/Lucy-and-Maria-Aylmer.jpg)
+</p>
 
 ---
 
@@ -407,31 +414,31 @@ Does it matter how God relates to (apparent) randomness?
 
 # Parting (random) thoughts
 
-1. Most scientists using randomness in their models are doing because 
+**1.** Most scientists using randomness in their models are doing because 
 **random models work**, not because they have a particular 
 philosophic/theological position.
 
 --
 
-2. **Randomness** can be used **creatively** to acheive desired ends.
+**2.** **Randomness** can be used **creatively** to acheive desired ends.
 
-    * Game design [Sorry, cribbage, etc.]
-    * Quantum computation
-    * Genetics?
-
---
-
-3. Allowing **a role for randomness does not preclude a role for God**.
-
-    * Personifying change doesn't bring clarity to the discussion.
-    * Not God or chance, rather God via chance?
+* Game design [Sorry, cribbage, etc.]
+* Probabilistic Algorithms, Quantum Computation
+* Genetics?
 
 --
 
-4. I prefer **symmetric interpretations** of randomness.
+**3.** Allowing **a role for randomness does not preclude a role for God**.
 
-    * "God when it's good, random when it's bad" seems contrived.
-    * It is easy to selectively choose our interpretation based on the situation.
+* Personifying chance doesn't bring clarity to the discussion.
+* It's not "God xor chance", rather "God via chance?"
+
+--
+
+**4.** I prefer **symmetric interpretations** of randomness.
+
+* "God when it's good, random when it's bad" seems contrived.
+* It is easy to selectively choose our interpretation based on the situation.
 
 ---
 
