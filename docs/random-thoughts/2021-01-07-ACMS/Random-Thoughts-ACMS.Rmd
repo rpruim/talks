@@ -274,13 +274,13 @@ class: inverse, center, middle
 
 #### Lola Rennt (Run Lola Run, 1998)
 
-![:scale 65%](images/run-lola-run.jpg)
+![:scale 55%](images/run-lola-run.jpg)
 
 * [Trailer](https://www.youtube.com/embed/uz2-D4lY2qg?start=20)
 
 #### Sliding Doors (1998)
 
-![:scale 65%](images/sliding-doors-1998.jpg)
+![:scale 55%](images/sliding-doors-1998.jpg)
 
 * [YouTube](https://youtu.be/B6wJq9AZVfY) (two trains)
 ]
@@ -315,10 +315,10 @@ gf_point(y ~ x, data = D2 %>% head(35000), size = 0.0005) %>%
 ```
 
 .pull-left[
-![:scale 97%](images/Sierpinski1A.png)
+![:scale 87%](images/Sierpinski1A.png)
 ]
 .pull-right[
-![:scale 97%](images/Sierpinski1B.png)
+![:scale 87%](images/Sierpinski1B.png)
 ]
 
 <!-- ![:scale 97%](images/Sierpinski1A.png) -->
@@ -341,10 +341,10 @@ gf_point(y ~ x, data = D2, size = 0.01, color = "gray50") %>%
 ```
 
 .pull-left[
-![:scale 97%](images/Sierpinski2A.png)
+![:scale 87%](images/Sierpinski2A.png)
 ]
 .pull-right[
-![:scale 97%](images/Sierpinski2B.png)
+![:scale 87%](images/Sierpinski2B.png)
 ]
 
 <!-- ![:scale 97%](images/Sierpinski2.png) -->
