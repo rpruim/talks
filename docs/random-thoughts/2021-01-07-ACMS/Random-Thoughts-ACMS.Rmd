@@ -363,5 +363,14 @@ philosophic/theological position.
 
 # Thanks
 
-Slides available at <some.url>
+Slides available at <https://rpruim.github.io/talks/>
+
+*Randomness and God's Governance*
+
+* [Biologos Blog](https://biologos.org/articles/randomness-and-gods-governance)
+
+* [At Ministry Theorem](http://ministrytheorem.calvinseminary.edu/wp-content/uploads/2016/06/9_pruim.pdf)
+
+
+
 
