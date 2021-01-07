@@ -444,9 +444,11 @@ philosophic/theological position.
 
 # Thanks
 
+.pull-left[
+
 Slides available at <https://rpruim.github.io/talks/>
 
-*Randomness and God's Governance*
+*Randomness and God's Governance* 
 
 * [Biologos Blog](https://biologos.org/articles/randomness-and-gods-governance)
 
@@ -454,6 +456,18 @@ Slides available at <https://rpruim.github.io/talks/>
 
     * Includes a reading list.
 
+[*Randomness and God's Nature*](https://www.gvsu.edu/cms4/asset/843249C9-B1E5-BD47-A25EDBC68363B726/bradleychance.pdf) by Jim Bradley
+]
 
+.pull-right[
+<p class = "center">
+![:scale 45%](images/Delight-in-Creation-book-cover.jpg)
+
+&nbsp;
+&nbsp;
+
+![:scale 45%](images/Gods-Providence-and-Randomness-book-cover.jpg)
+</p>
+]
 
 

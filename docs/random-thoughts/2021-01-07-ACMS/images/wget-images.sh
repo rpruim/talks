@@ -19,3 +19,13 @@ mv Vintage-Original-Game-Candy-Land*jpg candyland.jpg
 
 wget http://www.cribbage.org/images/hall2.jpg
 mv hall2.jpg joe-wergin-hof.jpg
+
+wget https://i2-prod.mirror.co.uk/incoming/article5257116.ece/ALTERNATES/s1227b/PAY-Lucy-and-Maria-Aylmer-non-identical-twins.jpg
+mv PAY-Lucy-and*jpg Lucy-and-Maria-Aylmer.jpg
+
+wget https://www.templetonpress.org/sites/default/files/2018-11/GOD%27S%20PROVIDENCE.jpg
+mv GOD*jpg Gods-Providence-and-Randomness-book-cover.jpg
+
+wget https://images-na.ssl-images-amazon.com/images/I/51XKvv+LzVL._SX350_BO1,204,203,200_.jpg
+mv 51XK*jpg Delight-in-Creation-book-cover.jpg
+
