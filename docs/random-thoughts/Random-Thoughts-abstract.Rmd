@@ -1,0 +1,34 @@
+---
+title: "Random Thoughts"
+author: "Randall Pruim"
+date: "1/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Abstract
+
+Randomness is difficult to think about.  And not just for students struggling to learn
+probability rules or to correctly interpret p-values and confidence intervals,
+or for the general public trying to interpret the results of COVID tests, models
+of transmission, or measures of vaccine efficacy and effectiveness.
+Randomness has also presented challenges to philosophers and theologians.
+Just what is randomness? And what does God have to do with it?
+In this talk, I'll present some musings about randomness and God's governance.
+
+
+Whether and how God uses randomness is difficult to tell, but randomness may not
+be as incompatible with a creating and sustaining God as some Christians fear.
+
+* Games
+
+* Games -> Science
+
+* What is randomness?
+
+
+

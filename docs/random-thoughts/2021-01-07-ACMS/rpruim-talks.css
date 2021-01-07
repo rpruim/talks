@@ -1,0 +1,24 @@
+.bigger {
+  font-size: 120%;
+  }
+  
+
+.pull-left30 {
+  float: left;
+  width: 30%;
+}
+
+.pull-left65 {
+  float: left;
+  width: 65%;
+}
+
+.pull-right30 {
+  float: right;
+  width: 30%;
+}
+
+.pull-right65 {
+  float: right;
+  width: 65%;
+}
