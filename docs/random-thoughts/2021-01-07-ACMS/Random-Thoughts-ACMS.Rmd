@@ -2,7 +2,7 @@
 title: "Random Thoughts"
 author: "Randall Pruim"
 institute: "Calvin University"
-date: "2021/01/21 (updated: `r Sys.Date()`)"
+date: "2021-01-07 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -374,14 +374,14 @@ Does it matter how God relates to (apparent) randomness?
     * Mediation of Christ: to make the world more liveable for humans?
     * Why doesn't God make different choices?
     
-1. Life events
+--
+
+2. Life events
 
     * Lots
     * Coincidenes
     * Insurance
     
-
-
 ---
 
 # A Thought Experiment
@@ -396,17 +396,25 @@ philosophic/theological position.
 
 --
 
-2. **Randomness** can be used **creatively**.
+2. **Randomness** can be used **creatively** to acheive desired ends.
 
     * Game design [Sorry, cribbage, etc.]
-    * Genetics
     * Quantum computation
+    * Genetics?
+
 --
 
-3. I prefer **symmetric interpretations** of randomness.
+3. Allowing **a role for randomness does not preclude a role for God**.
+
+    * Personifying change doesn't bring clarity to the discussion.
+    * Not God or chance, rather God via chance?
+
+--
+
+4. I prefer **symmetric interpretations** of randomness.
 
     * "God when it's good, random when it's bad" seems contrived.
-
+    * It is easy to selectively choose our interpretation based on the situation.
 
 ---
 
