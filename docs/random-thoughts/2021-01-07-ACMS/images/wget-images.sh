@@ -17,3 +17,5 @@ mv mitter.jpg hugo-board.jpg
 wget https://cdn0.rubylane.com/_pod/item/166090/RF1215-4/Vintage-Original-Game-Candy-Land-Board-full-0-2048-12.jpg
 mv Vintage-Original-Game-Candy-Land*jpg candyland.jpg
 
+wget http://www.cribbage.org/images/hall2.jpg
+mv hall2.jpg joe-wergin-hof.jpg
