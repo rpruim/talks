@@ -41,6 +41,10 @@ Image credit: [credit](https://danielmiessler.com/images/ordered_chaos.png)
 
 --
 
+0. There is no dinner after this talk. :-(
+
+--
+
 1. This is mostly a personal reflection.
 
 --
@@ -56,14 +60,9 @@ Image credit: [credit](https://danielmiessler.com/images/ordered_chaos.png)
 
 3. Frustrating lack of methodology (for the questions I'm approaching).
 
-  a. no theorems
+  a. no theorems, no data analysis, no algorithms
   
-  b. no data analysis
-  
-  c. no algorithms
-  
-  d. not clear other disciplines have what it takes either
-  
+  b. not clear other disciplines have what it takes either
  
 ---
 
