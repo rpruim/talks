@@ -2,6 +2,8 @@
 
 Here are slides and other resources from some of my presentations.
 
+  * [Random Thoughts](https://rpruim.github.io/talks/random-thoughts/2021-01-07-ACMS/Random-Thoughts-ACMS.html#1) (ACMS 2021)
+  
   * [Mixing D3 and R](D3/BDI2019/BDI2019-slides.html) (Big Data Ignite 2019)
 
   * [Domino Arithmetic](domino-arithmetic/domino-arithmetic-slides.html) (GVSU Math Path 2019)
