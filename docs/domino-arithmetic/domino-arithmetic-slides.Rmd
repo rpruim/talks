@@ -1335,6 +1335,14 @@ https://www2.math.upenn.edu/~wilf/gfologyLinked2.pdf
 </div>
 
 
+## You can find these slides at...
+
+```{r echo = FALSE, fig.align = "center"}
+qrcode::qrcode_gen("https://rpruim.github.io/talks/domino-arithmetic/domino-arithmetic-slides.html")
+```
+
+https://rpruim.github.io/talks/domino-arithmetic/domino-arithmetic-slides.html
+
 <!-- ## Some Images -->
 
 <!-- <div class = "domalgebra"> -->
