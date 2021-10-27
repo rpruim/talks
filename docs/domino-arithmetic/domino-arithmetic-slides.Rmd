@@ -403,7 +403,7 @@ If n is odd, then u(n) = 0.
 
 * Area of 3 $\times$ n rectangle is 3n, which is odd when n is **odd**.
 * Area covered by dominos is 2d (d = number of dominos), which is **even**.
-* So it isn't possible to tile a 3 $\times$ n rectangle with dominos.
+* So it isn't possible to tile a 3 $\times$ n rectangle with dominos when n is odd.
 
 ## What is u(4)?
 
@@ -546,7 +546,7 @@ The primary operations are addition and multiplication.
 <!-- ## What is Domino Arithmetic? -->
 
 
-<!-- > Arithmetic (from the Greek ἀριθμός arithmos, "number" and τική [τέχνη], tiké -->
+<!-- > **Domino** arithmetic (from the Greek ἀριθμός arithmos, "number" and τική [τέχνη], tiké -->
 <!-- [téchne], "art") is a branch of mathematics that consists of the study of -->
 <!-- ~~*numbers*~~ dominoes, especially the properties of the ~~*traditional*~~  -->
 <!-- **operations** on them --  -->
@@ -554,7 +554,7 @@ The primary operations are addition and multiplication.
 
 ## What is Domino Arithmetic?
 
-> Arithmetic is a branch of mathematics that consists of the study of
+> **Domino** arithmetic is a branch of mathematics that consists of the study of
 ~~*numbers*~~ **domino tilings**, 
 especially the properties of the ~~*traditional*~~ **operations** on them -- 
 **addition**, **subtraction**, **multiplication** and **division**.
@@ -667,6 +667,7 @@ Note:
 
 ```{d3 T4, ref.label = "dominos3by-d3", data = TT[[4]] %>% tile_data(), options = list(size = 30, space = 4 * 30 + 20, plus = "+"), height = 3 * 30, width = 5 * 4 * 30 + 4 * 20, echo = FALSE, container = "svg"}
 ```
+
 
 T(n) = <img src="images/dom1v.svg"> T(n-1)
      + <img src="images/dom2h.svg"> T(n-2) 
@@ -932,7 +933,7 @@ T &= \frac{1}{1 - z - z^2}\\
 \end{align}
 $$
 
-(Unfortunately, this is not a geometric series, so we have some work to do.)
+<!-- (Unfortunately, this is not a geometric series, so we have some work to do.) -->
 
 ## Geometric Series to the Rescue
 
@@ -961,7 +962,41 @@ We just need to determine $\alpha$, $\beta$, $A$, and $B$.
 $$
 \begin{align}
 T &= \frac{1}{1 - z - z^2}
-  = \frac{A}{1 - \alpha z} + \frac{B}{1-\beta z}\\[5mm]
+  = \frac{A}{1 - \alpha z} + \frac{B}{1-\beta z}
+  = \frac{A(1-\beta z) + B(1-\alpha z)}{(1-\alpha z)(1 - \beta z)}
+  \\[5mm]
+\end{align}
+$$
+
+## Finding $\alpha$, $\beta$, $A$, and $B$
+
+$$
+\begin{align}
+T &= \frac{1}{1 - z - z^2}
+  = \frac{A}{1 - \alpha z} + \frac{B}{1-\beta z}
+  = \frac{A(1-\beta z) + B(1-\alpha z)}{(1-\alpha z)(1 - \beta z)}
+  \\[5mm]
+\end{align}
+$$
+
+Denominator:
+
+$$
+\begin{align}
+1 - z - z^2 & = 1 - (\alpha + \beta)z + \alpha\beta z^2 \\
+1 &= \alpha + \beta\\
+-1 & = \alpha \beta
+\end{align}
+$$
+
+## Finding $\alpha$, $\beta$, $A$, and $B$
+
+$$
+\begin{align}
+T &= \frac{1}{1 - z - z^2}
+  = \frac{A}{1 - \alpha z} + \frac{B}{1-\beta z}
+  = \frac{A(1-\beta z) + B(1-\alpha z)}{(1-\alpha z)(1 - \beta z)}
+  \\[5mm]
 \end{align}
 $$
 
@@ -985,12 +1020,20 @@ $$
 $$
 
 
-## Finding $\alpha$, $\beta$
+## Four equations, four unknowns
 
 $$
 \begin{align}
 \alpha + \beta & = 1 &  \alpha \beta &= -1 \\
 A + B &= 1 & A\beta + B \alpha &= 0
+\end{align}
+$$
+
+## Finding $\alpha$, $\beta$
+
+$$
+\begin{align}
+\alpha + \beta & = 1 &  \alpha \beta &= -1 \\
 \end{align}
 $$
 From this we get
@@ -1018,14 +1061,17 @@ $$
 $$
 \begin{align}
 \alpha + \beta & = 1 &  \alpha \beta &= -1 \\
-A + B &= 1 & A\beta + B \alpha &= 0 \\
+A + B &= 1 & A\beta + B \alpha &= 0 \\[12mm]
 \end{align}
 $$
+
+&nbsp;
+
 $$
 \begin{align}
 0 &= A \beta + (1-A) \alpha  \\
 0 &= A \beta + \alpha - A \alpha \\
-0 &= A (\beta -\alpha) + \alpha \\
+0 &= A (\beta -\alpha) + \alpha \\[5mm]
 A &= \frac{\alpha}{\alpha - \beta} =  \frac{\alpha}{\sqrt{5}}\\
 B &= 1 - A = \frac{\alpha - \beta}{\alpha - \beta} - \frac{\alpha}{\alpha - \beta} =  \frac{-\beta}{\sqrt{5}}
 \end{align}
@@ -1037,7 +1083,16 @@ $$
 \begin{align}
 t_n &= A \alpha^n + B \beta^n = \frac{\alpha^{n+1}}{\sqrt{5}} - \frac{\beta^{n+1}}{\sqrt{5}} \\[5mm]
  t_n   &\approx A \alpha^n = \frac{\alpha^{n+1}}{\sqrt{5}}
+ \\[12mm]
 \end{align}
+$$
+where
+
+$$
+\begin{align*}
+\alpha &= \frac{1 + \sqrt{5}}{2} \approx 1.618 & 
+\beta  &= \frac{1 - \sqrt{5}}{2} \approx -0.618\\
+\end{align*}
 $$
 
 
@@ -1254,12 +1309,30 @@ U <- function(n) {
 U(0:10) %>% knitr::kable()
 ```
 
-## Want to Know More?
+<style>
+.forceBreak { -webkit-column-break-after: always; break-after: column; }
+</style>
+
+## Want to Know More? 
 
 
-```{r echo = FALSE, fig.align = "center", out.height = "50%"}
+<div style="float: left; width: 50%;">
+```{r echo = FALSE, fig.align = "center", fig.height = 10}
 knitr::include_graphics("images/generatingfunctionology.jpg")
 ```
+</div>
+
+<div style="float: right; width: 50%;">
+```{r echo = FALSE, fig.align = "center", fig.height = 3}
+library(qrcode)
+qrcode::qrcode_gen("https://www2.math.upenn.edu/~wilf/gfologyLinked2.pdf")
+```
+</div>
+
+
+<div style="text-align: center">
+https://www2.math.upenn.edu/~wilf/gfologyLinked2.pdf 
+</div>
 
 
 <!-- ## Some Images -->
