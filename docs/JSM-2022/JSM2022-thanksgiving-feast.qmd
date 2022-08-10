@@ -517,7 +517,7 @@ of Zetterberg scoring $44$ or more goals in $89$ games?
 * What about multiple comparisons/players?
 * Isn't 206/506 also just an estimate?
 
-## Computation in First Course {.visibility = "hidden"}
+## Computation in First Course {visibility = "hidden"}
 
 * Can be a harder sell in probability than in statistics
 
@@ -535,7 +535,7 @@ of Zetterberg scoring $44$ or more goals in $89$ games?
 <!-- Kaitlyn Eekhoff, 2020-07-17, research analyist in a law firm litigating opioid cases -->
 
 
-## Using Computation Well {.visibility = "hidden"}
+## Using Computation Well {visibility = "hidden"}
 
 * Teach R as a language, but not a "programming" language
 
