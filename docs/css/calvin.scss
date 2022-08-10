@@ -1,0 +1,40 @@
+
+/* fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-serif: 'Gentium Book Plus',  "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif !default;
+
+$font-family-sans-serif: 'Kantumruy Pro', sans-serif !default;
+
+// colors
+$calvin-maroon: #8C2131;
+$calvin-gold: #F3CD00;
+$calvin-renew-blue: #71B1C8;
+$calvin-true-green: #A2D6B3;
+
+$body-bg: white !default;
+$body-color: #333333 !default;
+$link-color: #51483d !default;
+$selection-bg: #26351c !default;
+
+// headings
+$presentation-heading-font: $font-family-serif !default;
+$presentation-heading-color: $calvin-maroon !default;
+
+/*-- scss:rules --*/
+
+.reveal h4 {
+  color: #666666;
+}
+
+.reveal .slide {
+  font-family: $font-family-serif;
+}
+
+.reveal a {
+  line-height: 1.3em;
+}
