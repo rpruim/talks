@@ -1,0 +1,710 @@
+---
+title: "3-Course Dinner<br>or<br>Thanksgiving Feast?"
+subtitle: "Putting the pieces together<br>in a modern Math/Stat sequence" 
+author: Randall Pruim
+institution: Calvin University
+date: cutt.ly/jsm2022-pruim-slides
+format: 
+  revealjs: 
+    theme: [default, css/calvin.scss]
+    logo: css/wayfinder.png
+    scrollable: true
+  
+---
+
+```{r setup, include = FALSE}
+set.seed(314159)
+knitr::opts_chunk$set(
+  echo = TRUE,
+  cache = TRUE)
+library(mosaic)
+library(ggformula)
+library(fastR2)
+library(maxLik)
+
+theme_set(theme_bw())
+
+update_geom_defaults(geom = 'path', list(size = 1.2))
+
+```
+
+
+### Slides and Questions
+
+<br>
+<center>
+Slides at 
+
+**<https://cutt.ly/jsm2022-pruim-slides>**
+
+<br>
+
+Comments/Questions at 
+
+**<https://cutt.ly/jsm2022-pruim-questions>**
+
+</center>
+
+
+## Some Background
+
+#### Calvin University 
+
+* Liberal arts university with ~3000 undergraduate students
+* (Relatively) large core curriculum, small majors 
+* Statistics major $\approx 24 s + 16 m + 12 c$ hours
+
+![](images/Calvin-overhead-chapel.jpg){fig-align="center" .r-stretch}
+
+
+
+
+## Some Background
+
+#### Prob/Stats sequence at Calvin
+
+* Taken by students from many programs
+
+* Some of these students have not had statistics before
+
+* The first time I taught our prob/stat sequence (in 2005)
+
+    * Just under half of students took the second course
+    
+    * Most were more interested in statistics than in probability
+    
+    * But the course I inherited was basically all probability in the first semester
+    
+::: {.notes}
+
+* GAISE was brand new and change was afoot in Intro Stats
+(Cobb's *Ptolameic Curriculum*, etc.) 
+
+:::
+
+
+## About the Title
+
+### 3-course dinner 
+
+* Mathematics (Probability); Statistics (Data); Computation
+
+![](images/3-course-dinner-plate.jpeg){fig-align="center" .r-stretch}
+
+## About the Title
+
+### Thanksgiving Dinner 
+
+![](images/thanksgiving-plate.jpeg){fig-align="center" .r-stretch}
+
+
+## Adjusting from a Traditional Sequence to an Integrated Approach
+
+* Some examples from my courses (over 15+ years now)
+
+* Some thoughts on the value of making the shift
+
+* Some tips/recommendations for making the shift
+
+## 1st Adjustment: Statistics Early
+
+![](images/pour-milk-tea.jpg){.r-stretch fig-align="center"}
+
+```{r include = FALSE, out.width = "40%", fig.align="center"}
+knitr::include_graphics("images/pour-milk-tea.jpg")
+```
+
+
+* Lead with Lady Tasting Tea (or similar) on **Day 1**.
+    * Any situation with $H_0: \pi = 0.5$ will do. 
+    
+## 1st Adjustment: Statistics Early
+
+![](images/pour-milk-tea.jpg){.r-stretch fig-align="center"}
+
+
+* Jargon-free discussion: How should we test the Lady's claim?
+
+## 1st Adjustment: Statistics Early
+
+![](images/pour-milk-tea.jpg){.r-stretch fig-align="center"}
+
+
+* Jargon-free discussion: How should we test the Lady's claim?
+
+    * Binomial distribution $\to$ coin tosses
+    * Null hypothesis $\to$ random guesser
+    * Test statistic $\to$ score (how many correct "guesses")
+    * Rejection region $\to$ minimum score to "pass the test"
+    * P-value $\to$ how likely to obtain score just by guessing
+
+::: {.notes}
+
+And I don't let students using any of the jargon either.
+
+:::
+
+## 1st Adjustment: Statistics Early
+
+![](images/pour-milk-tea.jpg){.r-stretch fig-align="center"}
+
+
+* Jargon-free discussion: How should we test the Lady's claim?
+    
+* Bring a coin to simulate the null distribution (tedious!)
+
+    * Have each student write down a sequences of H/T and compare to 
+    the coin toss outcomes
+
+## 2nd Adjustment: Computation Early
+
+![](images/pour-milk-tea.jpg){.r-stretch fig-align="center"}
+
+Flipping coins is tedious.  Let's automate.
+
+<br>
+
+```{r fig.height = 2.5, fig.width = 8, fig.align = "center"}
+rflip()           # chatty version of rbinom() from mosaic package
+```
+
+. . .
+
+```{r fig.height = 2.5, fig.width = 8, fig.align = "center"}
+rflip(20)
+```
+
+## 2nd Adjustment: Computation Early
+
+Now let's do that a lot of times...
+
+```{r fig.height = 2.5, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 1
+Sims <- do(5000) * rflip(20)    # do() from mosaic package 
+Sims |> gf_histogram(~ heads, binwidth = 1)
+```
+
+. . .
+
+How unusual would it be for a random guesser to correctly identify 
+18 cups out of 20?
+
+
+## Vocab Note {visibility="hidden"}
+
+![](images/pour-milk-tea.jpg){.r-stretch fig-align="center"}
+
+We can do this example without using any statistical jargon.
+
+* Binomial distribution $\to$ coin tosses
+* Null hypothesis $\to$ random guesser
+* Test statistic $\to$ score (how many correct "guesses")
+* Rejection region $\to$ minimum score to "pass the test"
+* P-value $\to$ how likely to obtain a certain score just by guessing
+
+::: {.notes}
+
+And I don't let students using any of the jargon either.
+
+:::
+
+## The Role(s) of Computation 
+
+
+* introduce concepts/ideas
+* emphasize big ideas
+* confirm (or alter) intuition
+* support applications
+
+
+***Note**: In my classes I end up having to clarify when I'm not
+looking for a purely computational (simulation) solution to a probability
+problem. For many of my students, simulations become their go-to method
+for answering probability questions.*
+
+## Adjustment #3: Role of Probability
+
+<span style="font-size:42px; text-align:center; display:block">
+~~Probability then Statistics~~ $\rightarrow$ **Probability FOR Statistics**
+</span>
+
+* Include basics of inference in first semester (tests, intervals, power, simulation-based methods).
+
+* Use statistical goals to motivate learning probability.
+
+
+Lady Tasting Tea 
+
+&nbsp;&nbsp;&nbsp;$\rightarrow$ Binomial distributions 
+    
+&nbsp;&nbsp;&nbsp;$\rightarrow$ Binomial Test (and Normal approximation) 
+    
+&nbsp;&nbsp;&nbsp;$\rightarrow$ Power
+
+
+## ~~Probability For Statistics~~
+
+<span class="jsm">Dennis Sun</span> (JSM 2020) has an even better name for this:
+
+* [*Dual Immersion in Probability and Statistics*](https://ww2.amstat.org/meetings/jsm/2020/onlineprogram/AbstractDetails.cfm?abstractid=308155) 
+
+. . .
+
+Or perhaps even better:
+
+* ***Triple Immersion** in Probability, Statistics, and Computation*
+
+
+## Continuing our Example: Power
+
+Suppose the Lady can correctly distinguish the mixing order 80% of the time,
+
+* How likely is she to pass our test (get $\ge$ 18 of 20 correct)?
+
+. . .
+
+```{r fig.height = 2.25, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 1
+Sims80 <- do(5000) * rflip(20, 0.8)   #  Correct 80% of the time 
+gf_freqpoly(~ heads, binwidth = 1, data = Sims, color = ~ "50%") |> 
+  gf_freqpoly(~ heads, binwidth = 1, data = Sims80, color = ~ "80%") |>
+  gf_vline(xintercept = ~ 18, color = "gray50", size = 2) |>
+  gf_labs(color = "p(correct)")
+```
+
+. . .
+
+Can come back later and work out power using binomial (or normal) distributions
+if we like.
+
+## Power: Generalizing
+
+Fill in the blanks:
+
+* If the Lady can correctly distinguish the mixing order ____ % of the time,
+how likely is she to pass our test?
+
+    (pass = get $\ge$ ____  of ____ correct)
+
+. . .
+
+<br>
+
+Easy enough to modify our code above for any particular case,  
+but there is a better way...
+
+## Power via Functions
+
+```{r fig.height = 4.0, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 4-5
+power <- function() {
+
+
+  Sims   <- do(5000) * rflip(20, 0.5)   
+  Sims80 <- do(5000) * rflip(20, 0.8)   
+
+  
+  
+  
+  
+  
+} 
+```
+
+* Use existing code as template.
+
+## Power via Functions
+
+```{r fig.height = 4.0, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 4-5
+power <- function() {
+  
+
+  Null   <- do(reps) * rflip(n, null)   
+  Alt    <- do(reps) * rflip(n, alt)   
+  
+
+  
+  
+  
+  
+}
+```
+
+* Use existing code as template.
+* Identify which values could be changed.
+
+## Power via Functions
+
+```{r fig.height = 4.0, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 1-3,12
+power <- function(
+  null = 0.5, alt = 0.8, n = 20, reps = 5000) 
+{
+  Null  <- do(reps) * rflip(n, null)   
+  Alt   <- do(reps) * rflip(n, alt)   
+  
+
+  
+  
+  
+  
+}
+```
+
+
+* Use existing code as template.
+* Identify which values could be changed and make them function arguments.
+
+## Power via Functions
+
+```{r fig.height = 4.0, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 7-11
+power <- function(
+  null = 0.5, alt = 0.8, n = 20, threshold = 18, reps = 5000) 
+{
+  Null  <- do(reps) * rflip(n, null)   
+  Alt   <- do(reps) * rflip(n, alt)   
+  
+  labs <- paste(100 * c(null, alt), "%")
+  gf_freqpoly(~ heads, binwidth = 1, data = Null, color = ~ labs[1]) |>
+    gf_freqpoly(~ heads, binwidth = 1, data = Alt, color = ~ labs[2])|>
+    gf_vline( xintercept = ~ threshold, color = "gray50", size = 2) |>
+    gf_labs(color = "p(correct)")
+}
+```
+
+
+```{r fig.height = 2.5, fig.width = 8, fig.align = "center"}
+power(null = 0.5, alt = 0.8, n = 20, threshold = 18) 
+```
+
+## Power via Functions
+
+```{r fig.height = 3.0, fig.width = 8, fig.align = "center"}
+#| code-line-numbers: 7-9
+power <- function(
+  null = 0.5, alt = 0.8, n = 20, threshold = 18, reps = 5000) 
+{
+  Null <- do(reps) * rflip(n, null)   
+  Alt  <- do(reps) * rflip(n, alt)   
+  
+  typeI <- prop( ~ (heads >= threshold), data = Null)
+  power <- prop( ~ (heads >= threshold), data = Alt)
+  c(typeI, power) |> setNames(c('type I', 'power'))
+}
+
+power(null = 0.5, alt = 0.8, n = 20, threshold = 18) 
+```
+
+
+## Power: Experimenting
+
+<!-- * Now we are set up to experiment with different scenarios. -->
+
+```{r}
+power(null = 0.5, alt = 0.9, n = 15, threshold = 13) 
+power(null = 0.5, alt = 0.9, n = 20, threshold = 18) 
+power(null = 0.5, alt = 0.9, n = 20, threshold = 18) 
+```
+
+. . .
+
+Leads to more questions:
+
+* How precise are these answers?  (0? 0.0000 vs 0.0004?)
+* How many replications should we use?
+* Can we avoid using simulations? Are there advantages?
+
+## Power via Functions
+
+The ability to turn one-offs into reusable functions is a key skill
+for students to develop.
+
+* Helps them understand how R works
+    
+* Also helps them think through 2 important questions
+    
+    * What do I want the computer to do for me?
+    * What does it need to know to do that?
+
+* More reproducible; faster exploration
+    
+
+## Computation in Prob/Stats sequence 
+
+These days the use of computation in a statistics class is not so controversial.  
+
+* Allows us to use **larger, more interesting data** sets
+
+* Allows us to **focus attention** on the right parts of the task
+
+* Allows us to teach **reproducible** analysis methods 
+(e.g., RMarkdown/Quarto, scripting, functions, packages)
+
+. . .
+
+Computation (and statistics) can also support learning **probability**.
+
+## Poisson and Exponential
+
+We can use the connection between the two distributions 
+
+. . .
+
+to help students shake a common misunderstanding of the Poisson rate parameter $\lambda$.
+
+. . . 
+
+::::{.columns{
+
+:::{.column width="15%"}
+
+![](images/metronome.jpeg){width="130px"}  
+:::
+
+:::{.column width="5%"}
+<br>
+<br>
+vs.
+:::
+
+:::{.column width="70%"}
+
+```{r, echo = FALSE, fig.align = "center", warning = FALSE, fig.height = 3.3, fig.width = 7}
+PoisSim <-
+  expand.grid(run = 1:10, i = 1:40) |>
+  group_by(run) |>
+  mutate(interval = rexp(40), time = cumsum(interval))
+stop <- min(max(time ~ run, data = PoisSim))  # shortest run?
+stop <- 5 * trunc(stop / 5)                   # truncate to multiple of 5
+gf_point(run ~ time, data = PoisSim |> filter(time <= stop),
+         shape = 1, size = 0.7, col = "black") |>
+  gf_hline(yintercept = seq(1.5, 9.5, by = 1), color = "gray60") |>
+  gf_vline(xintercept = seq(0, stop, by = 5), color = "gray60") |>
+  gf_labs(x = "", y = "") |>
+  gf_theme(panel.grid.major = element_blank(),
+           panel.grid.minor = element_blank()) |>
+  gf_refine(
+    scale_y_continuous(breaks = 0:10))
+```
+:::
+
+::::
+
+## Poisson Exercise {.smaller}
+
+After a 2010 NHL play-off win in which Detroit Red Wings wingman 
+Henrik Zetterberg scored two goals in a 3-0 win over the Phoenix Coyotes,
+Detroit coach Mike Babcock said, 
+``He's been real good at playoff time each and every year. 
+**He seems to score at a higher rate.**"
+
+. . .
+
+Do the data support this claim?  In $506$ regular season games, 
+Zetterberg scored $206$ goals.  In $89$ postseason games, he scored $44$ 
+goals.  Goal scoring can be modeled as a Poisson random process.  Assuming 
+a goal-scoring rate of $\frac{206}{506}$ goals per game, what is the probability
+of Zetterberg scoring $44$ or more goals in $89$ games?
+
+. . .
+
+**How does this probability relate to Coach Babcock's claim?**
+
+. . .
+
+* What about multiple comparisons/players?
+* Isn't 206/506 also just an estimate?
+
+## Computation in First Course {.visibility = "hidden"}
+
+* Can be a harder sell in probability than in statistics
+
+. . .
+
+* But it's worth it
+
+
+> Hi Professor Pruim, 
+>
+> I took your Stats 343 class [first course in sequence] a few years ago and was first introduced to R at that time. I now use R every day for work and am so appreciative of the head start that I got in your class. 
+
+    (While working as a research analyst at a law firm litigating opioid cases.)
+    
+<!-- Kaitlyn Eekhoff, 2020-07-17, research analyist in a law firm litigating opioid cases -->
+
+
+## Using Computation Well {.visibility = "hidden"}
+
+* Teach R as a language, but not a "programming" language
+
+    * Use **simple declarative commands** (chain with `|>`).
+    * Focus on **communicating to R**. (What do you want R to do?
+    What must R know to do that?)
+    * **Simple functions**  $\to$ big power boost (& not too hard)
+
+* Adopt a set of **complementary tools** and a **consistent style**
+
+    * "Less volume, more creativity"
+    * Demand more of instructors than of students
+
+:::{.notes}
+Over time, I have demanded more and more of my code quality.
+:::
+
+## Stat 344: First Exam Problem {.smaller}
+
+**Problem 1** `<Details omitted>`
+
+* What is the maximum likelihood estimate for $\theta$?  
+* If we test the null hypothesis that $\theta = 2.5$, what is the p-value?  
+* What is the 95% likelihood confidence interval for $\theta$?  
+
+. . . 
+
+Could start several ways
+
+* Provide (log) likelihood function.
+* Provide data and model.
+* Could require numerical or analytical approaches.
+
+. . . 
+
+But some of my students were getting lost in the details (logs, derivatives, numerical optimizers, etc.), so ...
+
+
+
+
+
+## Stat 344: First Exam Problem {.smaller}
+
+Below is a graph of a log likelihood function $l(\theta)$ for a data set with
+$n = 23$.
+
+```{r fig.width = 7, fig.height = 3, out.width = "60%", echo = FALSE, fig.align = "center", results = "hide", warning = FALSE, message = FALSE}
+library(mosaic)
+k <- qchisq(.95, 1) / 2
+m <- -17.14
+controls <-
+  data.frame(
+    x = c(2, 4.5, 5),
+    y = c(-19, m, m - k))
+l <-
+  mosaic::fitSpline(y ~ x, data = controls, df = 2)
+gf_function(l, xlim = c(0.95, 5.68)) |>
+#  gf_point(y ~ x, data = controls) |>
+  gf_labs(y = "log likelihood", x = expression(theta)) |>
+  gf_lims(y = c(-21.9, -17.5)) |>
+  gf_refine(
+    scale_x_continuous(breaks = seq(0, 9, by = 1), minor_breaks = seq(0,9, by = 0.25)),
+    scale_y_continuous(breaks = seq(-24, -14, by = 1), minor_breaks = seq(-24, -14, by = 0.25))
+    )
+maxLik(l, start = c(theta = 4)) |> summary()
+```
+
+Using the information provided, answer the following questions as accurately as you can.
+
+<!-- Your work should make it clear how you are getting your answers and that you know how to get more precise values -->
+<!-- if you had access to the log-likelihood function and not just the graph of it. -->
+
+* What is the maximum likelihood estimate for $\theta$?  
+* If we test the null hypothesis that $\theta = 2.5$, what is the p-value?  
+* What is the 95% likelihood confidence interval for $\theta$?  
+
+## Visualizing Likelihood
+
+`maxLik` + `fastR2` make it easy to visualize likelihood (for one parameter).
+
+```{r income-1, include = FALSE}
+data <- read.csv('~/public_html/data/s344/s18income.csv')$income
+n <- length(data)
+theta.hat <- n / sum( log(data) ) ; theta.hat
+```
+
+
+```{r income-ci, results = 'hide', fig.width = 7, fig.height = 3, out.width = "90%", echo = FALSE, fig.align = "center", warning = FALSE, message = FALSE}
+loglikelihood <-
+  function(theta, x) {
+    sapply(theta, function(t) sum(log(t) - (t + 1) * log(x)))
+  }
+```
+
+```{r}
+ml <- maxLik2(loglikelihood, start = c(theta = 2), x = data)
+plot(ml, ci = c("lik", "wald"))
+```
+
+## More examples
+
+* Golfballs in the Yard $\to$ Test Stats/Null Distributions/GOF
+
+<!-- (Thanks: Alan Rossman) -->
+
+. . .
+
+* How many replicates do I need (to estimate a p-value)?
+
+. . .
+
+* Robustness: Is the coverage rate in my simulation consistent with 
+nominal value?
+
+. . .
+
+* If two iid samples of size $n$ are drawn from the same normal distribution, 
+what is the probability that the mean of the second sample will lie in 
+the 95% CI produced by the first sample?
+
+
+## Summary
+
+
+* Take advantage of the interplay between 
+**probability, statistics, and computation**. 
+
+. . . 
+
+* Take all those good ideas from Intro Stats and adapt them for Probability & Math Stats.
+
+    * (Hint: Sometimes adapt = use without modification.)
+
+. . .
+
+* Choose a toolkit with high bang/buck: 
+
+    * "Less volume, more creativity."
+    
+    <!-- * Adopt strong coding conventions and encourage (force?) your students  -->
+    <!-- to do so, too. -->
+
+. . .    
+
+* Keep looking for new things -- or write them!
+
+<!-- * Design activities creatively to **teach, reinforce, and assess**. -->
+
+<!--     * Be on a perpetual scavenger hunt for ideas, data sets, ... -->
+
+
+## Thanks!
+
+<br>
+<center>
+Slides at 
+
+**<https://cutt.ly/jsm2022-pruim-slides>**
+
+<br>
+
+Comments/Questions at 
+
+**<https://cutt.ly/jsm2022-pruim-questions>**
+
+</center>
+
+
+# Image credits {visibility="hidden"}
+
+* <https://highstylife.com/thanksgiving-plate-says/>
+* <https://cdn.ladycarnarvon.com/wp-content/uploads/2013/09/DSC2795.jpg>

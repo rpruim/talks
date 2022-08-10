@@ -1,0 +1,14 @@
+---
+title: "JSM 2021 Abstract"
+author: "Randall Pruim"
+date: "10/29/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 3 Course Dinner or Thanksgiving Feast? Putting the pieces together in a modern Math/Stat sequence
+
+The preparation of undergraduate statistics and data science majors comprises several important components, including probability, statistical theory, model design, data analysis, etc.  The traditional upper-level courses in statistics programs offer a multi-course dinner, typically beginning with probability, followed by statistical theory, and somewhere else developing the practical skills of data analysis. Another approach blurs the boundaries between these components allowing instructors and students to move back and forth among them, to make connections explicit, and to include samplings of more dishes (e.g., computation, Bayesian methods, etc.) than the traditional approach typically includes.  We will present some examples from a Thanksgiving feast approach that includes a hypothesis test on day one, integration of computation throughout, and motivation of probability methods with statistical goals.  We will also discuss benefits and challenges of taking this approach.
