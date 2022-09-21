@@ -568,6 +568,8 @@ If A and B are tilings, what are
 
 (Note: there is a little white lie on this slide that we will fix in a moment.)
 
+<!-- white lie: multisets of tilings, not tilings -->
+
 ## Domino Algebra
 
 We would like domino algebra to be
@@ -652,7 +654,7 @@ Examples:
 Note:
 
 * multiplication does not commute!
-* additional does commute if we are not interested in the order of our list.
+* addition does commute if we are not interested in the order of our list.
 
 ## Equations for T(n)
 
