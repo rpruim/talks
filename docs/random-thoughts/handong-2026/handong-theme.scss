@@ -1,0 +1,65 @@
+/*-- scss:defaults --*/
+
+// 1. Import Google Fonts
+// @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,400;0,700;1,400&family=Bitter:ital,wght@0,400;0,700;1,400&family=Fira+Code&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;700&family=Bitter:wght@400;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&family=Bitter:wght@400;700&family=Fira+Code&display=swap');
+// @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+
+// 2. Assign fonts to Quarto Revealjs variables
+// $font-family-sans-serif: "Bitter", serif !default;
+// $font-family-sans-serif: "Droid Serif", serif !default;
+// $presentation-heading-font: "Fira Sans Extra Condensed", sans-serif !default;
+// $presentation-heading-font: 'Yanone Kaffeesatz', sans-serif !default;
+// $presentation-heading-font-weight: 400 !default;
+// $presentation-heading-color: #000000 !default;
+// $code-block-font-family: "Fira Code", monospace !default;
+
+
+/*-- scss:defaults --*/
+
+$presentation-font-size-root: 50px
+$presentation-font-smaller 	0.8
+$presentation-line-height 	1.3
+$presentation-h1-font-size 	2.8em
+$presentation-h2-font-size 	1.8em
+$presentation-h3-font-size 	1.5em
+$presentation-h4-font-size 	1.2em
+
+// colors
+$body-bg: #ffffff !default;
+$body-color: #000000 !default;
+$link-color: #0056b3 !default;
+$selection-bg: #e2e2e2 !default;
+
+// headings
+$presentation-heading-color: #383d3d !default;
+
+
+
+/*-- scss:rules --*/
+
+// Adjust heading behavior
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  text-transform: none; // Keeps headings from being forced to ALL CAPS
+  line-height: 1.1;
+//   letter-spacing: -0.01em;
+  letter-spacing: 0.02em; // Yanone benefits from a tiny bit of breathing room
+}
+
+
+// Fine-tune list spacing for better legibility
+.reveal ul, .reveal ol {
+  margin-bottom: 0.5em;
+}
+
+// Ensure bold text stands out in Bitter
+.reveal strong {
+  font-weight: 700;
+  color: #111;
+}
+
+// Custom utility for strikethrough text
+.strike {
+  text-decoration: line-through;
+}
