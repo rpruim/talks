@@ -249,7 +249,9 @@ knitr::include_graphics("../images/sorry-game-over-shoulder.jpg")
 
 ## Sliding Doors Train Scene
 
-{{< video https://youtu.be/B6wJq9AZVfY?si=-hSe7CWPfE3uxR8c&t=3 width="800" height="600" >}}
+<!-- {{< video https://youtu.be/B6wJq9AZVfY?si=-hSe7CWPfE3uxR8c&t=3 width="1400" height="900" >}} -->
+
+{{< video https://youtu.be/B6wJq9AZVfY width="12800" height="900" >}}
 
 <!-- <iframe width="784" height="441" src="https://www.youtube.com/embed/B6wJq9AZVfY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
