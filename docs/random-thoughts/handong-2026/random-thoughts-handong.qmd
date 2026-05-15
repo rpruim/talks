@@ -61,6 +61,8 @@ library(patchwork)
   
     b. not clear other disciplines have what it takes either
 
+3.  It's Friday afternoon.
+
 <!-- 3.  This is mostly a personal reflection. -->
 
 ::: 
@@ -153,9 +155,7 @@ A completely random game is just a **slow way to flip a coin**
 
 * Not very interesting to play unless you just like to see how the randomness plays out (slowly).
 
-<p class = "center">
-![](../images/candyland.jpg){width=50%}
-</p>
+![&nbsp;](../images/candyland-board-and-box.webp)
 
 
 ## Sorry
@@ -177,7 +177,7 @@ knitr::include_graphics("../images/sorry-game-over-shoulder.jpg")
 ```
 
 
-## Midnightsparty (Hugo)
+## Midnight Party (Hugo)
 
 :::{.columns}
 :::{.column width=30%}
@@ -402,7 +402,7 @@ Does it matter how God relates to (apparent) randomness?
 
 ## Parting (random) thoughts
 
-**1.** Most scientists using randomness in their models are doing because 
+**1.** Most scientists using randomness in their models are doing so because 
 **random models work**, not because they have a particular 
 philosophic/theological position.
 
@@ -410,16 +410,20 @@ philosophic/theological position.
 
 **2.** **Randomness** can be used **creatively** to acheive desired ends.
 
+:::{.incremental}
 * Game design [Sorry, cribbage, etc.]
 * Probabilistic Algorithms, Quantum Computation
 * Genetics?
+:::
 
 . . .
 
 **3.** Allowing **a role for randomness does not preclude a role for God**.
 
+:::{.incremental}
 * Personifying chance doesn't bring clarity to the discussion.
 * It's not "God xor chance!", rather "God via chance?"
+:::
 
 . . .
 
@@ -428,31 +432,71 @@ philosophic/theological position.
 * "God when it's good, random when it's bad" seems contrived.
 * It is easy to selectively choose our interpretation based on the situation.
 
+## Randomness and Mystery
 
-## Thanks
+James Bradley: 
+
+> Since 
+**the existence of ontological randomness cannot be settled scientifically**, 
+such arguments are our only option... 
+[The origin of randomness in the physical world] 
+is a mystery which is probably impenetrable. 
+The presence of **mystery should not be surprising**, however; 
+if God is infinite, we would expect that much of his 
+nature and actions will remain mysterious to finite 
+creatures.
+
+## More Reading
 
 :::{.columns}
-::::{.column width=50%}
-Slides available at <https://rpruim.github.io/talks/>
-
-*Randomness and God's Governance* 
-
-* [Biologos Blog](https://biologos.org/articles/randomness-and-gods-governance)
-
-* [At Ministry Theorem](http://ministrytheorem.calvinseminary.edu/wp-content/uploads/2016/06/9_pruim.pdf)
-
-    * Includes a reading list.
-
+:::{.column width=50%}
 [*Randomness and God's Nature*](https://www.gvsu.edu/cms4/asset/843249C9-B1E5-BD47-A25EDBC68363B726/bradleychance.pdf) by Jim Bradley
+
+> This article argues that the scientific concept of randomness and
+the historic Christian understanding of God’s nature are compatible. It argues that
+the existence of randomness cannot be settled scientifically; nevertheless, it clarifies
+randomness as a mathematical concept, argues that it provides a plausible interpreta-
+tion of scientific data, and argues that its existence is consistent with God’s nature
+as it is commonly understood by systematic theologians.
 :::
 
 :::{.column width=50%}
 <p class = "center">
-![](../images/Delight-in-Creation-book-cover.jpg){height=400}
-&nbsp;
-&nbsp;
-![](../images/providence-and-randomness-in-nature-cover.jpg){height=400}
+![](../images/providence-and-randomness-in-nature-cover.jpg){height=650}
 </p>
+:::
+:::
+
+
+
+## Thanks
+
+:::{.columns}
+:::{.column width=45%}
+
+*Randomness and God's Governance* 
+
+* [Biologos Blog](https://biologos.org/articles/randomness-and-gods-governance) (3 parts)
+
+* [At Ministry Theorem](http://ministrytheorem.calvinseminary.edu/wp-content/uploads/2016/06/9_pruim.pdf)
+
+
+Slides available at 
+
+```{r}
+#| include: false
+url <- 
+    "https://rpruim.github.io/talks/random-thoughts/handong-2026/random-thoughts-handong.html"
+qrcode::qr_code(url) |> 
+    plot()
+```
+
+![](../images/qrcode.svg){width=75%}
+
+<!-- <https://rpruim.github.io/talks/> -->
+:::
+:::{.column width=55%}
+![](../images/Delight-in-Creation-book-cover.jpg){width=75%}
 :::
 :::
 
