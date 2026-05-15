@@ -1,0 +1,149 @@
+---
+title: "Let's Talk Ethics"
+abstract: |
+  This talk will reflect on some experiences in my classes and among colleagues related to including ethics in what we do and teach. What makes this challenging? What makes it rewarding? 
+  What resources exist to help us?
+
+  I'll focus on "data science ethics", since I've been teaching primarily data science and statistics courses in recent years, but I hope many of the ideas will be relevant in adjacent disciplines like mathematics, computer science, and engineering as well.
+
+format: 
+  revealjs:
+    scrollable: true
+    multiplex: true
+brand: ../_brand1.yml
+embed-resources: true
+  
+---
+
+## Let's Talk (Data Science) Ethics
+
+:::{.incremental}
+* I'll focus on Data Science
+
+    * *DS $\neq$ AI*
+
+* Your mileage may vary
+:::
+
+## Discipline Matters
+
+![](images/disciplines-spectrum-white.png)
+
+
+## Imposter Syndrome
+
+#### ~~Reasons~~ Excuses for not doing this (more)
+
+:::{.incremental}
+* I haven't read enough
+* This isn't what I was trained to do
+* I don't know how to find/create materials (not in text book)
+* The last thing I tried flopped
+* I don't have time to add this to my course
+* I don't know how to assess this
+* Someone else could do this better
+:::
+
+
+## Get by 
+### with a little help from your friends 
+
+:::{.columns}
+:::{.column width=48%}
+![Lori Carter](images/lori-carter.webp){height=400}
+:::
+:::{.column width=52%}
+![Catherine Crocket](images/catherine-crocket.jpg){height=400}
+:::
+:::
+
+. . . 
+
+#### And help them get by with a little help from you!
+
+## integratedethicslabs.org
+
+![](images/integrated-ethics-labs.png)
+
+## Values and Virtues
+
+<iframe src="https://integratedethicslabs.org/labs/core-values/core-values-worksheet" width=1500 height=800>
+</iframe>
+
+## Make Industry Connections
+
+![[Jim Vandermey](https://vervint.com/who-we-are/leadership/jim-vandermey/)](https://photos.smugmug.com/photos/i-msstCNQ/0/MtLjprx3p4NTCgFmbN549Rb7Lfj9L8HQt6DFDRKns/XL/i-msstCNQ-XL.jpg)
+
+## Adopt a Philosopher
+
+:::{.columns}
+:::{.column width=50%}
+![](images/Rebecca-Konyndyk-DeYoung-980x980.webp){height=400}
+:::
+:::{.column width=50%}
+![](images/glittering-vices.jpg){height=400}
+:::
+:::
+
+## Ethics $\neq$ Solving Dilemmas
+
+## Ethics Frameworks
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+![](images/Gemini_Generated_woman_at_laptop.jpg){width=17%} &nbsp; &nbsp; &nbsp;
+![](images/arrow-right-2817.svg){width=11%} &nbsp;
+![](images/question-949.svg){width=11%}
+
+. . .
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+![](images/thor.jpg){height=250}
+&nbsp;
+&nbsp;
+![](images/captain-america-vert.jpg){height=250}
+&nbsp;
+&nbsp;
+![](images/iron-man-vert.jpg){height=250}
+
+## The ethics of code quality
+
+* HDSR paper
+* Vic Norman
+
+## Be fair!
+
+:::{.columns}
+:::{.column width=32%}
+![](images/automating-inequality-cover.jpg){height=400}
+:::
+:::{.column width=32%}
+
+<br>
+<br>
+
+![](images/algorithms-of-opression-cover.jpg){height=400}
+:::
+:::{.column width=32%}
+![](images/weapons-of-math-destruction-cover.jpg){height=400}
+:::
+:::
+
+## Be fair -- But what is fair?
+
+If we google for "doctor", what fraction of the images should be female? 
+
+
+Loan Activity
+
+
+## Norms for Stats and DS?
+
+Dooywerd's aspects/norms
+
