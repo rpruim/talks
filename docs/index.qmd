@@ -7,10 +7,11 @@ theme: yeti
 
 Here are slides and other resources from some of my presentations.
 
-  * [Random Thoughts](https://rpruim.github.io/talks/random-thoughts/handong-2026/random-thoughts-handong.html)
+  * [Let's Talk Ethics](lets-talk-ethics/lets-talk-ethics-handong.html) (Handong U, 2026)
+  * [Random Thoughts](random-thoughts/handong-2026/random-thoughts-handong.html)
   (Handong U, 2026)
 
-  * [Random Thoughts](https://rpruim.github.io/talks/random-thoughts/2021-01-07-ACMS/Random-Thoughts-ACMS.html#1) (ACMS 2021)
+  * [Random Thoughts](talks/random-thoughts/2021-01-07-ACMS/Random-Thoughts-ACMS.html#1) (ACMS 2021)
   
   * [Mixing D3 and R](D3/BDI2019/BDI2019-slides.html) (Big Data Ignite 2019)
 

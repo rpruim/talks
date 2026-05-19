@@ -632,8 +632,8 @@ Elaborated with 10 guidelines for achieving these ends.
 * What should be the mix of "big issues" and "daily ethical living" in our 
 courses?
 
-* Dedicated ethics courses (general or specific) vs. ethic integration into 
-all/other courses?
+* Dedicated ethics courses (general or specific) vs. 
+ethics integration into all/other courses?
 
 * What might we have taught five years ago that would help our alumni navigate AI better now?
 
