@@ -1,6 +1,7 @@
 ---
 format: html
 theme: yeti
+embed-resources: true
 ---
 
 # Some Presentations by R Pruim
