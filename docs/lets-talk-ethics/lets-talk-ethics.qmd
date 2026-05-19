@@ -394,14 +394,21 @@ are never distributed evenly among the population
 
 5. ____ tends to become mythic.
 
-## Neil Postman's Seven Questions
+## Neil Postman's [Seven Questions](https://youtu.be/hlrv7DIHllE?t=50m34s)
 
-- What problem does it solve?
-- Whose problem is it?
-- What new problems does it create?
-- Which people will be most impacted by it?
-- Which shifts in economic and political power will result? 
-- What unintended uses will it have?
+:::{.incremental .fade-in}
+1. What problem does it solve?
+1. Whose problem is it?
+1. What new problems does it create?
+1. Which people will be most impacted by it?
+1. What changes in language are being promoted?
+1. Which shifts in economic and political power will result? 
+1. What alternative (and unintended) uses will it have?
+
+---
+
+8. Where and how will we learn to ask important questions?
+:::
 
 ## (Have students) write good code
 
